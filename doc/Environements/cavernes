@@ -1,0 +1,39 @@
+-Aquatique:
+	Murs poisseux, avec de l'eau qui ruisselle
+	Sols de pierres gris/bleu, flaques
+	Mares d'eau profonde ou pas
+	Crabes, sirènes, pieuvres
+	Depuis: côte, îles
+	Vers: Rien
+-Etincelante:
+	Murs de pierre brute
+	Filons de gemmes, pierres précieuses
+	Sol basique
+	Golem, lutins, feu follets
+	Depuis: montagnes, défilés, mines
+	Vers: pronfondeurs
+-Psychédélique:
+	Murs colorés (bleu, rouge, rose, jaune vert)
+	Sol basique
+	Vapeurs colorées, les murs changent de couleur
+	Monstres informes, tentaculaires, golem de chair
+	Depuis: piège, défilés
+	Vers: Palais magique, repaire sorcier
+-Naturelle:
+	Murs et sols sobres, en pierre
+	Un peu d'eau qui ruiselle, mousse, squelettes
+	Animaux en tout genre (rats, ours, loups)
+	Depuis: Forêt, montagnes
+	Vers: Rien
+-Trou gluant:
+	Couloirs étroits, en terre,
+	Flaques de bave
+	Vers en tout genre, oeufs
+	Depuis: désert
+	Vers: Rien
+-Repaire:
+	Cavernes naturelles munie de décorations (coffre, tables, ...)
+	Bandits
+	Depuis: montagnes, forêt
+	Vers: Laboratoire magicien
+

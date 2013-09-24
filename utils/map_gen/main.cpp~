@@ -1,0 +1,65 @@
+#include "mapGenerator.h"
+#include "pattern.h"
+
+#define OR_X 35
+#define OR_Y 35
+#define BUTTON_X_1 640
+#define BUTTON_Y_1 520
+#define BUTTON_X_2 815
+#define BUTTON_Y_2 570
+#define CLICK_BUTTON ((event.type == sf::Event::MouseButtonPressed)&&\
+(sf::Mouse::getPosition(window).x>640)&&(sf::Mouse::getPosition(window).y>520)\
+&&(sf::Mouse::getPosition(window).x<815)&&(sf::Mouse::getPosition(window).y<570))
+
+int main(int argc, char *argv[]) {
+	sf::RenderWindow window;
+	sf::View view;
+	sf::Texture textureMap;
+	textureMap.loadFromFile("fond.png");
+	sf::Sprite spriteMap;
+	spriteMap.setTexture(textureMap);
+	sf::Texture textureSol;
+	textureSol.loadFromFile("mSol.png");
+	sf::Sprite spriteSol;
+	spriteSol.setTexture(textureSol);
+	sf::Texture textureBloc;
+	textureBloc.loadFromFile("mBloc.png");
+	sf::Sprite spriteBloc;
+	spriteBloc.setTexture(textureBloc);
+	window.create(sf::VideoMode(L_WINDOW, H_WINDOW, 32), "Map Generator");
+	view.reset(sf::FloatRect(0, 0, L_WINDOW, H_WINDOW));
+	window.setView(view);
+	window.draw(spriteMap);
+	window.display();
+	srand (time(NULL));
+	MapGenerator mapGenerator;
+	sf::Event event;
+	do {
+		window.draw(spriteMap);
+		Cavern pattern;
+		Map map = mapGenerator.generate();
+		pattern.apply(map);
+		int curX = OR_X;
+		int curY = OR_Y;
+		for (int i=0;i<map.x;i++) {
+			curY = OR_Y;
+			for (int j=0;j<map.y;j++) {
+				if (map.cell[i][j] == 1) {
+					spriteBloc.setPosition(curX,curY);
+					window.draw(spriteBloc);
+				}
+				else {
+					spriteSol.setPosition(curX,curY);
+					window.draw(spriteSol);
+				}
+				curY += 5;
+			}
+			curX +=5;
+		}
+		window.display();
+		do
+			window.waitEvent(event);
+		while ((event.type != sf::Event::Closed) && (!CLICK_BUTTON));
+	} while (event.type != sf::Event::Closed);
+	return 0;
+}

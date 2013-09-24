@@ -1,0 +1,90 @@
+Create Character
+	Main success scenario
+	Primary actor Player
+	1. The system displays the start screen
+	2. The player press any key
+	3. The system displays a menu screen
+	4. The player chooses New Game
+	5. The system displays the character creation screen
+	6. The player fills the name
+	7. The system checks if the character doesn't exist yet
+	8. The system creates a new character save file
+	9. The system generate a start map
+	10. The system loads the character file
+	
+GameWindow
+--------------------------------------------------------------------------------
+Know the main window
+
+StartScreen
+--------------------------------------------------------------------------------
+Display the start screen			GameWindow
+Recup the user input				StartController
+
+MenuScreen
+--------------------------------------------------------------------------------
+Display the main menu				GameWindow
+Recup the user input				MenuController
+
+NewGameMenuScreen
+--------------------------------------------------------------------------------
+Display the new game screen			GameWindow
+Recup the character's name			NewGameMenuController
+Display the attributes chooses			GameWindow
+Recup choosen attributes			NewGameMenuController
+
+LoadGameMenuScreen
+--------------------------------------------------------------------------------
+Display the load game screen			GameWindow
+Recup the character choice			LoadGameMenuController
+
+OptionsMenuScreen
+--------------------------------------------------------------------------------
+Display the options menu screen			GameWindow
+Recup the options changes			OptionsMenuController
+
+GameController
+--------------------------------------------------------------------------------
+Load the game options				OptionsFile
+Open the window game				GameWindow
+Launch the start screen				StartController
+Recup the start screen input			StartController
+Launch the menu					MenuController
+Recup the menu decision				MenuController
+Launch a game session				SessionController
+
+StartController
+--------------------------------------------------------------------------------
+Launch the displaying of the start screen	StartScreen
+Recup the user input in the start screen	StartScreen, GameController
+
+MenuController
+--------------------------------------------------------------------------------
+Launch the displaying of the menu screen	MenuScreen
+Recup the user input				MenuScreen
+Launch the new game menu			NewGameMenuController
+Launch the load game menu			LoadGameMenuController
+Launch the options menu				OptionsMenuController
+Recup the session to launch			NewGameMenuController, LoadGameMenuController
+Transmit the menu decision			GameController
+
+NewGameMenuController
+--------------------------------------------------------------------------------
+Launch the displaying of the new game screen	NewGameMenuScreen
+Validate the character's name			NewGameMenuScreen, CharacterList
+Create a new character				NewGameMenuScreen, Character
+Save the character				SaveCharacter
+Transmit the session to launch			MenuController
+
+LoadGameMenuController
+--------------------------------------------------------------------------------
+Recup the living character list			CharacterList
+Launch the displaying of the load screen	LoadGameMenuScreen
+Transmit the session to launch			LoadGameMenuScreen, MenuController
+
+OptionsMenuController
+--------------------------------------------------------------------------------
+Recup the options changes			OptionsMenuScreen
+Launch the displaying of the options screen	OptionsMenuScreen
+Modify the options file				OptionsFile
+
