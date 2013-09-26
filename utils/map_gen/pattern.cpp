@@ -110,6 +110,7 @@ void Labyrinth::apply(Map &map) {
 					map.cell[i][j] = 1;
 			}
 	apply_backtrack(map, 1, 1);
+	remove_dead_end(map);
 }
 
 void Labyrinth::apply_backtrack(Map &map, int cX, int cY) {
@@ -152,6 +153,58 @@ void Labyrinth::apply_backtrack(Map &map, int cX, int cY) {
 		}
 		turn = (turn+1)%4;
 	}
+}
+
+void Labyrinth::remove_dead_end(Map &map) {
+	for (int i=1;i<(map.x-1);i+=2)
+		for (int j=1;j<(map.y-1);j+=2)
+			if (is_dead_end(map,i,j)) {
+				int dir = rand()%4;
+				for (int k=0;k<4;k++) {
+					switch (dir) {
+						case 0:
+							if ((i != 1) && (map.cell[i-1][j])) {
+								map.cell[i-1][j] = 0;
+								k = 4;
+							}
+							break;
+						case 1:
+							if ((i < (map.x-2-!(map.x%2))) && (map.cell[i+1][j])) {
+								map.cell[i+1][j] = 0;
+								k = 4;
+							}
+							break;
+						case 2:
+							if ((j != 1) && (map.cell[i][j-1])) {
+								map.cell[i][j-1] = 0;
+								k = 4;
+							}
+							break;
+						case 3:
+							if ((j < (map.y-2-!(map.y%2))) && (map.cell[i][j+1])) {
+								map.cell[i][j+1] = 0;
+								k = 4;
+							}
+							break;
+					}
+					dir = (dir+1)%4;
+				}
+			}
+}
+
+bool Labyrinth::is_dead_end(Map &map, int i, int j) {
+	int count = 0;
+	if (map.cell[i-1][j])
+		count++;
+	if (map.cell[i+1][j])
+		count++;
+	if (map.cell[i][j-1])
+		count++;
+	if (map.cell[i][j+1])
+		count++;
+	if (count > 2)
+		return true;
+	return false;
 }
 
 Dungeon::Dungeon() {}

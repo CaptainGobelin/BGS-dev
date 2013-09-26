@@ -34,7 +34,7 @@ void MapGenerator_L::draw(Map &map) {
 				spriteDoor.setPosition(curX,curY);
 				window.draw(spriteDoor);
 			}
-			else {
+			else if (map.cell[i][j] == 0) {
 				spriteSol.setPosition(curX,curY);
 				window.draw(spriteSol);
 			}
@@ -72,7 +72,7 @@ void MapGenerator_M::draw(Map &map) {
 				spriteDoor.setPosition(curX,curY);
 				window.draw(spriteDoor);
 			}
-			else {
+			else if (map.cell[i][j] == 0) {
 				spriteSol.setPosition(curX,curY);
 				window.draw(spriteSol);
 			}

@@ -31,6 +31,8 @@ class Labyrinth : public Pattern {
 		virtual void apply(Map &map);
 	private :
 		void apply_backtrack(Map &map, int cX, int cY);
+		void remove_dead_end(Map &map);
+		bool is_dead_end(Map &map, int i, int j);
 };
 
 class Dungeon : public Pattern {
