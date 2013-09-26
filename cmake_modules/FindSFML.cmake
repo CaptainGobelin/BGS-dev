@@ -7,21 +7,21 @@
 # When you try to locate the SFML libraries, you must specify which modules you want to use (system, window, graphics, network, audio, main).
 # If none is given, the SFML_LIBRARIES variable will be empty and you'll end up linking to nothing.
 # example:
-#   find_package(SFML COMPONENTS graphics window system) // find the graphics, window and system modules
+# find_package(SFML COMPONENTS graphics window system) // find the graphics, window and system modules
 #
 # You can enforce a specific version, either MAJOR.MINOR or only MAJOR.
 # If nothing is specified, the version won't be checked (ie. any version will be accepted).
 # example:
-#   find_package(SFML COMPONENTS ...)     // no specific version required
-#   find_package(SFML 2 COMPONENTS ...)   // any 2.x version
-#   find_package(SFML 2.4 COMPONENTS ...) // version 2.4 or greater
+# find_package(SFML COMPONENTS ...) // no specific version required
+# find_package(SFML 2 COMPONENTS ...) // any 2.x version
+# find_package(SFML 2.4 COMPONENTS ...) // version 2.4 or greater
 #
 # By default, the dynamic libraries of SFML will be found. To find the static ones instead,
 # you must set the SFML_STATIC_LIBRARIES variable to TRUE before calling find_package(SFML ...).
 # In case of static linking, the SFML_STATIC macro will also be defined by this script.
 # example:
-#   set(SFML_STATIC_LIBRARIES TRUE)
-#   find_package(SFML 2 COMPONENTS network system)
+# set(SFML_STATIC_LIBRARIES TRUE)
+# find_package(SFML 2 COMPONENTS network system)
 #
 # On Mac OS X if SFML_STATIC_LIBRARIES is not set to TRUE then by default CMake will search for frameworks unless
 # CMAKE_FIND_FRAMEWORK is set to "NEVER" for example. Please refer to CMake documentation for more details.
@@ -36,19 +36,19 @@
 #
 # This script defines the following variables:
 # - For each specified module XXX (system, window, graphics, network, audio, main):
-#   - SFML_XXX_LIBRARY_DEBUG:   the name of the debug library of the xxx module (set to SFML_XXX_LIBRARY_RELEASE is no debug version is found)
-#   - SFML_XXX_LIBRARY_RELEASE: the name of the release library of the xxx module (set to SFML_XXX_LIBRARY_DEBUG is no release version is found)
-#   - SFML_XXX_LIBRARY:         the name of the library to link to for the xxx module (includes both debug and optimized names if necessary)
-#   - SFML_XXX_FOUND:           true if either the debug or release library of the xxx module is found
-# - SFML_LIBRARIES:   the list of all libraries corresponding to the required modules
-# - SFML_FOUND:       true if all the required modules are found
+# - SFML_XXX_LIBRARY_DEBUG: the name of the debug library of the xxx module (set to SFML_XXX_LIBRARY_RELEASE is no debug version is found)
+# - SFML_XXX_LIBRARY_RELEASE: the name of the release library of the xxx module (set to SFML_XXX_LIBRARY_DEBUG is no release version is found)
+# - SFML_XXX_LIBRARY: the name of the library to link to for the xxx module (includes both debug and optimized names if necessary)
+# - SFML_XXX_FOUND: true if either the debug or release library of the xxx module is found
+# - SFML_LIBRARIES: the list of all libraries corresponding to the required modules
+# - SFML_FOUND: true if all the required modules are found
 # - SFML_INCLUDE_DIR: the path where SFML headers are located (the directory containing the SFML/Config.hpp file)
 #
 # example:
-#   find_package(SFML 2 COMPONENTS system window graphics audio REQUIRED)
-#   include_directories(${SFML_INCLUDE_DIR})
-#   add_executable(myapp ...)
-#   target_link_libraries(myapp ${SFML_LIBRARIES})
+# find_package(SFML 2 COMPONENTS system window graphics audio REQUIRED)
+# include_directories(${SFML_INCLUDE_DIR})
+# add_executable(myapp ...)
+# target_link_libraries(myapp ${SFML_LIBRARIES})
 
 # define the SFML_STATIC macro if static build was chosen
 if(SFML_STATIC_LIBRARIES)
@@ -71,9 +71,9 @@ find_path(SFML_INCLUDE_DIR SFML/Config.hpp
           /Library/Frameworks
           /usr/local/
           /usr/
-          /sw          # Fink
-          /opt/local/  # DarwinPorts
-          /opt/csw/    # Blastwave
+          /sw # Fink
+          /opt/local/ # DarwinPorts
+          /opt/csw/ # Blastwave
           /opt/)
 
 # check the version number
@@ -152,7 +152,7 @@ foreach(FIND_SFML_COMPONENT ${SFML_FIND_COMPONENTS})
         
         # if both are found, set SFML_XXX_LIBRARY to contain both
         if (SFML_${FIND_SFML_COMPONENT_UPPER}_LIBRARY_DEBUG AND SFML_${FIND_SFML_COMPONENT_UPPER}_LIBRARY_RELEASE)
-            set(SFML_${FIND_SFML_COMPONENT_UPPER}_LIBRARY debug     ${SFML_${FIND_SFML_COMPONENT_UPPER}_LIBRARY_DEBUG}
+            set(SFML_${FIND_SFML_COMPONENT_UPPER}_LIBRARY debug ${SFML_${FIND_SFML_COMPONENT_UPPER}_LIBRARY_DEBUG}
                                                           optimized ${SFML_${FIND_SFML_COMPONENT_UPPER}_LIBRARY_RELEASE})
         endif()
 
@@ -160,12 +160,12 @@ foreach(FIND_SFML_COMPONENT ${SFML_FIND_COMPONENTS})
         if (SFML_${FIND_SFML_COMPONENT_UPPER}_LIBRARY_DEBUG AND NOT SFML_${FIND_SFML_COMPONENT_UPPER}_LIBRARY_RELEASE)
             # debug and not release
             set(SFML_${FIND_SFML_COMPONENT_UPPER}_LIBRARY_RELEASE ${SFML_${FIND_SFML_COMPONENT_UPPER}_LIBRARY_DEBUG})
-            set(SFML_${FIND_SFML_COMPONENT_UPPER}_LIBRARY         ${SFML_${FIND_SFML_COMPONENT_UPPER}_LIBRARY_DEBUG})
+            set(SFML_${FIND_SFML_COMPONENT_UPPER}_LIBRARY ${SFML_${FIND_SFML_COMPONENT_UPPER}_LIBRARY_DEBUG})
         endif()
         if (SFML_${FIND_SFML_COMPONENT_UPPER}_LIBRARY_RELEASE AND NOT SFML_${FIND_SFML_COMPONENT_UPPER}_LIBRARY_DEBUG)
             # release and not debug
             set(SFML_${FIND_SFML_COMPONENT_UPPER}_LIBRARY_DEBUG ${SFML_${FIND_SFML_COMPONENT_UPPER}_LIBRARY_RELEASE})
-            set(SFML_${FIND_SFML_COMPONENT_UPPER}_LIBRARY       ${SFML_${FIND_SFML_COMPONENT_UPPER}_LIBRARY_RELEASE})
+            set(SFML_${FIND_SFML_COMPONENT_UPPER}_LIBRARY ${SFML_${FIND_SFML_COMPONENT_UPPER}_LIBRARY_RELEASE})
         endif()
     else()
         # library not found
@@ -205,5 +205,5 @@ endif()
 
 # handle success
 if(SFML_FOUND)
-    message("Found SFML: ${SFML_INCLUDE_DIR}")
+    message(STATUS "Found SFML ${SFML_VERSION_MAJOR}.${SFML_VERSION_MINOR} in ${SFML_INCLUDE_DIR}")
 endif()
