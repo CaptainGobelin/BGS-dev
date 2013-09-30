@@ -10,8 +10,9 @@ src/*
 
 )
 #Déclaration de l'exécutable
-include_directories(${SFML_INCLUDE_DIR})
+include_directories(${SFML_INCLUDE_DIR} ${Boost_INCLUDE_DIR})
 add_executable(bgs ${source_files})
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
 find_package(SFML 2.0 REQUIRED system window graphics)
-target_link_libraries(bgs ${SFML_LIBRARIES})
+find_package(Boost COMPONENTS system filesystem serialization REQUIRED)
+target_link_libraries(bgs ${SFML_LIBRARIES} ${Boost_LIBRARIES})

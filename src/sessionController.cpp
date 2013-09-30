@@ -43,5 +43,7 @@ int SessionController::launch(Character &character, Interface &interface) {
 		character.checkView(map);
 		sessionScreen.display(character, interface, map);
 	}
+	SaveUtils::save(character);
+	SaveUtils::saveMap(character.getName(), character.getMap(), map);
 	return CLOSE_INPUT;
 }

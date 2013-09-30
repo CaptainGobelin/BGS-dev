@@ -10,6 +10,7 @@
 class Cell {
 	public :
 		Cell();
+		Cell(int code);
 		const int &getCode() const {return code;}
 		const bool &isSolid() const {return solid;}
 		const bool &isTransparent() const {return transparent;}
@@ -18,8 +19,17 @@ class Cell {
 		void setVisited(const bool &newVisited) {visited=newVisited;}
 		void setViewed(const bool &newViewed) {viewed=newViewed;}
 		sf::Sprite &getSprite() {return sprite;}
+		void loadSprite();
+
+		void dungeonFloorA();
+		void dungeonWallA();
 
 		std::list<Item> drops;
+
+		template<class Archive>
+	    void serialize(Archive& ar, const unsigned int version){
+	        ar & code & viewed & visited;
+	    }
 
 	protected :
 		int code;
@@ -30,14 +40,6 @@ class Cell {
 		sf::Sprite sprite;
 };
 
-class DungeonFloorA : public Cell {
-	public : 
-		DungeonFloorA();
-};
-
-class DungeonWallA : public Cell {
-	public :
-		DungeonWallA();
-};
+BOOST_CLASS_VERSION(Cell, 4);
 
 #endif

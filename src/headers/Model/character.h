@@ -29,8 +29,15 @@ class Character {
 		bool move(int dX, int dY, const Map& map);
 		void setPosition(int newX, int newY) {setX(newX);setY(newY);}
 		void checkView(Map& map);
+		void loadSprite();
+		//void applyRaceCode();
 
 		std::list<Item> inventory;
+
+		template<class Archive>
+	    void serialize(Archive& ar, const unsigned int version){
+	        ar & name & attributes & x & y & map & race;
+	    }
 
 	private :
 		std::string name;
@@ -43,5 +50,7 @@ class Character {
 		void checkVer(Map& map, int dir);
 		void checkHor(Map& map, int dir);
 };
+
+BOOST_CLASS_VERSION(Character, 2);
 
 #endif

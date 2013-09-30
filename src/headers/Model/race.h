@@ -10,6 +10,7 @@
 class Race {
 	public :
 		Race();
+		Race(int code);
 		/*const sf::Sprite &getFaceTop() const {return faceTop;}
 		void setFaceTop(const sf::Sprite &newFaceTop) {faceTop=newFaceTop;}
 		const sf::Sprite &getFaceBottom() const {return faceBottom;}
@@ -20,6 +21,13 @@ class Race {
 		const int &getRaceCode() const {return raceCode;}
 
 		void setPosition(float x, float y);
+		void loadSprite();
+		void humanRace();
+
+		template<class Archive>
+	    void serialize(Archive& ar, const unsigned int version){
+	        ar & attributes & raceCode;
+	    }
 
 	protected :
 		/*sf::Sprite faceTop;
@@ -29,9 +37,6 @@ class Race {
 		int raceCode;
 };
 
-class HumanRace : public Race {
-	public :
-		HumanRace();
-};
+BOOST_CLASS_VERSION(Race, 3);
 
 #endif

@@ -19,9 +19,29 @@ class Map {
 
 		void refreshCells(const int x, const int y);
 		void draw(const int x, const int y);
+		void applyCellsCode();
 
 		Cell **cell;
 		sf::Sprite fog;
+
+		template<class Archive>
+	    void save(Archive& ar, const unsigned int version) const {
+	        ar & length & width;
+	        for (int i=0;i<length;i++)
+	        	for (int j=0;j<width;j++)
+	        		ar & cell[i][j];
+	    }
+	    template<class Archive>
+	    void load(Archive& ar, const unsigned int version){
+	        ar & length & width;
+	        cell = new Cell* [length];
+   			for (int i=0;i<length;i++)
+        		cell[i] = new Cell [width];
+	        for (int i=0;i<length;i++)
+	        	for (int j=0;j<width;j++)
+	        		ar & cell[i][j];
+	    }
+	    BOOST_SERIALIZATION_SPLIT_MEMBER();
 
 	private :
 		int length;

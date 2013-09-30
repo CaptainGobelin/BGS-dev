@@ -5,11 +5,9 @@ Character::Character() {}
 Character::Character(std::string name, int raceChoice, std::string map) {
 	this->name = name;
 	this->map = map;
-	switch (raceChoice) {
-		case HUMAN_CODE: {
-			race = HumanRace();
-		}
-	}
+	this->x = 2;
+	this->y = 2;
+	this->race = Race(raceChoice);
 	this->attributes[ATTR_VIEW] = 9;
 }
 
@@ -108,4 +106,8 @@ void Character::checkHor(Map& map, int dir) {
 				j = j2;
 			}
 	}
+}
+
+void Character::loadSprite() {
+	race.loadSprite();
 }
