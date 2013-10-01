@@ -21,6 +21,7 @@ class Cell {
 		sf::Sprite &getSprite() {return sprite;}
 		void loadSprite();
 
+		void nothing();
 		void dungeonFloorA();
 		void dungeonWallA();
 
