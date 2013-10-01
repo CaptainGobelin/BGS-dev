@@ -16,6 +16,7 @@ void GameInput::treatEvent(sf::Event event) {
 			case sf::Keyboard::Right : {value=RIGHT_INPUT;return;}
 			case sf::Keyboard::Left : {value=LEFT_INPUT;return;}
 			case sf::Keyboard::M : {value=M_INPUT;return;}
+			case sf::Keyboard::Return : {value=ENTER_INPUT;return;}
 			default : {value=ANY_KEY_INPUT;return;}
 		}
 	else {

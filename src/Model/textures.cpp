@@ -11,4 +11,5 @@ void Textures::loadTextures(const char *path) {
 	texturesWeaponOff.loadFromFile(path+(std::string)"tiles/weapon_off.png");
 	texturesInterface.loadFromFile(path+(std::string)"int/panel.png");
 	texturesMap.loadFromFile(path+(std::string)"int/mParch.png");
+	texturesMenu.loadFromFile(path+(std::string)"int/menuPan.png");
 }

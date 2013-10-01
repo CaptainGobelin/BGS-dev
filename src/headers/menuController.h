@@ -10,11 +10,15 @@
 #include "Model/map.h"
 #include "loadGameMenuController.h"
 #include "sessionController.h"
+#include "GUI/menuScreen.h"
 
 class MenuController {
 	public :
 		MenuController();
 		int launch();
+
+	private :
+		MenuScreen menuScreen;
 };
 
 #endif

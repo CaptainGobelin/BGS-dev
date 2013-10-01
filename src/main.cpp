@@ -10,6 +10,7 @@ sf::Texture Textures::texturesFloors;
 sf::Texture Textures::texturesWalls;
 sf::Texture Textures::texturesInterface;
 sf::Texture Textures::texturesMap;
+sf::Texture Textures::texturesMenu;
 sf::Texture Textures::texturesArmorOn;
 sf::Texture Textures::texturesArmorOff;
 sf::Texture Textures::texturesWeaponOn;

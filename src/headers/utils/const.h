@@ -22,6 +22,7 @@
 #define LEFT_INPUT 5
 #define RIGHT_INPUT 6
 #define M_INPUT 7
+#define ENTER_INPUT 8
 
 //Menu inputs
 #define INIT_CHOICE 0
