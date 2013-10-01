@@ -9,9 +9,8 @@
 
 class Item {
 	public :
-		Item();
-		Item(int locX, int locY);
-		const int &getType() const {return type;}
+		Item(int locX = -1, int locY = -1, int code = DEFAULT_ITEM);
+		const int &getCode() const {return code;}
 		const int &getX() const {return x;}
 		const int &getY() const {return y;}
 		void setLocation(const int newX, const int newY) {x=newX;y=newY;} 
@@ -20,25 +19,19 @@ class Item {
 		sf::Sprite &getSpriteOn() {return spriteOn;}
 		sf::Sprite &getSpriteOff() {return spriteOff;}
 
+		void loadSprite();
+
+		void generalItem();
+		void sword1HA();
+		void greavesLA();
+
 	protected :
-		int type;
+		int code;
 		int x;
 		int y;
 		std::string name;
 		sf::Sprite spriteOn;
 		sf::Sprite spriteOff;
 	};
-
-class Sword1HA : public Item {
-	public : 
-		Sword1HA();
-		Sword1HA(int locX, int locY);
-};
-
-class GreavesLA : public Item {
-	public : 
-		GreavesLA();
-		GreavesLA(int locX, int locY);
-};
 
 #endif
