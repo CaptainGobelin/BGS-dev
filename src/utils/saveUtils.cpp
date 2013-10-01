@@ -42,8 +42,5 @@ Map SaveUtils::loadMap(std::string charName, std::string mapName) {
     std::ifstream ifile(const_cast<char*>(path.c_str()));
     boost::archive::binary_iarchive iBinaryArchive(ifile);
     iBinaryArchive >> loadedMap;
-    for (int i=0;i<loadedMap.getLength();i++)
-        for (int j=0;j<loadedMap.getWidth();j++)
-            loadedMap.cell[i][j].loadSprite();
     return loadedMap;
 }

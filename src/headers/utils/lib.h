@@ -6,6 +6,7 @@
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
+#include <boost/serialization/list.hpp>
 #include <string>
 #include <iostream>
 #include <fstream>

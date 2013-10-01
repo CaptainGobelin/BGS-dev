@@ -48,4 +48,6 @@ class Map {
 		int width;
 };
 
+BOOST_CLASS_VERSION(Map, 5);
+
 #endif

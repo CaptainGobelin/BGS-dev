@@ -25,6 +25,17 @@ class Item {
 		void sword1HA();
 		void greavesLA();
 
+		template<class Archive>
+	    void save(Archive& ar, const unsigned int version) const {
+	        ar & code & x & y;
+	    }
+	    template<class Archive>
+	    void load(Archive& ar, const unsigned int version) {
+	        ar & code & x & y;
+	        loadSprite();
+	    }
+	    BOOST_SERIALIZATION_SPLIT_MEMBER();
+
 	protected :
 		int code;
 		int x;
@@ -33,5 +44,7 @@ class Item {
 		sf::Sprite spriteOn;
 		sf::Sprite spriteOff;
 	};
+
+BOOST_CLASS_VERSION(Item, 6);
 
 #endif

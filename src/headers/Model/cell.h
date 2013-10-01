@@ -28,9 +28,15 @@ class Cell {
 		std::list<Item> drops;
 
 		template<class Archive>
-	    void serialize(Archive& ar, const unsigned int version){
-	        ar & code & viewed & visited;
+	    void save(Archive& ar, const unsigned int version) const {
+	        ar & code & viewed & visited & drops;
 	    }
+		template<class Archive>
+	    void load(Archive& ar, const unsigned int version){
+	        ar & code & viewed & visited & drops;
+	        loadSprite();
+	    }
+	    BOOST_SERIALIZATION_SPLIT_MEMBER();
 
 	protected :
 		int code;
