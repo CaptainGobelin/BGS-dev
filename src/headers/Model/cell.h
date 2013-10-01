@@ -19,6 +19,7 @@ class Cell {
 		void setVisited(const bool &newVisited) {visited=newVisited;}
 		void setViewed(const bool &newViewed) {viewed=newViewed;}
 		sf::Sprite &getSprite() {return sprite;}
+
 		void loadSprite();
 
 		void nothing();

@@ -8,14 +8,13 @@ int SessionController::launch(Character &character, Interface &interface) {
 	SessionScreen sessionScreen;
 	character.checkView(map);
 	sessionScreen.display(character, interface, map);
-	/*Item i1(10,10,SWORD_1H_A);
-	Item i2(11,10,GREAVES_L_A);
-	map.cell[10][10].drops.push_front(i1);
-	map.cell[11][10].drops.push_front(i2);*/
 	GameInput input;
 	//Game Loop
 	while (input.getValue() != CLOSE_INPUT) {
-		map.refreshCells(character.getX(), character.getY());
+		//To know if we have to count the current turn.
+		bool played = false;
+		//To know if we have to refresh the screen.
+		bool toRefresh = true;
 		input = sessionScreen.recupInput();
 		switch (input.getValue()) {
 			case M_INPUT : {
@@ -26,26 +25,36 @@ int SessionController::launch(Character &character, Interface &interface) {
 			case UP_INPUT : {
 				if (character.move(0,-1,map))
 					interface.showItems(map.cell[character.getX()][character.getY()]);
+				played = true;
 				break;
 			}
 			case DOWN_INPUT : {
 				if (character.move(0,1,map))
 					interface.showItems(map.cell[character.getX()][character.getY()]);
+				played = true;
 				break;
 			}
 			case RIGHT_INPUT : {
 				if (character.move(1,0,map))
 					interface.showItems(map.cell[character.getX()][character.getY()]);
+				played = true;
 				break;
 			}
 			case LEFT_INPUT : {
 				if (character.move(-1,0,map))
 					interface.showItems(map.cell[character.getX()][character.getY()]);
+				played = true;
 				break;
 			}
+			default:
+				toRefresh = false;
 		}
-		character.checkView(map);
-		sessionScreen.display(character, interface, map);
+		if (played) {
+			map.refreshCells(character.getX(), character.getY());
+			character.checkView(map);
+		}
+		if (toRefresh)
+			sessionScreen.display(character, interface, map);
 	}
 	SaveUtils::save(character);
 	SaveUtils::saveMap(character.getName(), character.getMap(), map);
