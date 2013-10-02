@@ -1,6 +1,0 @@
-/* Project Rupture init file
-Basic syntax => option= value */
-
-frameLimit= 49
-vSync= true
-language= en
