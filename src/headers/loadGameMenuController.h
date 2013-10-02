@@ -4,10 +4,15 @@
 #include "utils/lib.h"
 #include "utils/const.h"
 
+#include "GUI/loadGameMenuScreen.h"
+
 class LoadGameMenuController {
 	public :
 		LoadGameMenuController();
-		int launch(std::string *charName);
+		int launch(std::string &charName);
+
+	private :
+		LoadGameMenuScreen loadGameMenuScreen;
 };
 
 #endif

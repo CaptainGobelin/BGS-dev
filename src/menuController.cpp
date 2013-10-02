@@ -27,7 +27,9 @@ int MenuController::launch() {
 		LoadGameMenuController loadGameMenu;
 		Interface interface;
 		std::string charName = "";
-		loadGameMenu.launch(&charName);
+		int toDo = loadGameMenu.launch(charName);
+		if (toDo != TO_CONTINUE)
+			return toDo;
 		Character character = SaveUtils::load(charName, interface);
 		SessionController sessionController;
 		return sessionController.launch(character, interface);

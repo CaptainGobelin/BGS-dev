@@ -25,10 +25,11 @@
 #define ENTER_INPUT 8
 
 //Menu inputs
-#define INIT_CHOICE 0
-#define TO_SESSION 1
-#define TO_MAIN_MENU 2
-#define TO_GAME_SESSION 3
+#define INIT_CHOICE 10
+#define TO_SESSION 11
+#define TO_MAIN_MENU 12
+#define TO_GAME_SESSION 13
+#define TO_CONTINUE 14
 
 //Messages
 #define MESS_LINES 21
