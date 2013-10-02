@@ -1,10 +1,21 @@
 #include "../headers/utils/saveUtils.h"
 
-void SaveUtils::save(const Character &character) {
+void SaveUtils::save(const Character &character, const Interface &interface) {
     std::string pathChar = SAVE_PATH+character.getName()+".sav";
     std::ofstream ofile(const_cast<char*>(pathChar.c_str()));
     boost::archive::binary_oarchive oBinaryArchive(ofile);
-    oBinaryArchive << character; 
+    oBinaryArchive << character;
+    std::string path = SAVE_PATH+character.getName()+"_journal.txt";
+    std::ofstream file(const_cast<char*>(path.c_str()), std::ios::out | std::ios::trunc);
+    if (file) {
+        for (int i=0;i<MESS_LINES;i++) {
+            std::string message = interface.getMessage(i);
+            file << message << std::endl;
+        }
+        file.close();
+    }
+    else
+        std::cerr << "Error: Can't read save file." << std::endl;
 }
 
 void SaveUtils::saveMap(std::string charName, std::string mapName, const Map &map) {
@@ -15,7 +26,7 @@ void SaveUtils::saveMap(std::string charName, std::string mapName, const Map &ma
 }
 
 Character SaveUtils::load(std::string name, Interface &interface) {
-    std::string path = SAVE_PATH+name+"_journal.sav";
+    std::string path = SAVE_PATH+name+"_journal.txt";
     std::ifstream file(const_cast<char*>(path.c_str()), std::ios::in);
     if(file) {
         Character loadedChar;

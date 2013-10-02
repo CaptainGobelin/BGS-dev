@@ -56,7 +56,7 @@ int SessionController::launch(Character &character, Interface &interface) {
 		if (toRefresh)
 			sessionScreen.display(character, interface, map);
 	}
-	SaveUtils::save(character);
+	SaveUtils::save(character, interface);
 	SaveUtils::saveMap(character.getName(), character.getMap(), map);
 	return CLOSE_INPUT;
 }

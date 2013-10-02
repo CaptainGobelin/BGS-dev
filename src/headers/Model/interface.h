@@ -12,6 +12,7 @@ class Interface {
 	public :
 		Interface();
 
+		const std::string getMessage(int i) const;
 		void write(std::string message);
 		void draw();
 		void showItems(Cell &cell);

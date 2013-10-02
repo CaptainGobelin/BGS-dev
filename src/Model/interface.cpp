@@ -13,6 +13,13 @@ Interface::Interface() {
 	}
 }
 
+const std::string Interface::getMessage(int i) const {
+	if ((i < 0)||(i>=MESS_LINES)) 
+		return "";
+	else 
+		return textBox[i].getString();
+}
+
 void Interface::write(std::string message) {
 	if (message.length() > 31) {
 		int cut = 31;
