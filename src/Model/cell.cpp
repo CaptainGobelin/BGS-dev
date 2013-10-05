@@ -14,6 +14,7 @@ Cell::Cell(int code) {
 }
 
 void Cell::loadSprite() {
+	this->viewed = false;
 	switch (code) {
 		case DUNGEON_FLOOR_A:
 			dungeonFloorA();

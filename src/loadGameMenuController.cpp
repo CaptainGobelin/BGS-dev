@@ -13,6 +13,8 @@ int LoadGameMenuController::launch(std::string &charName) {
 		switch (input.getValue()) {
 			case CLOSE_INPUT:
 				return CLOSE_INPUT;
+			case ESCAPE_INPUT:
+				return TO_MAIN_MENU;
 			case UP_INPUT:
 				choice--;
 				while (choice < 0)

@@ -1,6 +1,10 @@
 #include "../headers/GUI/menuScreen.h"
 
 MenuScreen::MenuScreen() {
+	this->titleScreen.setTexture(Textures::texturesStart);
+	this->titleScreen.setPosition(0,0);
+	GameWindow::window.draw(titleScreen);
+	GameWindow::window.display();
 	this->menuPanel.setTexture(Textures::texturesMenu);
 	this->menuPanel.setTextureRect(sf::IntRect(0, 0, 252, 190));
 	this->menuPanel.setPosition(370,450);

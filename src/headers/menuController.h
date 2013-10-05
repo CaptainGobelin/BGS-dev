@@ -8,6 +8,7 @@
 #include "Model/character.h"
 #include "utils/saveUtils.h"
 #include "Model/map.h"
+#include "newGameMenuController.h"
 #include "loadGameMenuController.h"
 #include "sessionController.h"
 #include "GUI/menuScreen.h"

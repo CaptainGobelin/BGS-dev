@@ -10,7 +10,7 @@
 
 class Map {
 	public :
-		Map();
+		Map(int x=0, int y=0);
 		~Map();
 		const int &getLength() const {return length;}
 		void setLength(const int &newLength) {length=newLength;}

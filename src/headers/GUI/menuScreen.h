@@ -18,6 +18,7 @@ class MenuScreen {
 		void display(int choice);
 
 	private :
+		sf::Sprite titleScreen;
 		sf::Sprite menuPanel;
 		sf::Sprite arrow;
 		sf::Text textBox[4];

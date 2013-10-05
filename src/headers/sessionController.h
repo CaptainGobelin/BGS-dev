@@ -8,6 +8,7 @@
 #include "Model/character.h"
 #include "Model/interface.h"
 #include "utils/saveUtils.h"
+#include "utils/mapGenerator.h"
 #include "Model/map.h"
 #include "GUI/sessionScreen.h"
 #include "mapController.h"

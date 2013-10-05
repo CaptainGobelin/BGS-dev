@@ -11,6 +11,8 @@ int MenuController::launch() {
 		switch (input.getValue()) {
 			case CLOSE_INPUT:
 				return input.getValue();
+			case ESCAPE_INPUT:
+				return INIT_CHOICE;
 			case DOWN_INPUT:
 				choice = (choice+1)%4;
 				menuScreen.display(choice);
@@ -23,7 +25,13 @@ int MenuController::launch() {
 				break;
 		}
 	} while (input.getValue() != ENTER_INPUT);
-	if (choice == 1) {
+	if (choice == 0) {
+		NewGameMenuController newGameMenuController;
+		int toDo = newGameMenuController.launch();
+		if (toDo != TO_CONTINUE)
+			return toDo;
+	}
+	else if (choice == 1) {
 		LoadGameMenuController loadGameMenu;
 		Interface interface;
 		std::string charName = "";

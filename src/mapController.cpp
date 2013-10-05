@@ -8,6 +8,8 @@ int MapController::launch(Map &map, Character &character) {
 	mapScreen.display(map, character);
 	GameInput input = this->mapScreen.recupInput();
 	while (input.getValue() != M_INPUT) {
+		if (input.getValue() == ESCAPE_INPUT)
+			return M_INPUT;
 		if (input.getValue() == CLOSE_INPUT)
 			return input.getValue();
 		input = this->mapScreen.recupInput();

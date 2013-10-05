@@ -1,6 +1,8 @@
 #include "headers/gameController.h"
 
 GameController::GameController() {
+	//Rand initialization
+	srand (time(NULL));
 	//Load the game config
 	OptionsFile gameOptions;
 	gameOptions.load();

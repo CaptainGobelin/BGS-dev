@@ -4,6 +4,7 @@
 #include "lib.h"
 #include "const.h"
 
+#include "stringUtils.h"
 #include "../Model/character.h"
 #include "../Model/interface.h"
 #include "../Model/map.h"

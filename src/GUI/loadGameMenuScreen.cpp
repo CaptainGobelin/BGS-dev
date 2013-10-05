@@ -43,6 +43,7 @@ GameInput LoadGameMenuScreen::recupInput() {
 }
 
 void LoadGameMenuScreen::display(int choice) {
+	GameWindow::window.clear();
 	int count = 0;
 	for (std::list<sf::Text>::iterator it=characters.begin();it!=characters.end();++it) {
 		(*it).setPosition(10, 10 + count*30);

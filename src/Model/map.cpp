@@ -1,8 +1,11 @@
 #include "../headers/Model/map.h"
 
-Map::Map() {
-	this->length = 0;
-	this->width = 0;
+Map::Map(int x/*=0*/, int y/*=0*/) {
+	this->length = x;
+	this->width = y;
+	cell = new Cell* [length];
+   			for (int i=0;i<length;i++)
+        		cell[i] = new Cell [width];
 	this->fog.setTexture(Textures::texturesFloors);
 	this->fog.setTextureRect(sf::IntRect(0, 2*T_TILES, T_TILES, T_TILES));
 }
@@ -16,8 +19,9 @@ Map::~Map() {
 void Map::refreshCells(const int x, const int y) {
 	for (int i=std::max(0,x-12);i<std::min(length,x+13);i++)
       	for (int j=std::max(0,y-12);j<std::min(width,y+13);j++)
-      		if (cell[i][j].isViewed())
+      		if (cell[i][j].isViewed()) {
       			cell[i][j].setViewed(false);
+      		}
 }
 
 void Map::draw(const int x, const int y) {

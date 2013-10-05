@@ -30,11 +30,11 @@ class Cell {
 
 		template<class Archive>
 	    void save(Archive& ar, const unsigned int version) const {
-	        ar & code & viewed & visited & drops;
+	        ar & code & visited & drops;
 	    }
 		template<class Archive>
 	    void load(Archive& ar, const unsigned int version){
-	        ar & code & viewed & visited & drops;
+	        ar & code & visited & drops;
 	        loadSprite();
 	    }
 	    BOOST_SERIALIZATION_SPLIT_MEMBER();

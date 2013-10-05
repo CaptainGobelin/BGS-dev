@@ -30,7 +30,6 @@ class Character {
 		void setPosition(int newX, int newY) {setX(newX);setY(newY);}
 		void checkView(Map& map);
 		void loadSprite();
-		//void applyRaceCode();
 
 		std::list<Item> inventory;
 
@@ -47,8 +46,7 @@ class Character {
 		int y;
 		std::string map;
 
-		void checkVer(Map& map, int dir);
-		void checkHor(Map& map, int dir);
+		void checkLine(Map &map, int i, int j);
 };
 
 BOOST_CLASS_VERSION(Character, 2);
