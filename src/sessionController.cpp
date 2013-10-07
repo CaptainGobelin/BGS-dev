@@ -4,8 +4,7 @@ SessionController::SessionController() {}
 
 int SessionController::launch(Character &character, Interface &interface) {
 	//Initialization
-	//Map map = SaveUtils::loadMap(character.getName(), character.getMap());
-	Map map = MapGenerator::generate(20,20, new Dungeon());
+	Map map = SaveUtils::loadMap(character.getName(), character.getMap());
 	SessionScreen sessionScreen;
 	character.checkView(map);
 	sessionScreen.display(character, interface, map);
@@ -58,6 +57,6 @@ int SessionController::launch(Character &character, Interface &interface) {
 			sessionScreen.display(character, interface, map);
 	}
 	SaveUtils::save(character, interface);
-	//SaveUtils::saveMap(character.getName(), character.getMap(), map);
+	SaveUtils::saveMap(character.getName(), character.getMap(), map);
 	return CLOSE_INPUT;
 }

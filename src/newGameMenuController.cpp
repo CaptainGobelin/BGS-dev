@@ -11,7 +11,7 @@ NewGameMenuController::NewGameMenuController() {
 		}
 }
 
-int NewGameMenuController::launch() {
+int NewGameMenuController::launch(std::string &name) {
 	newGameMenuScreen.display(true);
 	bool correct = false;
 	bool stop = false;
@@ -57,5 +57,26 @@ int NewGameMenuController::launch() {
 				stop = correct;
 		}
 	} while (!stop);
+	name = newGameMenuScreen.characterName.getString();
+	createCharacter(name);
 	return TO_CONTINUE;
+}
+
+void NewGameMenuController::createCharacter(std::string name) {
+	Map map = MapGenerator::generate(20,20, new Dungeon());
+	int x, y;
+	do  {
+		x = rand()%map.getLength();
+		y = rand()%map.getWidth();
+	} while (map.cell[x][y].isSolid());
+	Character character(name, HUMAN_CODE, "D1");
+	character.setX(x);
+	character.setY(y);
+	Interface interface;
+	SaveUtils::save(character, interface);
+	std::string s = "/"+StringUtils::saveStem(name);
+	s = WORLD_PATH + s;
+	boost::filesystem::path path(s);
+	boost::filesystem::create_directory(path);
+	SaveUtils::saveMap(character.getName(), character.getMap(), map);
 }

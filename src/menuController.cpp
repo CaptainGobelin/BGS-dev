@@ -27,17 +27,22 @@ int MenuController::launch() {
 	} while (input.getValue() != ENTER_INPUT);
 	if (choice == 0) {
 		NewGameMenuController newGameMenuController;
-		int toDo = newGameMenuController.launch();
+		std::string charName = "";
+		int toDo = newGameMenuController.launch(charName);
 		if (toDo != TO_CONTINUE)
 			return toDo;
+		Interface interface;
+		Character character = SaveUtils::load(charName, interface);
+		SessionController sessionController;
+		return sessionController.launch(character, interface);
 	}
 	else if (choice == 1) {
 		LoadGameMenuController loadGameMenu;
-		Interface interface;
 		std::string charName = "";
 		int toDo = loadGameMenu.launch(charName);
 		if (toDo != TO_CONTINUE)
 			return toDo;
+		Interface interface;
 		Character character = SaveUtils::load(charName, interface);
 		SessionController sessionController;
 		return sessionController.launch(character, interface);
