@@ -14,8 +14,8 @@
 
 
 
-
-
 First message.
 Second message.
 Third message.
+You see (1) Loin cloth.
+You see (1) Sword.

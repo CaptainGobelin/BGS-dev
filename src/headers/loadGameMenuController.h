@@ -13,6 +13,8 @@ class LoadGameMenuController {
 
 	private :
 		LoadGameMenuScreen loadGameMenuScreen;
+
+		bool sure();
 };
 
 #endif

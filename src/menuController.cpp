@@ -37,9 +37,13 @@ int MenuController::launch() {
 		return sessionController.launch(character, interface);
 	}
 	else if (choice == 1) {
-		LoadGameMenuController loadGameMenu;
 		std::string charName = "";
-		int toDo = loadGameMenu.launch(charName);
+		int toDo;
+		do {
+			LoadGameMenuController loadGameMenu;
+			toDo = loadGameMenu.launch(charName);
+		}
+		while (toDo == REDO);
 		if (toDo != TO_CONTINUE)
 			return toDo;
 		Interface interface;

@@ -24,6 +24,7 @@
 #define M_INPUT 7
 #define ENTER_INPUT 8
 #define ESCAPE_INPUT 9
+#define DELETE_INPUT 10
 
 //Menu inputs
 #define INIT_CHOICE 10
@@ -31,6 +32,7 @@
 #define TO_MAIN_MENU 12
 #define TO_GAME_SESSION 13
 #define TO_CONTINUE 14
+#define REDO 15
 
 //Messages
 #define MESS_LINES 21
