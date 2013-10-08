@@ -55,3 +55,13 @@ Map SaveUtils::loadMap(std::string charName, std::string mapName) {
     iBinaryArchive >> loadedMap;
     return loadedMap;
 }
+
+void SaveUtils::deleteSave(std::string name) {
+    std::string nameStem = StringUtils::saveStem(name);
+    std::string pCharacter = SAVE_PATH + ("/" + (nameStem + ".sav"));
+    std::string pJournal = SAVE_PATH + ("/" + (nameStem + "_journal.txt"));
+    std::string pMap = WORLD_PATH + ("/" + nameStem);
+    boost::filesystem::remove(boost::filesystem::path(pCharacter));
+    boost::filesystem::remove(boost::filesystem::path(pJournal));
+    boost::filesystem::remove_all(boost::filesystem::path(pMap));
+}

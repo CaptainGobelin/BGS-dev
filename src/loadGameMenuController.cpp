@@ -17,13 +17,7 @@ int LoadGameMenuController::launch(std::string &charName) {
 				return TO_MAIN_MENU;
 			case DELETE_INPUT:
 				if (sure()) {
-					std::string nameStem = StringUtils::saveStem(loadGameMenuScreen.getName(choice));
-					std::string pCharacter = SAVE_PATH + ("/" + (nameStem + ".sav"));
-					std::string pJournal = SAVE_PATH + ("/" + (nameStem + "_journal.txt"));
-					std::string pMap = WORLD_PATH + ("/" + nameStem);
-					boost::filesystem::remove(boost::filesystem::path(pCharacter));
-					boost::filesystem::remove(boost::filesystem::path(pJournal));
-					boost::filesystem::remove_all(boost::filesystem::path(pMap));
+					SaveUtils::deleteSave(loadGameMenuScreen.getName(choice));
 					return REDO;
 				}
 				loadGameMenuScreen.display(choice);

@@ -15,6 +15,7 @@ class SaveUtils {
 		static void saveMap(std::string charName, std::string mapName, const Map &map);
 		static Character load(std::string name, Interface &interface);
 		static Map loadMap(std::string charName, std::string mapName);
+		static void deleteSave(std::string name);
 };
 
 #endif
