@@ -78,23 +78,28 @@ bool SessionController::changeMap(Character &character, Map &map, Interface &int
 		return false;
 	SaveUtils::saveMap(character.getName(), character.getMap(), map);
 	std::string dest = map.cell[character.getX()][character.getY()].exits.begin()->getDestCode();
+	//Check if the map already exists.
+	bool mapExists = false;
 	boost::filesystem::path path(WORLD_PATH+StringUtils::saveStem(character.getName()));
 	for(boost::filesystem::directory_iterator it(path);it!=boost::filesystem::directory_iterator();++it)
-		if(boost::filesystem::extension(*it) == ".map") {
+		if(boost::filesystem::extension(*it) == ".map")
 			if (dest.compare((*it).path().stem().string()) == 0) {
-				Map nMap = SaveUtils::loadMap(character.getName(), dest);
-				map.cell[character.getX()][character.getY()].exits.begin()->setDestName(nMap.getName());
-				character.goToStart(nMap, map.getName());
-				character.setMap(dest);
-				SaveUtils::saveMap(character.getName(), character.getMap(), nMap);
-				return true;
+				mapExists = true;
+				break;
 			}
-		}
-	Map nMap = MapGenerator::generate(20,20, new Dungeon());
+	Map nMap;
+	//In the other case we generate a new map.
+	if (!mapExists) {
+		nMap = MapGenerator::generate(20,20, new Dungeon());
+		interface.write("Welcome to "+nMap.getName()+".");
+	}
+	else
+		nMap = SaveUtils::loadMap(character.getName(), dest);
+	//Then we change previous map and chracter informations.
 	map.cell[character.getX()][character.getY()].exits.begin()->setDestName(nMap.getName());
 	character.goToStart(nMap, map.getName());
 	character.setMap(dest);
+	//Finally we save the new map.
 	SaveUtils::saveMap(character.getName(), character.getMap(), nMap);
-	interface.write("Welcome to "+nMap.getName()+".");
 	return true;
 }
