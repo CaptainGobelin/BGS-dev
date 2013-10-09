@@ -16,6 +16,7 @@ class Interface {
 		void write(std::string message);
 		void draw();
 		void showItems(Cell &cell);
+		void showDestination(Cell & cell);
 
 	private :
 		sf::Sprite panel;

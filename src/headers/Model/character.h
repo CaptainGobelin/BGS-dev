@@ -30,6 +30,7 @@ class Character {
 		void setPosition(int newX, int newY) {setX(newX);setY(newY);}
 		void checkView(Map& map);
 		void loadSprite();
+		void goToStart(Map &map, std::string mapName);
 
 		std::list<Item> inventory;
 

@@ -6,6 +6,7 @@
 
 #include "textures.h"
 #include "item.h"
+#include "mapExit.h"
 
 class Cell {
 	public :
@@ -25,16 +26,18 @@ class Cell {
 		void nothing();
 		void dungeonFloorA();
 		void dungeonWallA();
+		void dungeonExit();
 
 		std::list<Item> drops;
+		std::list<MapExit> exits;
 
 		template<class Archive>
 	    void save(Archive& ar, const unsigned int version) const {
-	        ar & code & visited & drops;
+	        ar & code & visited & drops & exits;
 	    }
 		template<class Archive>
 	    void load(Archive& ar, const unsigned int version){
-	        ar & code & visited & drops;
+	        ar & code & visited & drops & exits;
 	        loadSprite();
 	    }
 	    BOOST_SERIALIZATION_SPLIT_MEMBER();

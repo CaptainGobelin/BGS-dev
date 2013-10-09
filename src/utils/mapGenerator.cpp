@@ -16,5 +16,13 @@ Map MapGenerator::generate(int x, int y, MapPattern *pattern) {
 			else
 				map.cell[i+1][j+1].dungeonFloorA();
 		}
+	map.setName("The Secret Prison of Zeiram the Lich");
+	int xE,yE;
+	do {
+		xE = rand()%l;
+		yE = rand()%w;
+	} while (map.cell[xE][yE].isSolid());
+	map.cell[xE][yE].dungeonExit();
+	map.cell[xE][yE].exits.push_front(MapExit("D3"));
 	return map;
 }

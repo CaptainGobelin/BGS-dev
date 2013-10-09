@@ -18,6 +18,7 @@ class SessionController {
 	public :
 		SessionController();
 		int launch(Character &character, Interface &interface);
+		bool changeMap(Character &character, Map &map, Interface &interface);
 };
 
 #endif

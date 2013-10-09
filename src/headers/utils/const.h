@@ -25,6 +25,7 @@
 #define ENTER_INPUT 8
 #define ESCAPE_INPUT 9
 #define DELETE_INPUT 10
+#define Q_INPUT 11
 
 //Menu inputs
 #define INIT_CHOICE 10
@@ -45,9 +46,11 @@
 #define HUMAN_CODE 1
 
 //Cells
+#define CHANGE_MAP_CODE 1000
 #define NOTHING_CODE 0
 #define DUNGEON_WALL_A 1
 #define DUNGEON_FLOOR_A 2
+#define DUNGEON_EXIT 3
 
 //Save File
 #define END_OF_FILE -99999

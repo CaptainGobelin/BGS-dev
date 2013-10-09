@@ -31,10 +31,12 @@ int MenuController::launch() {
 		int toDo = newGameMenuController.launch(charName);
 		if (toDo != TO_CONTINUE)
 			return toDo;
-		Interface interface;
-		Character character = SaveUtils::load(charName, interface);
-		SessionController sessionController;
-		return sessionController.launch(character, interface);
+		do {
+			Interface interface;
+			Character character = SaveUtils::load(charName, interface);
+			SessionController sessionController;
+			toDo = sessionController.launch(character, interface);
+		} while (toDo == REDO);
 	}
 	else if (choice == 1) {
 		std::string charName = "";
@@ -46,10 +48,13 @@ int MenuController::launch() {
 		while (toDo == REDO);
 		if (toDo != TO_CONTINUE)
 			return toDo;
-		Interface interface;
-		Character character = SaveUtils::load(charName, interface);
-		SessionController sessionController;
-		return sessionController.launch(character, interface);
+		do {
+			Interface interface;
+			Character character = SaveUtils::load(charName, interface);
+			SessionController sessionController;
+			toDo = sessionController.launch(character, interface);
+		} while (toDo == REDO);
+		return toDo;
 	}
 	return CLOSE_INPUT;
 }

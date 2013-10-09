@@ -64,3 +64,12 @@ void Interface::showItems(Cell &cell) {
 	line += ".";
 	write(line);
 }
+
+void Interface::showDestination(Cell &cell) {
+	if (cell.exits.empty())
+		return;
+	std::string line = "You see a way to ";
+	line += cell.exits.begin()->getDestName();
+	line += ".";
+	write(line);
+}

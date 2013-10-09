@@ -24,10 +24,12 @@ class MapScreen {
 		void display(Map &map, Character &character);
 
 	private :
+		sf::Font font;
 		sf::Sprite mapSprite;
 		sf::Sprite charSprite;
 		sf::Sprite blocSprite;
 		sf::Sprite emptySprite;
+		sf::Text mapName;
 		int mapLength;
 		int mapWidth;
 };

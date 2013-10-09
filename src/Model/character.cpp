@@ -70,3 +70,25 @@ void Character::checkLine(Map &map, int i, int j) {
 void Character::loadSprite() {
 	race.loadSprite();
 }
+
+void Character::goToStart(Map &map, std::string mapName) {
+	for (int i=0;i<map.getLength();i++)
+		for (int j=0;j<map.getWidth();j++)
+			if (!map.cell[i][j].exits.empty())
+				if (map.cell[i][j].exits.begin()->getDestCode().compare(this->map) == 0) {
+					map.cell[i][j].exits.begin()->setDestName(mapName);
+					this->x = i;
+					this->y = j;
+					return;
+				}
+	int rX, rY;
+	do {
+		rX = rand()%map.getLength();
+		rY = rand()%map.getWidth();
+	} while (map.cell[rX][rY].isSolid() || !map.cell[rX][rY].exits.empty());
+	map.cell[rX][rY].dungeonExit();
+	map.cell[rX][rY].exits.push_front(MapExit(this->map));
+	map.cell[rX][rY].exits.begin()->setDestName(mapName);
+	this->x = rX;
+	this->y = rY;
+}

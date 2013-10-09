@@ -16,6 +16,8 @@ class Map {
 		void setLength(const int &newLength) {length=newLength;}
 		const int &getWidth() const {return width;}
 		void setWidth(const int &newWidth) {width=newWidth;}
+		const std::string &getName() const {return name;}
+		void setName(const std::string &newName) {name=newName;}
 
 		void refreshCells(const int x, const int y);
 		void draw(const int x, const int y);
@@ -26,14 +28,14 @@ class Map {
 
 		template<class Archive>
 	    void save(Archive& ar, const unsigned int version) const {
-	        ar & length & width;
+	        ar & length & width & name;
 	        for (int i=0;i<length;i++)
 	        	for (int j=0;j<width;j++)
 	        		ar & cell[i][j];
 	    }
 	    template<class Archive>
 	    void load(Archive& ar, const unsigned int version){
-	        ar & length & width;
+	        ar & length & width & name;
 	        cell = new Cell* [length];
    			for (int i=0;i<length;i++)
         		cell[i] = new Cell [width];
@@ -46,6 +48,7 @@ class Map {
 	private :
 		int length;
 		int width;
+		std::string name;
 };
 
 BOOST_CLASS_VERSION(Map, 5);

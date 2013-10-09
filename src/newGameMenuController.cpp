@@ -69,7 +69,7 @@ void NewGameMenuController::createCharacter(std::string name) {
 		x = rand()%map.getLength();
 		y = rand()%map.getWidth();
 	} while (map.cell[x][y].isSolid());
-	Character character(name, HUMAN_CODE, "D1");
+	Character character(name, HUMAN_CODE, "A1");
 	character.setX(x);
 	character.setY(y);
 	Interface interface;

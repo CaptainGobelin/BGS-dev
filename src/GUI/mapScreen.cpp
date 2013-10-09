@@ -1,6 +1,10 @@
 #include "../headers/GUI/mapScreen.h"
 
 MapScreen::MapScreen() {
+	this->font.loadFromFile((std::string)FONT_PATH+"mapFont.ttf");
+	this->mapName.setFont(font);
+	this->mapName.setCharacterSize(25);
+	this->mapName.setColor(sf::Color::Black);
 	this->mapSprite.setTexture(Textures::texturesMap);
 	this->blocSprite.setTexture(Textures::texturesMap);
 	this->emptySprite.setTexture(Textures::texturesMap);
@@ -36,6 +40,10 @@ GameInput MapScreen::recupInput() {
 }
 
 void MapScreen::display(Map &map, Character &character) {
+	//Diplay the name of the map at the top of the map screen.
+	this->mapName.setString(map.getName());
+	this->mapName.setPosition(487 - (map.getName().size()*8.9), 105);
+	//Pix is the size of each sprite.
 	int pix = this->blocSprite.getScale().x * 50;
 	GameWindow::window.draw(this->mapSprite);
 	for (int i=-this->mapLength/2;i<(this->mapLength+1)/2;i++)
@@ -54,5 +62,6 @@ void MapScreen::display(Map &map, Character &character) {
 	this->charSprite.setPosition(503+pix*(character.getX()-this->mapLength/2),\
 		369+pix*(character.getY()-this->mapWidth/2));
 	GameWindow::window.draw(this->charSprite);
+	GameWindow::window.draw(this->mapName);
 	GameWindow::window.display();
 }

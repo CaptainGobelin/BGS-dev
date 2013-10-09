@@ -16,6 +16,7 @@ void GameInput::treatEvent(sf::Event event) {
 			case sf::Keyboard::Right : {value=RIGHT_INPUT;return;}
 			case sf::Keyboard::Left : {value=LEFT_INPUT;return;}
 			case sf::Keyboard::M : {value=M_INPUT;return;}
+			case sf::Keyboard::Q : {value=Q_INPUT;return;}
 			case sf::Keyboard::Return : {value=ENTER_INPUT;return;}
 			case sf::Keyboard::Escape : {value=ESCAPE_INPUT;return;}
 			case sf::Keyboard::Delete : {value=DELETE_INPUT;return;}
