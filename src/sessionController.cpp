@@ -87,19 +87,25 @@ bool SessionController::changeMap(Character &character, Map &map, Interface &int
 				mapExists = true;
 				break;
 			}
-	Map nMap;
 	//In the other case we generate a new map.
 	if (!mapExists) {
-		nMap = MapGenerator::generate(20,20, new Dungeon());
+		Map nMap = MapGenerator::generate(20,20, new Dungeon());
 		interface.write("Welcome to "+nMap.getName()+".");
+		//Then we change previous map and chracter informations.
+		map.cell[character.getX()][character.getY()].exits.begin()->setDestName(nMap.getName());
+		character.goToStart(nMap, map.getName());
+		character.setMap(dest);
+		//Finally we save the new map.
+		SaveUtils::saveMap(character.getName(), character.getMap(), nMap);
 	}
-	else
-		nMap = SaveUtils::loadMap(character.getName(), dest);
-	//Then we change previous map and chracter informations.
-	map.cell[character.getX()][character.getY()].exits.begin()->setDestName(nMap.getName());
-	character.goToStart(nMap, map.getName());
-	character.setMap(dest);
-	//Finally we save the new map.
-	SaveUtils::saveMap(character.getName(), character.getMap(), nMap);
+	else {
+		Map nMap = SaveUtils::loadMap(character.getName(), dest);
+		//Then we change previous map and chracter informations.
+		map.cell[character.getX()][character.getY()].exits.begin()->setDestName(nMap.getName());
+		character.goToStart(nMap, map.getName());
+		character.setMap(dest);
+		//Finally we save the new map.
+		SaveUtils::saveMap(character.getName(), character.getMap(), nMap);
+	}
 	return true;
 }
