@@ -63,13 +63,13 @@ int NewGameMenuController::launch(std::string &name) {
 }
 
 void NewGameMenuController::createCharacter(std::string name) {
-	Map map = MapGenerator::generate(20,20, new Dungeon());
+	Map map = MapGenerator::generate(20,20, new Dungeon(), "1_1_1");
 	int x, y;
 	do  {
 		x = rand()%map.getLength();
 		y = rand()%map.getWidth();
 	} while (map.cell[x][y].isSolid());
-	Character character(name, HUMAN_CODE, "A1");
+	Character character(name, HUMAN_CODE, "1_1_1");
 	character.setX(x);
 	character.setY(y);
 	Interface interface;

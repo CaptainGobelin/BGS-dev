@@ -3,7 +3,7 @@
 extern sf::RenderWindow window;
 extern sf::View view;
 
-Map MapGenerator::generate(int x, int y, MapPattern *pattern) {
+Map MapGenerator::generate(int x, int y, MapPattern *pattern, std::string mapCode) {
 	int l = rand() % x + x;
 	int w = rand() % y + y;
 	Map map(l+2,w+2);
@@ -16,13 +16,21 @@ Map MapGenerator::generate(int x, int y, MapPattern *pattern) {
 			else
 				map.cell[i+1][j+1].dungeonFloorA();
 		}
-	map.setName("The Secret Prison of Zeiram the Lich");
+	map.setName(NameGenerator::dungeonName());
 	int xE,yE;
 	do {
 		xE = rand()%l;
 		yE = rand()%w;
 	} while (map.cell[xE][yE].isSolid());
 	map.cell[xE][yE].dungeonExit();
-	map.cell[xE][yE].exits.push_front(MapExit("D3"));
+	int newMapCode = StringUtils::getMapCode(mapCode, 1);
+	std::ostringstream oss;
+	oss.str("");
+	oss << (newMapCode+1);
+	newMapCode = StringUtils::getMapCode(mapCode, 2);
+	oss << "_" << (newMapCode);
+	newMapCode = StringUtils::getMapCode(mapCode, 3);
+	oss << "_" << (newMapCode+1);
+	map.cell[xE][yE].exits.push_front(MapExit(oss.str()));
 	return map;
 }
