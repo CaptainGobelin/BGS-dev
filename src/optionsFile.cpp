@@ -10,6 +10,7 @@ bool OptionsFile::load() {
 	std::ifstream file(OPTION_PATH, std::ios::in);
 	if (file) {
 		file >> line;
+		//Skip the starting comments
 		if (line == "/*") {
 			while (line != "*/")
 				file >> line;

@@ -8,7 +8,7 @@
 #include "../GUI/gameWindow.h"
 
 class Item {
-	public :
+	public:
 		Item(int locX = -1, int locY = -1, int code = DEFAULT_ITEM);
 		const int &getCode() const {return code;}
 		const int &getX() const {return x;}
@@ -19,8 +19,10 @@ class Item {
 		sf::Sprite &getSpriteOn() {return spriteOn;}
 		sf::Sprite &getSpriteOff() {return spriteOff;}
 
+		//Load element that don't need to be serialized
 		void loadSprite();
 
+		//Method which contains standard properties of an item
 		void generalItem();
 		void sword1HA();
 		void greavesLA();
@@ -36,12 +38,14 @@ class Item {
 	    }
 	    BOOST_SERIALIZATION_SPLIT_MEMBER();
 
-	protected :
+	private:
 		int code;
 		int x;
 		int y;
 		std::string name;
+		//Sprite of the item if equiped
 		sf::Sprite spriteOn;
+		//Sprite of the item if unequiped
 		sf::Sprite spriteOff;
 	};
 

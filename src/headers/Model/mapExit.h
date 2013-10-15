@@ -6,8 +6,10 @@
 
 #include "textures.h"
 
+//A map exit is a link between to map (a way to a map to an anoter one)
+
 class MapExit {
-	public :
+	public:
 		MapExit(std::string code = "");
 
 		const std::string &getDestCode() const {return destCode;}
@@ -20,7 +22,7 @@ class MapExit {
 	        ar & destCode & destName;
 	    }
 
-	private :
+	private:
 		std::string destCode;
 		std::string destName;
 };

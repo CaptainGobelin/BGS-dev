@@ -7,11 +7,11 @@
 #include "human_analyze.h"
 
 class NameGenerator {
-	public :
+	public:
 		static std::string humanName();
 		static std::string dungeonName();
 
-	private :
+	private:
 		static std::string getAdjectif();
 		static std::string getName();
 		static std::string getAdjectifName();

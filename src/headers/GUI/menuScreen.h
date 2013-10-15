@@ -9,7 +9,7 @@
 #include "gameWindow.h"
 
 class MenuScreen {
-	public :
+	public:
 		MenuScreen();
 		const sf::Sprite &getMenuPanel() const {return menuPanel;}
 		const sf::Sprite &getArrow() const {return arrow;}
@@ -17,7 +17,7 @@ class MenuScreen {
 		GameInput recupInput();
 		void display(int choice);
 
-	private :
+	private:
 		sf::Sprite titleScreen;
 		sf::Sprite menuPanel;
 		sf::Sprite arrow;

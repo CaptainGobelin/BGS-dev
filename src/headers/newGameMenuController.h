@@ -8,12 +8,12 @@
 #include "GUI/newGameMenuScreen.h"
 
 class NewGameMenuController {
-	public :
+	public:
 		NewGameMenuController();
 		int launch(std::string &name);
 		void createCharacter(std::string name);
 
-	private :
+	private:
 		NewGameMenuScreen newGameMenuScreen;
 		std::list<std::string> characters;
 };

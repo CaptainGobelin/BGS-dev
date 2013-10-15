@@ -5,6 +5,7 @@ MapController::MapController(Map &map, Character &character) {
 }
 
 int MapController::launch(Map &map, Character &character) {
+	//Juste display the map until you press M, Escape or Close
 	mapScreen.display(map, character);
 	GameInput input = this->mapScreen.recupInput();
 	while (input.getValue() != M_INPUT) {

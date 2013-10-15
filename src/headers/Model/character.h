@@ -11,7 +11,7 @@
 #include "../GUI/gameWindow.h"
 
 class Character {
-	public :
+	public:
 		Character();
 		Character(std::string, int raceChoice, std::string map);
 		const Race &getRace() const {return race;}
@@ -28,8 +28,12 @@ class Character {
 		void draw();
 		bool move(int dX, int dY, const Map& map);
 		void setPosition(int newX, int newY) {setX(newX);setY(newY);}
+		//Check to filed of view of the character
 		void checkView(Map& map);
+		//Load element that don't need to be serialized
 		void loadSprite();
+		//Go to the entrance of the map
+		//If there's no entrance, generate one
 		void goToStart(Map &map, std::string mapName);
 
 		std::list<Item> inventory;

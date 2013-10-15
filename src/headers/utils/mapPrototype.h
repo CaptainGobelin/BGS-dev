@@ -5,7 +5,7 @@
 #include "const.h"
 
 class MapPrototype {
-	public :
+	public:
 		MapPrototype();
 		MapPrototype(int newX, int newY);
 		~MapPrototype();

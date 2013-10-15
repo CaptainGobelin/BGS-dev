@@ -10,7 +10,7 @@
 #include "../Model/map.h"
 
 class SaveUtils {
-	public :
+	public:
 		static void save(const Character &character, const Interface &interface);
 		static void saveMap(std::string charName, std::string mapName, const Map &map);
 		static Character load(std::string name, Interface &interface);

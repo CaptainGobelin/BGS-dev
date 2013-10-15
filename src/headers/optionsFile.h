@@ -9,7 +9,7 @@
 #include <cstdlib>
 
 class OptionsFile {
-	public :
+	public:
 		OptionsFile();
 		const int &getFrameLimit() const {return frameLimit;}
 		void setFrameLimit(const int &newFrameLimit) {frameLimit=newFrameLimit;}
@@ -18,7 +18,7 @@ class OptionsFile {
 
 		bool load();
 		
-	private :
+	private:
 		int frameLimit;
 		bool vSync;
 

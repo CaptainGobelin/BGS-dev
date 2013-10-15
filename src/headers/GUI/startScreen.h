@@ -9,7 +9,7 @@
 #include "gameWindow.h"
 
 class StartScreen {
-	public :
+	public:
 		StartScreen();
 		const sf::Sprite &getTitleScreen() const {return titleScreen;}
 		void setTitleScreen(const sf::Sprite &newTitleScreen) {titleScreen=newTitleScreen;}
@@ -17,7 +17,7 @@ class StartScreen {
 		GameInput recupInput();
 		void display();
 
-	private :
+	private:
 		sf::Sprite titleScreen;
 };
 

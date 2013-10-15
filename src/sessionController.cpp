@@ -20,11 +20,13 @@ int SessionController::launch(Character &character, Interface &interface) {
 		input = sessionScreen.recupInput();
 		switch (input.getValue()) {
 			moved = false;
+			//Display Map
 			case M_INPUT : {
 				MapController mapController(map, character);
 				input.setValue(mapController.launch(map, character));
 				break;
 			}
+			//Change map
 			case Q_INPUT : {
 				if (changeMap(character, map, interface)) {
 					SaveUtils::save(character, interface);
@@ -34,6 +36,7 @@ int SessionController::launch(Character &character, Interface &interface) {
 					interface.write("You cannot exit from here !");
 				break;
 			}
+			//Moving inputs
 			case UP_INPUT : {
 				moved = character.move(0,-1,map);
 				played = true;

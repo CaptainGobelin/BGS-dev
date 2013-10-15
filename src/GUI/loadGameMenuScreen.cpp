@@ -1,6 +1,7 @@
 #include "../headers/GUI/loadGameMenuScreen.h"
 
 LoadGameMenuScreen::LoadGameMenuScreen() {
+	//Load the name of all existing characters, and store them in a sf::Text
 	font.loadFromFile((std::string)FONT_PATH+"pcsenior.ttf");
 	int count = 0;
 	boost::filesystem::path path(SAVE_PATH);

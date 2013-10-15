@@ -5,7 +5,7 @@
 #include "../utils/lib.h"
 
 class Textures {
-	public :
+	public:
 		static void loadTextures(const char *path);
 		static sf::Texture texturesStart;
 		static sf::Texture texturesCharacters;

@@ -7,11 +7,11 @@
 #include "GUI/loadGameMenuScreen.h"
 
 class LoadGameMenuController {
-	public :
+	public:
 		LoadGameMenuController();
 		int launch(std::string &charName);
 
-	private :
+	private:
 		LoadGameMenuScreen loadGameMenuScreen;
 
 		bool sure();

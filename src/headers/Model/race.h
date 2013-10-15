@@ -7,8 +7,10 @@
 #include "textures.h"
 #include "../GUI/gameWindow.h"
 
+//The race of a character
+
 class Race {
-	public :
+	public:
 		Race();
 		Race(int code);
 		/*const sf::Sprite &getFaceTop() const {return faceTop;}
@@ -21,7 +23,9 @@ class Race {
 		const int &getRaceCode() const {return raceCode;}
 
 		void setPosition(float x, float y);
+		//Load element that don't need to be serialized
 		void loadSprite();
+		//Methods which contains standard properties of races
 		void humanRace();
 
 		template<class Archive>
@@ -29,7 +33,7 @@ class Race {
 	        ar & attributes & raceCode;
 	    }
 
-	protected :
+	protected:
 		/*sf::Sprite faceTop;
 		sf::Sprite faceBottom;*/
 		sf::Sprite body;

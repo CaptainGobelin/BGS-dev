@@ -33,7 +33,6 @@ void GameController::launch() {
 }
 
 int GameController::startScreen() {
-	//Launch the start screen
 	StartController startController;
 	return startController.launch();
 }

@@ -21,6 +21,7 @@ const std::string Interface::getMessage(int i) const {
 }
 
 void Interface::write(std::string message) {
+	//If the message is too long for one line, cut in two
 	if (message.length() > 31) {
 		int cut = 31;
 		while (message.at(cut) != ' ')
@@ -45,6 +46,7 @@ void Interface::draw() {
 }
 
 void Interface::showItems(Cell &cell) {
+	//Just construct a message of the list of items
 	if (cell.drops.empty())
 		return;
 	std::ostringstream oss;

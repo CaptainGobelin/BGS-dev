@@ -39,6 +39,7 @@ void Character::checkView(Map& map) {
 }
 
 void Character::checkLine(Map &map, int i, int j) {
+	//A standard Bresenham algorithm
 	bool see = true;
 	int dx = abs(i - x);
 	int dy = abs(j - y);
@@ -72,6 +73,7 @@ void Character::loadSprite() {
 }
 
 void Character::goToStart(Map &map, std::string mapName) {
+	//Check if the entrance already exists
 	for (int i=0;i<map.getLength();i++)
 		for (int j=0;j<map.getWidth();j++)
 			if (!map.cell[i][j].exits.empty())
@@ -81,6 +83,7 @@ void Character::goToStart(Map &map, std::string mapName) {
 					this->y = j;
 					return;
 				}
+	//If not, generate one
 	int rX, rY;
 	do {
 		rX = rand()%map.getLength();

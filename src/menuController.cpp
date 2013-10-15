@@ -25,10 +25,15 @@ int MenuController::launch() {
 				break;
 		}
 	} while (input.getValue() != ENTER_INPUT);
+	//When you choose an option in the menu:
+	//If you press new game, you create a character
+	//And then the game load it
 	if (choice == 0) {
 		NewGameMenuController newGameMenuController;
 		std::string charName = "";
 		int toDo = newGameMenuController.launch(charName);
+		//If toDo contains an other value than TO_CONTNIUE, we
+		//Stop the process of game creation and return the value
 		if (toDo != TO_CONTINUE)
 			return toDo;
 		do {
@@ -38,6 +43,8 @@ int MenuController::launch() {
 			toDo = sessionController.launch(character, interface);
 		} while (toDo == REDO);
 	}
+	//If you press Load game, you choose the character you want
+	//And the game load it
 	else if (choice == 1) {
 		std::string charName = "";
 		int toDo;
@@ -46,6 +53,8 @@ int MenuController::launch() {
 			toDo = loadGameMenu.launch(charName);
 		}
 		while (toDo == REDO);
+		//If toDo contains an other value than TO_CONTNIUE, we
+		//Stop the process of game loading and return the value
 		if (toDo != TO_CONTINUE)
 			return toDo;
 		do {

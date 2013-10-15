@@ -11,7 +11,7 @@
 #include "../Model/character.h"
 
 class NewGameMenuScreen {
-	public :
+	public:
 		NewGameMenuScreen();
 
 		sf::Event recupInput();
@@ -19,7 +19,7 @@ class NewGameMenuScreen {
 
 		sf::Text characterName;
 
-	private :
+	private:
 		sf::Font font;
 		sf::Text warning;
 };

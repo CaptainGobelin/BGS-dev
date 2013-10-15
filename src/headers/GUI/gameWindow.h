@@ -7,11 +7,13 @@
 #include "../optionsFile.h"
 
 class GameWindow {
-	public :
+	public:
 		static void setOptions(OptionsFile opt);
 		
 		static sf::RenderWindow window;
+		//Game viewport
 		static sf::View viewGame;
+		//Interface viewport
 		static sf::View viewInt;
 };
 

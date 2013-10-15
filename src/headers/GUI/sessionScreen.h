@@ -12,7 +12,7 @@
 #include "gameWindow.h"
 
 class SessionScreen {
-	public :
+	public:
 		SessionScreen();
 
 		GameInput recupInput();

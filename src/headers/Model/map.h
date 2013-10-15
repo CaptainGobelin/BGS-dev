@@ -9,7 +9,7 @@
 #include "../GUI/gameWindow.h"
 
 class Map {
-	public :
+	public:
 		Map(int x=0, int y=0);
 		~Map();
 		const int &getLength() const {return length;}
@@ -19,9 +19,9 @@ class Map {
 		const std::string &getName() const {return name;}
 		void setName(const std::string &newName) {name=newName;}
 
+		//Pass a turn to all cells of the map
 		void refreshCells(const int x, const int y);
 		void draw(const int x, const int y);
-		void applyCellsCode();
 
 		Cell **cell;
 		sf::Sprite fog;
@@ -45,7 +45,7 @@ class Map {
 	    }
 	    BOOST_SERIALIZATION_SPLIT_MEMBER();
 
-	private :
+	private:
 		int length;
 		int width;
 		std::string name;

@@ -9,16 +9,18 @@
 #include "../GUI/gameWindow.h"
 
 class Interface {
-	public :
+	public:
 		Interface();
 
 		const std::string getMessage(int i) const;
 		void write(std::string message);
 		void draw();
+		//Show the list of the items of a cell
 		void showItems(Cell &cell);
+		//Show the way to an another map if there's one
 		void showDestination(Cell & cell);
 
-	private :
+	private:
 		sf::Sprite panel;
 		sf::Font font;
 		sf::Text textBox[MESS_LINES];

@@ -14,11 +14,11 @@
 #include "Model/map.h"
 
 class GameController {
-	public :
+	public:
 		GameController();
 		void launch();
 
-	private :
+	private:
 		int startScreen();
 		int mainMenu();
 };

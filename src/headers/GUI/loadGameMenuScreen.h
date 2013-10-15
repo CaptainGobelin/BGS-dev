@@ -11,15 +11,17 @@
 #include "../Model/character.h"
 
 class LoadGameMenuScreen {
-	public :
+	public:
 		LoadGameMenuScreen();
 
+		//Get the number of character saved
 		int getNChoices();
+		//Get the name of a character
 		std::string getName(int choice);
 		GameInput recupInput();
 		void display(int choice);
 
-	private :
+	private:
 		std::list<sf::Text> characters;
 		sf::Font font;
 };

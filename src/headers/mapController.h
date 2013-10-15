@@ -8,11 +8,11 @@
 #include "GUI/mapScreen.h"
 
 class MapController {
-	public :
+	public:
 		MapController(Map &map, Character &character);
 		int launch(Map &map, Character &character);
 
-	private :
+	private:
 		MapScreen mapScreen;
 };
 

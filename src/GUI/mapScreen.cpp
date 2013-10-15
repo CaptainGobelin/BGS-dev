@@ -19,6 +19,7 @@ MapScreen::MapScreen() {
 }
 
 void MapScreen::setScale(int mLength, int mWidth) {
+	//774x500 is the size of the displyable area
 	this->mapLength = mLength;
 	this->mapWidth = mWidth;
 	float pX = 774/(float)mLength;
@@ -40,6 +41,7 @@ GameInput MapScreen::recupInput() {
 }
 
 void MapScreen::display(Map &map, Character &character) {
+	//[503;369] is the center of the displayable area
 	//Diplay the name of the map at the top of the map screen.
 	this->mapName.setString(map.getName());
 	this->mapName.setPosition(487 - (map.getName().size()*8.9), 105);

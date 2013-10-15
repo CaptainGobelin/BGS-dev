@@ -25,6 +25,7 @@ void Map::refreshCells(const int x, const int y) {
 }
 
 void Map::draw(const int x, const int y) {
+	//First we draw the floors (sprite, the items)
 	GameWindow::window.setView(GameWindow::viewGame);
 	for (int i=std::max(0,x-12);i<std::min(length,x+13);i++)
       	for (int j=std::max(0,y-12);j<std::min(width,y+13);j++) {
@@ -41,6 +42,7 @@ void Map::draw(const int x, const int y) {
 				GameWindow::window.draw((*it).getSpriteOff());
 			}
 		}
+	//And then the wall (cause sprites are bigger)
 	for (int i=std::max(0,x-12);i<std::min(length,x+13);i++)
       	for (int j=std::max(0,y-12);j<std::min(width,y+13);j++) {
       		if (!cell[i][j].isVisited())

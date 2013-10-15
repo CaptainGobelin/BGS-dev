@@ -3,6 +3,7 @@
 LoadGameMenuController::LoadGameMenuController() {}
 
 int LoadGameMenuController::launch(std::string &charName) {
+	//nChoices is the number of saved characters
 	int nChoices = loadGameMenuScreen.getNChoices();
 	int choice = 0;
 	bool stop = true;

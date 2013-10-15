@@ -9,7 +9,7 @@
 #include "mapExit.h"
 
 class Cell {
-	public :
+	public:
 		Cell();
 		Cell(int code);
 		const int &getCode() const {return code;}
@@ -21,14 +21,18 @@ class Cell {
 		void setViewed(const bool &newViewed) {viewed=newViewed;}
 		sf::Sprite &getSprite() {return sprite;}
 
+		//Load element that don't need to be serialized
 		void loadSprite();
 
+		//These methods get the standard properties of an element
 		void nothing();
 		void dungeonFloorA();
 		void dungeonWallA();
 		void dungeonExit();
 
+		//The drops are items contains on the cell
 		std::list<Item> drops;
+		//This list may contains a way to an another map
 		std::list<MapExit> exits;
 
 		template<class Archive>
@@ -42,7 +46,7 @@ class Cell {
 	    }
 	    BOOST_SERIALIZATION_SPLIT_MEMBER();
 
-	protected :
+	private:
 		int code;
 		bool solid;
 		bool transparent;

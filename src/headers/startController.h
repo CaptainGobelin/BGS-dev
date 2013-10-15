@@ -7,10 +7,10 @@
 #include "GUI/startScreen.h"
 
 class StartController {
-	public :
+	public:
 		StartController();
 		int launch();
-	private :
+	private:
 		StartScreen startScreen;
 };
 

@@ -14,11 +14,11 @@
 #include "GUI/menuScreen.h"
 
 class MenuController {
-	public :
+	public:
 		MenuController();
 		int launch();
 
-	private :
+	private:
 		MenuScreen menuScreen;
 };
 

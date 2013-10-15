@@ -11,7 +11,7 @@
 #include "../Model/map.h"
 
 class MapScreen {
-	public :
+	public:
 		MapScreen();
 
 		const sf::Sprite &getMapSprite() const {return mapSprite;}
@@ -19,11 +19,12 @@ class MapScreen {
 		const sf::Sprite &getBlocSprite() const {return blocSprite;}
 		const sf::Sprite &getEmptySprite() const {return emptySprite;}
 
+		//Scale the map sprite to fill the entire screen
 		void setScale(int mLength, int mWidth);
 		GameInput recupInput();
 		void display(Map &map, Character &character);
 
-	private :
+	private:
 		sf::Font font;
 		sf::Sprite mapSprite;
 		sf::Sprite charSprite;
