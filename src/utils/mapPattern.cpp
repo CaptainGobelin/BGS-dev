@@ -44,6 +44,10 @@ void MapPattern::flood_rec(MapPrototype &map, int fX, int fY) {
 
 Random::Random() {}
 
+std::string Random::getRandomName() {
+	return "Unknow name";
+}
+
 void Random::apply(MapPrototype &map) {
 	for (int i=0;i<map.x;i++)
 		for (int j=0;j<map.y;j++) {
@@ -57,6 +61,10 @@ void Cavern::apply(MapPrototype &map) {
 	do
 		apply_loop(map);
 	while (flood(map) < (map.x*map.y)/3);
+}
+
+std::string Cavern::getRandomName() {
+	return "Unknow name";
 }
 
 void Cavern::apply_loop(MapPrototype &map) {
@@ -111,6 +119,10 @@ void Labyrinth::apply(MapPrototype &map) {
 			}
 	apply_backtrack(map, 1, 1);
 	remove_dead_end(map);
+}
+
+std::string Labyrinth::getRandomName() {
+	return "Unknow name";
 }
 
 void Labyrinth::apply_backtrack(MapPrototype &map, int cX, int cY) {
@@ -214,6 +226,10 @@ void Dungeon::apply(MapPrototype &map) {
 		apply_loop(map);
 	} while (flood(map) < (map.x*map.y/2));
 	remove_dead_end(map);
+}
+
+std::string Dungeon::getRandomName() {
+	return NameGenerator::dungeonName();
 }
 
 void Dungeon::apply_loop(MapPrototype &map) {

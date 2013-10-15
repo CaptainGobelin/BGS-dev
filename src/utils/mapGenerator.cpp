@@ -16,7 +16,7 @@ Map MapGenerator::generate(int x, int y, MapPattern *pattern, std::string mapCod
 			else
 				map.cell[i+1][j+1].dungeonFloorA();
 		}
-	map.setName(NameGenerator::dungeonName());
+	map.setName(pattern->getRandomName());
 	int xE,yE;
 	do {
 		xE = rand()%l;

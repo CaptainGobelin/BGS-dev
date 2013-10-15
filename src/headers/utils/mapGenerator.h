@@ -7,7 +7,6 @@
 #include "stringUtils.h"
 #include "../Model/map.h"
 #include "mapPattern.h"
-#include "nameGenerator.h"
 
 class MapGenerator {
 	public :
