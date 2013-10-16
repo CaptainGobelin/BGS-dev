@@ -15,9 +15,9 @@ Map MapGenerator::generate(int x, int y, MapPattern *pattern, std::string mapCod
 	for (int i=0;i<l;i++)
 		for (int j=0;j<w;j++) {
 			if (mapP.cell[i][j] == 1)
-				map.cell[i+1][j+1].dungeonWallA();
+				pattern->wallCell(map.cell[i+1][j+1]);
 			else
-				map.cell[i+1][j+1].dungeonFloorA();
+				pattern->floorCell(map.cell[i+1][j+1]);
 		}
 	map.setName(pattern->getRandomName());
 	//We generate exits (entrance are only generate when we need one)

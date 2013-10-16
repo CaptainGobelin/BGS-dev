@@ -6,6 +6,7 @@
 
 #include "mapPrototype.h"
 #include "nameGenerator.h"
+#include "../Model/cell.h"
 
 //Each pattern sub-class is a type of map we can generate.
 
@@ -13,11 +14,14 @@ class MapPattern {
 	public:
 		MapPattern();
 		//The flood method will remove floors we can't access
+		//flood return the number of accessible floors
 		int flood(MapPrototype &map);
 		void flood_rec(MapPrototype &map, int fX, int fY);
 		//Apply simply generate a map prototype of the pattern
 		virtual void apply(MapPrototype &map) = 0;
 		virtual std::string getRandomName() = 0;
+		virtual void floorCell(Cell &cell) = 0;
+		virtual void wallCell(Cell &cell) = 0;
 };
 
 class Random : public MapPattern {
@@ -25,6 +29,8 @@ class Random : public MapPattern {
 		Random();
 		virtual void apply(MapPrototype &map);
 		virtual std::string getRandomName();
+		virtual void floorCell(Cell &cell);
+		virtual void wallCell(Cell &cell);
 };
 
 class Cavern : public MapPattern {
@@ -32,6 +38,8 @@ class Cavern : public MapPattern {
 		Cavern();
 		virtual void apply(MapPrototype &map);
 		virtual std::string getRandomName();
+		virtual void floorCell(Cell &cell);
+		virtual void wallCell(Cell &cell);
 	private:
 		void apply_loop(MapPrototype &map);
 };
@@ -41,6 +49,8 @@ class Labyrinth : public MapPattern {
 		Labyrinth();
 		virtual void apply(MapPrototype &map);
 		virtual std::string getRandomName();
+		virtual void floorCell(Cell &cell);
+		virtual void wallCell(Cell &cell);
 	private:
 		void apply_backtrack(MapPrototype &map, int cX, int cY);
 		void remove_dead_end(MapPrototype &map);
@@ -52,6 +62,8 @@ class Dungeon : public MapPattern {
 		Dungeon();
 		virtual void apply(MapPrototype &map);
 		virtual std::string getRandomName();
+		virtual void floorCell(Cell &cell);
+		virtual void wallCell(Cell &cell);
 	private:
 		void apply_loop(MapPrototype &map);
 		bool draw_room(MapPrototype &map, int i, int j, int &maxI, int &maxJ);

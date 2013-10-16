@@ -1,6 +1,9 @@
 #include "../headers/utils/nameGenerator.h"
 
 std::string NameGenerator::humanName() {
+	//Name generation algorithm use the markov chains
+	//We analyze names (look at utils/name_analyze) to construct markov chains
+	//Then we use this "tableau" to construct a random name
 	std::string result = "";
 	bool stop = false;
 	int ascii = 0;
