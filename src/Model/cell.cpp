@@ -36,50 +36,42 @@ void Cell::loadSprite() {
 	}
 }
 
-void Cell::nothing() {
-	this->code = NOTHING_CODE;
-	this->solid = true;
-	this->transparent = false;
+void Cell::wallFactory(int c, bool s, bool t, int x0, int y0, int x1, int y1) {
+	this->code = c;
+	this->solid = s;
+	this->transparent = t;
+	this->sprite.setTexture(Textures::texturesWalls);
+	this->sprite.setTextureRect(sf::IntRect(x0, y0, x1, y1));
+}
+
+void Cell::floorFactory(int c, bool s, bool t, int x0, int y0, int x1, int y1) {
+	this->code = c;
+	this->solid = s;
+	this->transparent = t;
 	this->sprite.setTexture(Textures::texturesFloors);
-	this->sprite.setTextureRect(sf::IntRect(0, 0, T_TILES, T_TILES));
+	this->sprite.setTextureRect(sf::IntRect(x0, y0, x1, y1));
+}
+
+void Cell::nothing() {
+	floorFactory(NOTHING_CODE, true, false, 0, 0, T_TILES, T_TILES);
 }
 
 void Cell::dungeonFloorA() {
-	this->code = DUNGEON_FLOOR_A;
-	this->solid = false;
-	this->transparent = true;
-	this->sprite.setTexture(Textures::texturesFloors);
-	this->sprite.setTextureRect(sf::IntRect(0, T_TILES, T_TILES, T_TILES));
+	floorFactory(DUNGEON_FLOOR_A, false, true, 0, T_TILES, T_TILES, T_TILES);
 }
 
 void Cell::dungeonWallA() {
-	this->code = DUNGEON_WALL_A;
-	this->solid = true;
-	this->transparent = false;
-	this->sprite.setTexture(Textures::texturesWalls);
-	this->sprite.setTextureRect(sf::IntRect(0, 0, T_TILES+4, T_TILES+4));
+	wallFactory(DUNGEON_WALL_A, true, false, 0, 0, T_TILES+4, T_TILES+4);
 }
 
 void Cell::dungeonExit() {
-	this->code = DUNGEON_EXIT;
-	this->solid = false;
-	this->transparent = true;
-	this->sprite.setTexture(Textures::texturesFloors);
-	this->sprite.setTextureRect(sf::IntRect(0, 3*T_TILES, T_TILES, T_TILES));
+	floorFactory(DUNGEON_EXIT, false, true, 0, 3*T_TILES, T_TILES, T_TILES);
 }
 
 void Cell::cavernWallA() {
-	this->code = CAVERN_WALL_A;
-	this->solid = true;
-	this->transparent = false;
-	this->sprite.setTexture(Textures::texturesWalls);
-	this->sprite.setTextureRect(sf::IntRect(T_TILES+4, 0, T_TILES+4, T_TILES+4));
+	wallFactory(CAVERN_WALL_A, true, false, T_TILES+4, 0, T_TILES+4, T_TILES+4);
 }
 
 void Cell::cavernFloorA() {
-	this->code = CAVERN_FLOOR_A;
-	this->solid = false;
-	this->transparent = true;
-	this->sprite.setTexture(Textures::texturesFloors);
-	this->sprite.setTextureRect(sf::IntRect(T_TILES, 0, T_TILES, T_TILES));
+	floorFactory(CAVERN_FLOOR_A, false, true, T_TILES, 0, T_TILES, T_TILES);
 }

@@ -55,6 +55,9 @@ class Cell {
 		bool viewed;
 		bool visited;
 		sf::Sprite sprite;
+
+		void wallFactory(int c, bool s, bool t, int x0, int y0, int x1, int y1);
+		void floorFactory(int c, bool s, bool t, int x0, int y0, int x1, int y1);
 };
 
 BOOST_CLASS_VERSION(Cell, 4);
