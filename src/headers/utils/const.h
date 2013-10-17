@@ -51,6 +51,8 @@
 #define DUNGEON_WALL_A 1
 #define DUNGEON_FLOOR_A 2
 #define DUNGEON_EXIT 3
+#define CAVERN_WALL_A 4
+#define CAVERN_FLOOR_A 5
 
 //Save File
 #define END_OF_FILE -99999

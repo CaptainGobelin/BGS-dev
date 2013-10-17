@@ -86,11 +86,11 @@ std::string Cavern::getRandomName() {
 }
 
 void Cavern::floorCell(Cell &cell) {
-	cell.dungeonFloorA();
+	cell.cavernFloorA();
 }
 
 void Cavern::wallCell(Cell &cell) {
-	cell.dungeonWallA();
+	cell.cavernWallA();
 }
 
 void Cavern::apply_loop(MapPrototype &map) {

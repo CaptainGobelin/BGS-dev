@@ -25,6 +25,12 @@ void Cell::loadSprite() {
 		case DUNGEON_EXIT:
 			dungeonExit();
 			break;
+		case CAVERN_FLOOR_A:
+			cavernFloorA();
+			break;
+		case CAVERN_WALL_A:
+			cavernWallA();
+			break;
 		default:
 			nothing();
 	}
@@ -60,4 +66,20 @@ void Cell::dungeonExit() {
 	this->transparent = true;
 	this->sprite.setTexture(Textures::texturesFloors);
 	this->sprite.setTextureRect(sf::IntRect(0, 3*T_TILES, T_TILES, T_TILES));
+}
+
+void Cell::cavernWallA() {
+	this->code = CAVERN_WALL_A;
+	this->solid = true;
+	this->transparent = false;
+	this->sprite.setTexture(Textures::texturesWalls);
+	this->sprite.setTextureRect(sf::IntRect(T_TILES+4, 0, T_TILES+4, T_TILES+4));
+}
+
+void Cell::cavernFloorA() {
+	this->code = CAVERN_FLOOR_A;
+	this->solid = false;
+	this->transparent = true;
+	this->sprite.setTexture(Textures::texturesFloors);
+	this->sprite.setTextureRect(sf::IntRect(T_TILES, 0, T_TILES, T_TILES));
 }
