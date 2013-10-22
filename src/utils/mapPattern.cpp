@@ -48,6 +48,49 @@ void MapPattern::flood_rec(MapPrototype &map, int fX, int fY) {
 		flood_rec(map,fX,fY+1);
 }
 
+void MapPattern::cavernGenerator(MapPrototype &map, int toWall, int limit, int loop) {
+	//It's a cellula automata algorithm
+	//At te begining each cell is randomly convert
+	for (int i=0;i<map.x;i++)
+		for (int j=0;j<map.y;j++)
+			if ((i==0)||(i==(map.x-1))||(j==0)||(j==(map.y-1)))
+				map.cell[i][j] = 1;
+			else
+				map.cell[i][j] = (rand()%100)<toWall;
+	//Then we apply four times a simple algorithm
+	//For each cell, if the number of neighboors (include the cell itself)
+	//Is in [1..4] we convert it to a wall
+	int copy[map.x][map.y];
+	for (int turn=0;turn<(loop+1);turn++) {
+		for (int i=1;i<map.x-1;i++)
+			for (int j=1;j<map.y-1;j++) {
+				int count1=0;
+				for (int ii=i-1;ii<i+2;ii++)
+					for (int jj=j-1;jj<j+2;jj++)
+						count1 += map.cell[ii][jj];
+				copy[i][j] = (count1 > limit) || (count1 < 1);
+			}
+		//Here we copy the map, to prepare the new step of the loop
+		for (int i=1;i<map.x-1;i++)
+			for (int j=1;j<map.y-1;j++)
+				map.cell[i][j] = copy[i][j];
+	}
+	//Finally we convert isolated walls to floor (3 times to make it clean)
+	for (int turn=0;turn<loop;turn++) {
+		for (int i=1;i<map.x-1;i++)
+			for (int j=1;j<map.y-1;j++) {
+				int count1=0;
+				for (int ii=i-1;ii<i+2;ii++)
+					for (int jj=j-1;jj<j+2;jj++)
+						count1 += map.cell[ii][jj];
+				copy[i][j] = (count1 > limit);
+			}
+		for (int i=1;i<map.x-1;i++)
+			for (int j=1;j<map.y-1;j++)
+				map.cell[i][j] = copy[i][j];
+	}
+}
+
 Random::Random() {}
 
 std::string Random::getRandomName() {
@@ -77,7 +120,7 @@ void Cavern::apply(MapPrototype &map) {
 	//In the other case we drop off the present one
 	//And we generate an another cavern
 	do
-		apply_loop(map);
+		cavernGenerator(map, 45, 4, 3);
 	while (flood(map) < (map.x*map.y)/3);
 }
 
@@ -93,49 +136,24 @@ void Cavern::wallCell(Cell &cell) {
 	cell.cavernWallA();
 }
 
-void Cavern::apply_loop(MapPrototype &map) {
-	//It's a cellula automata algorithm
-	//At te begining each cell is randomly convert
-	//To a wall or a floor with toWall% chances to be a wall
-	int toWall = 45;
-	for (int i=0;i<map.x;i++)
-		for (int j=0;j<map.y;j++)
-			if ((i==0)||(i==(map.x-1))||(j==0)||(j==(map.y-1)))
-				map.cell[i][j] = 1;
-			else
-				map.cell[i][j] = (rand()%100)<toWall;
-	//Then we apply four times a simple algorithm
-	//For each cell, if the number of neighboors (include the cell itself)
-	//Is in [1..4] we convert it to a wall
-	int copy[map.x][map.y];
-	for (int turn=0;turn<4;turn++) {
-		for (int i=1;i<map.x-1;i++)
-			for (int j=1;j<map.y-1;j++) {
-				int count1=0;
-				for (int ii=i-1;ii<i+2;ii++)
-					for (int jj=j-1;jj<j+2;jj++)
-						count1 += map.cell[ii][jj];
-				copy[i][j] = (count1 > 4) || (count1 < 1);
-			}
-		//Here we copy the map, to prepare the new step of the loop
-		for (int i=1;i<map.x-1;i++)
-			for (int j=1;j<map.y-1;j++)
-				map.cell[i][j] = copy[i][j];
-	}
-	//Finally we convert isolated walls to floor (3 times to make it clean)
-	for (int turn=0;turn<3;turn++) {
-		for (int i=1;i<map.x-1;i++)
-			for (int j=1;j<map.y-1;j++) {
-				int count1=0;
-				for (int ii=i-1;ii<i+2;ii++)
-					for (int jj=j-1;jj<j+2;jj++)
-						count1 += map.cell[ii][jj];
-				copy[i][j] = (count1 > 4);
-			}
-		for (int i=1;i<map.x-1;i++)
-			for (int j=1;j<map.y-1;j++)
-				map.cell[i][j] = copy[i][j];
-	}
+Plain::Plain() {}
+
+void Plain::apply(MapPrototype &map) {
+	do
+		cavernGenerator(map, 55, 5, 3);
+	while (flood(map) < (map.x*map.y)/3);
+}
+
+std::string Plain::getRandomName() {
+	return "Unknow name";
+}
+
+void Plain::floorCell(Cell &cell) {
+	cell.grassA();
+}
+
+void Plain::wallCell(Cell &cell) {
+	cell.treeA();
 }
 
 Labyrinth::Labyrinth() {}

@@ -31,6 +31,12 @@ void Cell::loadSprite() {
 		case CAVERN_WALL_A:
 			cavernWallA();
 			break;
+		case GRASS_A:
+			grassA();
+			break;
+		case TREE_A:
+			treeA();
+			break;
 		default:
 			nothing();
 	}
@@ -74,4 +80,12 @@ void Cell::cavernWallA() {
 
 void Cell::cavernFloorA() {
 	floorFactory(CAVERN_FLOOR_A, false, true, T_TILES, 0, T_TILES, T_TILES);
+}
+
+void Cell::grassA() {
+	floorFactory(GRASS_A, false, true, T_TILES, T_TILES, T_TILES, T_TILES);
+}
+
+void Cell::treeA() {
+	wallFactory(TREE_A, true, false, 2*(T_TILES+4), 0, T_TILES+4, T_TILES+4);
 }

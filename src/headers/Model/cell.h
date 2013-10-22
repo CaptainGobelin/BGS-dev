@@ -31,6 +31,8 @@ class Cell {
 		void dungeonExit();
 		void cavernFloorA();
 		void cavernWallA();
+		void grassA();
+		void treeA();
 
 		//The drops are items contains on the cell
 		std::list<Item> drops;

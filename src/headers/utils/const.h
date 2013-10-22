@@ -53,6 +53,8 @@
 #define DUNGEON_EXIT 3
 #define CAVERN_WALL_A 4
 #define CAVERN_FLOOR_A 5
+#define GRASS_A 6
+#define TREE_A 7
 
 //Save File
 #define END_OF_FILE -99999
