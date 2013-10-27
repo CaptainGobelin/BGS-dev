@@ -25,7 +25,7 @@ class MapPattern {
 		void flood_rec(MapPrototype &map, int fX, int fY);
 		//Cavern generator algorithm
 		//toWall controls the number of walls (low value for more walls)
-		//limit controls the width of corridor (3 for small corridors, 5 for large)
+		//limit controls the width of corridor (4 for small corridors, 5 for large)
 		//loop controls the sharpness of the map (4 for "natural" walls for example)
 		void cavernGenerator(MapPrototype &map, int toWall, int limit, int loop);
 };

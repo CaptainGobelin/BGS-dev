@@ -3,11 +3,12 @@
 extern sf::RenderWindow window;
 extern sf::View view;
 
-Map MapGenerator::generate(int x, int y, MapPattern *pattern, std::string mapCode) {
+Map MapGenerator::generate(int x, int y, MapPattern *pattern, std::string mapCode, int dependencies) {
 	//Initialization
 	int l = rand() % x + x;
 	int w = rand() % y + y;
 	Map map(l+2,w+2);
+	map.setDependencies(dependencies);
 	MapPrototype mapP(l,w);
 	//We generate a prototype of the new map
 	pattern->apply(mapP);
@@ -20,6 +21,9 @@ Map MapGenerator::generate(int x, int y, MapPattern *pattern, std::string mapCod
 				pattern->floorCell(map.cell[i+1][j+1]);
 		}
 	map.setName(pattern->getRandomName());
+	//If the map is a leaf we don't need to create way to oter map
+	if (dependencies <= 0)
+		return map;
 	//We generate exits (entrance are only generate when we need one)
 	int xE,yE;
 	do {
@@ -31,11 +35,11 @@ Map MapGenerator::generate(int x, int y, MapPattern *pattern, std::string mapCod
 	int newMapCode = StringUtils::getMapCode(mapCode, 1);
 	std::ostringstream oss;
 	oss.str("");
-	oss << (newMapCode+1);
+	oss << newMapCode;
 	newMapCode = StringUtils::getMapCode(mapCode, 2);
-	oss << "_" << (newMapCode);
+	oss << "_" << 1;
 	newMapCode = StringUtils::getMapCode(mapCode, 3);
-	oss << "_" << (newMapCode+1);
-	map.cell[xE][yE].exits.push_front(MapExit(oss.str()));
+	oss << "_" << newMapCode+1;
+	map.cell[xE][yE].exits.push_front(MapExit(oss.str(), dependencies-1));
 	return map;
 }

@@ -19,7 +19,7 @@ class Map {
 		const std::string &getName() const {return name;}
 		void setName(const std::string &newName) {name=newName;}
 		const int &getDependencies() const {return dependencies;}
-		void setDependencies(const int &newDependencies) {width=newDependencies;}
+		void setDependencies(const int &newDependencies) {dependencies=newDependencies;}
 
 		//Pass a turn to all cells of the map
 		void refreshCells(const int x, const int y);

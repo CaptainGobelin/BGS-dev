@@ -92,7 +92,8 @@ bool SessionController::changeMap(Character &character, Map &map, Interface &int
 			}
 	//In the other case we generate a new map.
 	if (!mapExists) {
-		Map nMap = MapGenerator::generate(20,20, new Dungeon(), dest);
+		int nDep = map.cell[character.getX()][character.getY()].exits.begin()->getDependencies();
+		Map nMap = MapGenerator::generate(20,20, new Dungeon(), dest, nDep);
 		interface.write("Welcome to "+nMap.getName()+".");
 		//Then we change previous map and chracter informations.
 		map.cell[character.getX()][character.getY()].exits.begin()->setDestName(nMap.getName());
