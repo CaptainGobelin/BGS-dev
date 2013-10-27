@@ -224,7 +224,7 @@ void Dungeon::apply_loop(Map &map) {
 		for (int j=1;j<(map.y-1);j+=2) {
 			if (map.cell[i][j] == 0)
 				continue;
-			if (rand()%2)
+			if (rand()%10 < 6)
 				continue;
 			int maxI = (rand()%9)+3;
 			int maxJ = (rand()%9)+3;
@@ -235,7 +235,7 @@ void Dungeon::apply_loop(Map &map) {
 	for (int i=1;i<(map.x-1);i+=2)
 		for (int j=1;j<(map.y-1);j+=2)
 				if (map.cell[i][j] == 1)
-					draw_corridor(map, i, j);
+					draw_corridor(map, i, j, -1);
 	for (int i=0;i<map.x;i++)
 		for (int j=0;j<map.y;j++) {
 			if (map.cell[i][j] == 2)
@@ -307,9 +307,11 @@ void Dungeon::draw_entries(Map &map, int i, int j, int maxI, int maxJ) {
 	}	
 }
 
-void Dungeon::draw_corridor(Map &map, int i, int j) {
+void Dungeon::draw_corridor(Map &map, int i, int j, int d) {
+	int dir = d;
+	if ((d < 0) || (rand()%10 > 7))
+		dir = rand()%4;
 	map.cell[i][j] = 5;
-	int dir = rand()%4;
 	int sDir = 2*(rand()%2)+1;
 	for (int t=0;t<4;t++) {
 		if (((i+2*dirI(dir)) <= 0) || ((i+2*dirI(dir)) >= (map.x-1)))
@@ -318,7 +320,7 @@ void Dungeon::draw_corridor(Map &map, int i, int j) {
 			continue;
 		if (map.cell[i+2*dirI(dir)][j+2*dirJ(dir)] == 1) {
 			map.cell[i+dirI(dir)][j+dirJ(dir)] = 5;
-			draw_corridor(map, i+2*dirI(dir), j+2*dirJ(dir));
+			draw_corridor(map, i+2*dirI(dir), j+2*dirJ(dir), dir);
 		}
 		dir = (dir+sDir)%4;
 	}

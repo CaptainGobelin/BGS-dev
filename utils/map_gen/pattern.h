@@ -43,7 +43,7 @@ class Dungeon : public Pattern {
 		void apply_loop(Map &map);
 		bool draw_room(Map &map, int i, int j, int &maxI, int &maxJ);
 		void draw_entries(Map &map, int i, int j, int maxI, int maxJ);
-		void draw_corridor(Map &map, int i, int j);
+		void draw_corridor(Map &map, int i, int j, int d);
 		void remove_dead_end(Map &map);
 		void remove_corridor(Map &map, int i, int j);
 		int dirI(int dir);
