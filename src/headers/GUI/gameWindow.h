@@ -8,7 +8,7 @@
 
 class GameWindow {
 	public:
-		static void setOptions(OptionsFile opt);
+		static void setOptions();
 		
 		static sf::RenderWindow window;
 		//Game viewport

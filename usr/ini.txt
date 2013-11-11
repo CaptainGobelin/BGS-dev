@@ -1,5 +1,18 @@
-/* Project Rupture init file
-Basic syntax => option= value */
+%% Blood Gold and Sorcery init file
+%% Basic syntax => option=value
+%% WARNING : if you change options from here the game doesn't check if everything is correct !
 
-frameLimit= 49
-vSync= true
+frameLimit=49
+vSync=true
+
+%% Key binding
+%% Availables keys:
+%% All letters
+%% Arrows
+
+%% Game keys
+upMove=UpArrow
+downMove=DownArrow
+rightMove=RightArrow
+leftMove=LeftArrow
+map=M

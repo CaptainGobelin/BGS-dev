@@ -2,27 +2,23 @@
 #define OPTIONS_H
 
 #include "utils/const.h"
-#include <string>
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <cstdlib>
+#include "utils/lib.h"
 
 class OptionsFile {
 	public:
-		OptionsFile();
-		const int &getFrameLimit() const {return frameLimit;}
-		void setFrameLimit(const int &newFrameLimit) {frameLimit=newFrameLimit;}
-		const bool &getVSync() const {return vSync;}
-		void setVSync(const bool &newVSync) {vSync=newVSync;}
+		static bool load();
+		static int frameLimit;
+		static bool vSync;
+		static sf::Keyboard::Key mapKey;
+		static sf::Keyboard::Key upKey;
+		static sf::Keyboard::Key downKey;
+		static sf::Keyboard::Key rightKey;
+		static sf::Keyboard::Key leftKey;
 
-		bool load();
-		
 	private:
-		int frameLimit;
-		bool vSync;
-
-		bool toBool(std::string const& s);
+		static void setOption(std::string line);
+		static bool toBool(std::string const& s);
+		static sf::Keyboard::Key toKey(std::string const& s);
 };
 
 #endif

@@ -4,12 +4,11 @@ GameController::GameController() {
 	//Rand initialization
 	srand (time(NULL));
 	//Load the game config
-	OptionsFile gameOptions;
-	gameOptions.load();
+	OptionsFile::load();
 	//Load textures
 	Textures::loadTextures(TEXTURES_PATH);
 	//Open the window
-	GameWindow::setOptions(gameOptions);
+	GameWindow::setOptions();
 }
 
 void GameController::launch() {
