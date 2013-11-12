@@ -10,33 +10,44 @@ void GameInput::treatEvent(sf::Event event) {
 		return;
 	}
 	else if (event.type == sf::Event::KeyPressed) {
-		if (event.key.code == OptionsFile::mapKey) {
+		if (event.key.code == OptionsFile::mapGameKey) {
 			value = M_INPUT;
 			return;
 		}
-		if (event.key.code == OptionsFile::upKey) {
+		if (event.key.code == OptionsFile::upGameKey) {
 			value = UP_INPUT;
 			return;
 		}
-		if (event.key.code == OptionsFile::downKey) {
+		if (event.key.code == OptionsFile::downGameKey) {
 			value = DOWN_INPUT;
 			return;
 		}
-		if (event.key.code == OptionsFile::rightKey) {
+		if (event.key.code == OptionsFile::rightGameKey) {
 			value = RIGHT_INPUT;
 			return;
 		}
-		if (event.key.code == OptionsFile::leftKey) {
+		if (event.key.code == OptionsFile::leftGameKey) {
 			value = LEFT_INPUT;
 			return;
 		}
+		if (event.key.code == OptionsFile::menuGameKey) {
+			value = ESCAPE_INPUT;
+			return;
+		}
+		if (event.key.code == OptionsFile::validGameKey) {
+			value = ENTER_INPUT;
+			return;
+		}
+		if (event.key.code == OptionsFile::exitGameKey) {
+			value = Q_INPUT;
+			return;
+		}
 		else switch (event.key.code) {
-			case sf::Keyboard::Q : {value=Q_INPUT;return;}
-			case sf::Keyboard::Return : {value=ENTER_INPUT;return;}
-			case sf::Keyboard::Escape : {value=ESCAPE_INPUT;return;}
 			case sf::Keyboard::Delete : {value=DELETE_INPUT;return;}
 			default : {value=ANY_KEY_INPUT;return;}
 		}
+		value = ANY_KEY_INPUT;
+		return;
 	}
 	else {
 		value = INVALID_INPUT;

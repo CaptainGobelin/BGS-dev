@@ -9,11 +9,14 @@ class OptionsFile {
 		static bool load();
 		static int frameLimit;
 		static bool vSync;
-		static sf::Keyboard::Key mapKey;
-		static sf::Keyboard::Key upKey;
-		static sf::Keyboard::Key downKey;
-		static sf::Keyboard::Key rightKey;
-		static sf::Keyboard::Key leftKey;
+		static sf::Keyboard::Key mapGameKey;
+		static sf::Keyboard::Key upGameKey;
+		static sf::Keyboard::Key downGameKey;
+		static sf::Keyboard::Key rightGameKey;
+		static sf::Keyboard::Key leftGameKey;
+		static sf::Keyboard::Key menuGameKey;
+		static sf::Keyboard::Key validGameKey;
+		static sf::Keyboard::Key exitGameKey;
 
 	private:
 		static void setOption(std::string line);

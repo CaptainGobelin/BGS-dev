@@ -7,12 +7,18 @@ vSync=true
 
 %% Key binding
 %% Availables keys:
-%% All letters
+%% All letters (no capitals)
 %% Arrows
+%% Return
+%% Backspace
+%% Escape
 
 %% Game keys
+validation=Return
+menu=Escape
 upMove=UpArrow
 downMove=DownArrow
 rightMove=RightArrow
 leftMove=LeftArrow
 map=M
+exit=E

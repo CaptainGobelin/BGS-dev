@@ -6,11 +6,14 @@ sf::View GameWindow::viewInt;
 
 int OptionsFile::frameLimit = 50;
 bool OptionsFile::vSync = true;
-sf::Keyboard::Key OptionsFile::mapKey = sf::Keyboard::M;
-sf::Keyboard::Key OptionsFile::upKey = sf::Keyboard::Up;
-sf::Keyboard::Key OptionsFile::downKey = sf::Keyboard::Down;
-sf::Keyboard::Key OptionsFile::rightKey = sf::Keyboard::Right;
-sf::Keyboard::Key OptionsFile::leftKey = sf::Keyboard::Left;
+sf::Keyboard::Key OptionsFile::mapGameKey = sf::Keyboard::M;
+sf::Keyboard::Key OptionsFile::upGameKey = sf::Keyboard::Up;
+sf::Keyboard::Key OptionsFile::downGameKey = sf::Keyboard::Down;
+sf::Keyboard::Key OptionsFile::rightGameKey = sf::Keyboard::Right;
+sf::Keyboard::Key OptionsFile::leftGameKey = sf::Keyboard::Left;
+sf::Keyboard::Key OptionsFile::menuGameKey = sf::Keyboard::Escape;
+sf::Keyboard::Key OptionsFile::validGameKey = sf::Keyboard::Return;
+sf::Keyboard::Key OptionsFile::exitGameKey = sf::Keyboard::Q;
 
 sf::Texture Textures::texturesStart;
 sf::Texture Textures::texturesCharacters;

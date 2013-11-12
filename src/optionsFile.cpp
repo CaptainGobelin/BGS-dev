@@ -25,19 +25,28 @@ void OptionsFile::setOption(std::string line) {
     	vSync = toBool(value);
     }
     else if (line.substr(0,pos) == "map") {
-    	mapKey = toKey(value);
+    	mapGameKey = toKey(value);
     }
     else if (line.substr(0,pos) == "upMove") {
-    	upKey = toKey(value);
+    	upGameKey = toKey(value);
     }
     else if (line.substr(0,pos) == "downMove") {
-    	downKey = toKey(value);
+    	downGameKey = toKey(value);
     }
     else if (line.substr(0,pos) == "rightMove") {
-    	rightKey = toKey(value);
+    	rightGameKey = toKey(value);
     }
     else if (line.substr(0,pos) == "leftMove") {
-    	leftKey = toKey(value);
+    	leftGameKey = toKey(value);
+    }
+    else if (line.substr(0,pos) == "menu") {
+    	menuGameKey = toKey(value);
+    }
+    else if (line.substr(0,pos) == "validation") {
+    	validGameKey = toKey(value);
+    }
+    else if (line.substr(0,pos) == "exit") {
+    	exitGameKey = toKey(value);
     }
 }
 
@@ -102,6 +111,12 @@ sf::Keyboard::Key OptionsFile::toKey(std::string const& s) {
 		return sf::Keyboard::Right;
 	if (s == "LeftArrow")
 		return sf::Keyboard::Left;
+	if (s == "Return")
+		return sf::Keyboard::Return;
+	if (s == "Backspace")
+		return sf::Keyboard::BackSpace;
+	if (s == "Escape")
+		return sf::Keyboard::Escape;
 }
 
 bool OptionsFile::toBool(std::string const& s) {
