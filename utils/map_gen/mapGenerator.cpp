@@ -10,9 +10,11 @@ MapGenerator_L::MapGenerator_L() {
 	textureSol.loadFromFile("data/mSol_L.png");
 	textureBloc.loadFromFile("data/mBloc_L.png");
 	textureDoor.loadFromFile("data/mDoor_L.png");
+	textureObj.loadFromFile("data/mObj_L.png");
 	spriteSol.setTexture(textureSol);
 	spriteBloc.setTexture(textureBloc);
 	spriteDoor.setTexture(textureDoor);
+	spriteObj.setTexture(textureObj);
 }
 
 Map MapGenerator_L::generate() {
@@ -38,6 +40,10 @@ void MapGenerator_L::draw(Map &map) {
 				spriteSol.setPosition(curX,curY);
 				window.draw(spriteSol);
 			}
+			else if (map.cell[i][j] == 2) {
+				spriteObj.setPosition(curX,curY);
+				window.draw(spriteObj);
+			}
 			curY += 5;
 		}
 		curX +=5;
@@ -48,9 +54,11 @@ MapGenerator_M::MapGenerator_M() {
 	textureSol.loadFromFile("data/mSol_M.png");
 	textureBloc.loadFromFile("data/mBloc_M.png");
 	textureDoor.loadFromFile("data/mDoor_M.png");
+	textureObj.loadFromFile("data/mObj_M.png");
 	spriteSol.setTexture(textureSol);
 	spriteBloc.setTexture(textureBloc);
 	spriteDoor.setTexture(textureDoor);
+	spriteObj.setTexture(textureObj);
 }
 
 Map MapGenerator_M::generate() {
@@ -75,6 +83,10 @@ void MapGenerator_M::draw(Map &map) {
 			else if (map.cell[i][j] == 0) {
 				spriteSol.setPosition(curX,curY);
 				window.draw(spriteSol);
+			}
+			else if (map.cell[i][j] == 2) {
+				spriteObj.setPosition(curX,curY);
+				window.draw(spriteObj);
 			}
 			curY += 10;
 		}

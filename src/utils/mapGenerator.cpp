@@ -15,10 +15,16 @@ Map MapGenerator::generate(int x, int y, MapPattern *pattern, std::string mapCod
 	//Then we convert the prototype into a real map
 	for (int i=0;i<l;i++)
 		for (int j=0;j<w;j++) {
-			if (mapP.cell[i][j] == 1)
+			if (mapP.cell[i][j] == WALL)
 				pattern->wallCell(map.cell[i+1][j+1]);
-			else
+			else if (mapP.cell[i][j] == FLOOR)
 				pattern->floorCell(map.cell[i+1][j+1]);
+			else// if (mapP.cell[i][j] == DOOR)
+				pattern->floorCell(map.cell[i+1][j+1]);
+			/*if (mapP.cell[i][j] == 1)
+				pattern->wallCell(map.cell[i+1][j+1]);
+			else if (mapP.cell[i][j] == 0)
+				pattern->floorCell(map.cell[i+1][j+1]);*/
 		}
 	map.setName(pattern->getRandomName());
 	//If the map is a leaf we don't need to create way to oter map

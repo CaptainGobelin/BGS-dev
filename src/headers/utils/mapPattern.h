@@ -28,6 +28,8 @@ class MapPattern {
 		//limit controls the width of corridor (4 for small corridors, 5 for large)
 		//loop controls the sharpness of the map (4 for "natural" walls for example)
 		void cavernGenerator(MapPrototype &map, int toWall, int limit, int loop);
+		//Check if we don't block a floor while adding wall
+		bool canAddWall(MapPrototype &map, int x, int y);
 };
 
 class Random : public MapPattern {

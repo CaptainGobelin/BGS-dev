@@ -9,23 +9,23 @@ int MapPattern::flood(MapPrototype &map) {
 	do {
 		fX = rand()%map.x;
 		fY = rand()%map.y;
-	} while (map.cell[fX][fY]);
+	} while (map.cell[fX][fY] != FLOOR);
 	//And we start flooding from this cell
 	flood_rec(map, fX, fY);
 	//Then we replace flooded cells by normal cells
 	//And non flooded cells by walls
 	for (int i=0;i<map.x;i++)
 		for (int j=0;j<map.y;j++)
-			if (map.cell[i][j] == 0)
-				map.cell[i][j] = 1;
-			else if (map.cell[i][j] == 3)
-				map.cell[i][j] = 1;
-			else if (map.cell[i][j] == 2) {
-				map.cell[i][j] = 0;
+			if (map.cell[i][j] == FLOOR)
+				map.cell[i][j] = WALL;
+			else if (map.cell[i][j] == DOOR)
+				map.cell[i][j] = WALL;
+			else if (map.cell[i][j] == FLOOR<<4) {
+				map.cell[i][j] = FLOOR;
 				k++;
 			}
-			else if (map.cell[i][j] == 4) {
-				map.cell[i][j] = 3;
+			else if (map.cell[i][j] == DOOR<<4) {
+				map.cell[i][j] = DOOR;
 				k++;
 			}
 	return k;
@@ -33,18 +33,18 @@ int MapPattern::flood(MapPrototype &map) {
 
 void MapPattern::flood_rec(MapPrototype &map, int fX, int fY) {
 	//We mark the cell flooded
-	if (map.cell[fX][fY] == 0)
-		map.cell[fX][fY] = 2;
-	if (map.cell[fX][fY] == 3)
-		map.cell[fX][fY] = 4;
+	if (map.cell[fX][fY] == FLOOR)
+		map.cell[fX][fY] = FLOOR<<4;
+	if (map.cell[fX][fY] == DOOR)
+		map.cell[fX][fY] = DOOR<<4;
 	//We call the flood method on the adjacent cells
-	if ((map.cell[fX-1][fY] == 3) || (map.cell[fX-1][fY] == 0))
+	if ((map.cell[fX-1][fY] == DOOR) || (map.cell[fX-1][fY] == FLOOR))
 		flood_rec(map,fX-1,fY);
-	if ((map.cell[fX+1][fY] == 3) || (map.cell[fX+1][fY] == 0))
+	if ((map.cell[fX+1][fY] == DOOR) || (map.cell[fX+1][fY] == FLOOR))
 		flood_rec(map,fX+1,fY);
-	if ((map.cell[fX][fY-1] == 3) || (map.cell[fX][fY-1] == 0))
+	if ((map.cell[fX][fY-1] == DOOR) || (map.cell[fX][fY-1] == FLOOR))
 		flood_rec(map,fX,fY-1);
-	if ((map.cell[fX][fY+1] == 3) || (map.cell[fX][fY+1] == 0))
+	if ((map.cell[fX][fY+1] == DOOR) || (map.cell[fX][fY+1] == FLOOR))
 		flood_rec(map,fX,fY+1);
 }
 
@@ -54,9 +54,12 @@ void MapPattern::cavernGenerator(MapPrototype &map, int toWall, int limit, int l
 	for (int i=0;i<map.x;i++)
 		for (int j=0;j<map.y;j++)
 			if ((i==0)||(i==(map.x-1))||(j==0)||(j==(map.y-1)))
-				map.cell[i][j] = 1;
+				map.cell[i][j] = WALL;
 			else
-				map.cell[i][j] = (rand()%100)<toWall;
+				if ((rand()%100)<toWall)
+					map.cell[i][j] = WALL;
+				else
+					map.cell[i][j] = FLOOR;
 	//Then we apply four times a simple algorithm
 	//For each cell, if the number of neighboors (include the cell itself)
 	//Is in [1..4] we convert it to a wall
@@ -67,8 +70,12 @@ void MapPattern::cavernGenerator(MapPrototype &map, int toWall, int limit, int l
 				int count1=0;
 				for (int ii=i-1;ii<i+2;ii++)
 					for (int jj=j-1;jj<j+2;jj++)
-						count1 += map.cell[ii][jj];
-				copy[i][j] = (count1 > limit) || (count1 < 1);
+						if (map.cell[ii][jj] == WALL)
+							count1++;
+				if ((count1 > limit) || (count1 < 1))
+					copy[i][j] = WALL;
+				else
+					copy[i][j] = FLOOR;
 			}
 		//Here we copy the map, to prepare the new step of the loop
 		for (int i=1;i<map.x-1;i++)
@@ -82,8 +89,12 @@ void MapPattern::cavernGenerator(MapPrototype &map, int toWall, int limit, int l
 				int count1=0;
 				for (int ii=i-1;ii<i+2;ii++)
 					for (int jj=j-1;jj<j+2;jj++)
-						count1 += map.cell[ii][jj];
-				copy[i][j] = (count1 > limit);
+						if (map.cell[ii][jj] == WALL)
+							count1++;
+				if (count1 > limit)
+					copy[i][j] = WALL;
+				else
+					copy[i][j] = FLOOR;
 			}
 		for (int i=1;i<map.x-1;i++)
 			for (int j=1;j<map.y-1;j++)
@@ -108,9 +119,11 @@ void Random::wallCell(Cell &cell) {
 void Random::apply(MapPrototype &map) {
 	//Cells are randomly floor of wall
 	for (int i=0;i<map.x;i++)
-		for (int j=0;j<map.y;j++) {
-			map.cell[i][j] = rand()%2;
-		}
+		for (int j=0;j<map.y;j++)
+			if (rand()%2)
+				map.cell[i][j] = WALL;
+			else
+				map.cell[i][j] = FLOOR;
 }
 
 Cavern::Cavern() {}
@@ -165,12 +178,12 @@ void Labyrinth::apply(MapPrototype &map) {
 	for (int i=0;i<map.x;i++)
 		for (int j=0;j<map.y;j++)
 			if ((i==0)||(j==0)||(i==(map.x-1))||(j==(map.y-1)))
-				map.cell[i][j] = 1;
+				map.cell[i][j] = WALL;
 			else {
 				if ((i%2) && (j%2))
-					map.cell[i][j] = 2;
+					map.cell[i][j] = FLOOR<<4;
 				else
-					map.cell[i][j] = 1;
+					map.cell[i][j] = WALL;
 			}
 	//Then we generate the perfect maze
 	apply_backtrack(map, 1, 1);
@@ -194,38 +207,38 @@ void Labyrinth::apply_backtrack(MapPrototype &map, int cX, int cY) {
 	//Backtrack method is a bit long but simple
 	//We try to construct a way with random directions
 	//When we are blocked, we try another direction
-	map.cell[cX][cY] = 0;
+	map.cell[cX][cY] = FLOOR;
 	int turn = rand()%4;
 	for (int k=0;k<4;k++) {
 		switch (turn) {
 			case 0: {
 				if (cX != 1)
-					if (map.cell[cX-2][cY] == 2) {
-						map.cell[cX-1][cY] = 0;
+					if (map.cell[cX-2][cY] == FLOOR<<4) {
+						map.cell[cX-1][cY] = FLOOR;
 						apply_backtrack(map, cX-2, cY);
 					}
 				break;
 			}
 			case 1: {
 				if (cY < (map.y-2))
-					if (map.cell[cX][cY+2] == 2) {
-						map.cell[cX][cY+1] = 0;
+					if (map.cell[cX][cY+2] == FLOOR<<4) {
+						map.cell[cX][cY+1] = FLOOR;
 						apply_backtrack(map, cX, cY+2);
 					}
 				break;
 			}
 			case 2: {
 				if (cX < (map.x-2))
-					if (map.cell[cX+2][cY] == 2) {
-						map.cell[cX+1][cY] = 0;
+					if (map.cell[cX+2][cY] == FLOOR<<4) {
+						map.cell[cX+1][cY] = FLOOR;
 						apply_backtrack(map, cX+2, cY);
 					}
 				break;
 			}
 			case 3: {
 				if (cY != 1)
-					if (map.cell[cX][cY-2] == 2) {
-						map.cell[cX][cY-1] = 0;
+					if (map.cell[cX][cY-2] == FLOOR<<4) {
+						map.cell[cX][cY-1] = FLOOR;
 						apply_backtrack(map, cX, cY-2);
 					}
 				break;
@@ -245,26 +258,26 @@ void Labyrinth::remove_dead_end(MapPrototype &map) {
 				for (int k=0;k<4;k++) {
 					switch (dir) {
 						case 0:
-							if ((i != 1) && (map.cell[i-1][j])) {
-								map.cell[i-1][j] = 0;
+							if ((i != 1) && (map.cell[i-1][j] == WALL)) {
+								map.cell[i-1][j] = FLOOR;
 								k = 4;
 							}
 							break;
 						case 1:
-							if ((i < (map.x-2-!(map.x%2))) && (map.cell[i+1][j])) {
-								map.cell[i+1][j] = 0;
+							if ((i < (map.x-2-!(map.x%2))) && (map.cell[i+1][j] == WALL)) {
+								map.cell[i+1][j] = FLOOR;
 								k = 4;
 							}
 							break;
 						case 2:
-							if ((j != 1) && (map.cell[i][j-1])) {
-								map.cell[i][j-1] = 0;
+							if ((j != 1) && (map.cell[i][j-1] == WALL)) {
+								map.cell[i][j-1] = FLOOR;
 								k = 4;
 							}
 							break;
 						case 3:
-							if ((j < (map.y-2-!(map.y%2))) && (map.cell[i][j+1])) {
-								map.cell[i][j+1] = 0;
+							if ((j < (map.y-2-!(map.y%2))) && (map.cell[i][j+1] == WALL)) {
+								map.cell[i][j+1] = FLOOR;
 								k = 4;
 							}
 							break;
@@ -277,13 +290,13 @@ void Labyrinth::remove_dead_end(MapPrototype &map) {
 bool Labyrinth::is_dead_end(MapPrototype &map, int i, int j) {
 	//A dead end is a cell with just one adjacent floor
 	int count = 0;
-	if (map.cell[i-1][j])
+	if (map.cell[i-1][j] == WALL)
 		count++;
-	if (map.cell[i+1][j])
+	if (map.cell[i+1][j] == WALL)
 		count++;
-	if (map.cell[i][j-1])
+	if (map.cell[i][j-1] == WALL)
 		count++;
-	if (map.cell[i][j+1])
+	if (map.cell[i][j+1] == WALL)
 		count++;
 	if (count > 2)
 		return true;
@@ -318,12 +331,12 @@ void Dungeon::apply_loop(MapPrototype &map) {
 	//First all the cells are wall
 	for (int i=0;i<map.x;i++)
 		for (int j=0;j<map.y;j++)
-				map.cell[i][j] = 1;
+				map.cell[i][j] = WALL;
 	//Then, for each odd cell (if it's a wall)
 	//We can make a new room appear (with an odd size)
 	for (int i=1;i<(map.x-1);i+=2)
 		for (int j=1;j<(map.y-1);j+=2) {
-			if (map.cell[i][j] == 0)
+			if (map.cell[i][j] == FLOOR)
 				continue;
 			if (rand()%2)
 				continue;
@@ -338,15 +351,15 @@ void Dungeon::apply_loop(MapPrototype &map) {
 	//We fill ot with random corridors
 	for (int i=1;i<(map.x-1);i+=2)
 		for (int j=1;j<(map.y-1);j+=2)
-				if (map.cell[i][j] == 1)
+				if (map.cell[i][j] == WALL)
 					draw_corridor(map, i, j);
 	//Finally temp wall/floor are converted to real wall/floor
 	for (int i=0;i<map.x;i++)
 		for (int j=0;j<map.y;j++) {
-			if (map.cell[i][j] == 2)
-				map.cell[i][j] = 1;
-			if (map.cell[i][j] == 5)
-				map.cell[i][j] = 0;
+			if (map.cell[i][j] == WALL<<4)
+				map.cell[i][j] = WALL;
+			if (map.cell[i][j] == FLOOR<<4)
+				map.cell[i][j] = FLOOR;
 		}
 }
 
@@ -363,7 +376,7 @@ bool Dungeon::draw_room(MapPrototype &map, int i, int j, int &maxI, int &maxJ) {
 		int turnJ = 0;
 		for (int jj=j;jj<(j+maxJ);jj++) {
 			turnJ++;
-			if (map.cell[ii][jj] == 2) {
+			if (map.cell[ii][jj] == WALL<<4) {
 				ii = i+maxI;
 				jj = j+maxJ;
 				if (turnI > turnJ)
@@ -384,9 +397,9 @@ bool Dungeon::draw_room(MapPrototype &map, int i, int j, int &maxI, int &maxJ) {
 	for (int ii=i-1;ii<(i+1+maxI);ii++)
 		for (int jj=j-1;jj<(j+1+maxJ);jj++)
 			if ((ii==i-1)||(jj==j-1)||(ii==i+maxI)||(jj==j+maxJ))
-				map.cell[ii][jj] = 2;
+				map.cell[ii][jj] = WALL<<4;
 			else
-				map.cell[ii][jj] = 0;
+				map.cell[ii][jj] = FLOOR;
 	return true;
 }
 
@@ -408,19 +421,19 @@ void Dungeon::draw_entries(MapPrototype &map, int i, int j, int maxI, int maxJ) 
 		if (dir1) {
 			int dist = (rand()%maxI)+i;
 			dist -= (dist%2 == 0);
-			map.cell[dist][(j-1)+dir2*(maxJ+1)] = 3;
+			map.cell[dist][(j-1)+dir2*(maxJ+1)] = DOOR;
 		}
 		else {
 			int dist = (rand()%maxJ)+j;
 			dist -= (dist%2 == 0);
-			map.cell[(i-1)+dir2*(maxI+1)][dist] = 3;
+			map.cell[(i-1)+dir2*(maxI+1)][dist] = DOOR;
 		}
 	}	
 }
 
 void Dungeon::draw_corridor(MapPrototype &map, int i, int j) {
 	//The algorithm is almost the same that maze generation
-	map.cell[i][j] = 5;
+	map.cell[i][j] = FLOOR<<4;
 	int dir = rand()%4;
 	int sDir = 2*(rand()%2)+1;
 	for (int t=0;t<4;t++) {
@@ -428,8 +441,8 @@ void Dungeon::draw_corridor(MapPrototype &map, int i, int j) {
 			continue;
 		if (((j+2*dirJ(dir)) <= 0) || ((j+2*dirJ(dir)) >= (map.y-1)))
 			continue;
-		if (map.cell[i+2*dirI(dir)][j+2*dirJ(dir)] == 1) {
-			map.cell[i+dirI(dir)][j+dirJ(dir)] = 5;
+		if (map.cell[i+2*dirI(dir)][j+2*dirJ(dir)] == WALL) {
+			map.cell[i+dirI(dir)][j+dirJ(dir)] = FLOOR<<4;
 			draw_corridor(map, i+2*dirI(dir), j+2*dirJ(dir));
 		}
 		dir = (dir+sDir)%4;
@@ -439,33 +452,33 @@ void Dungeon::draw_corridor(MapPrototype &map, int i, int j) {
 void Dungeon::remove_dead_end(MapPrototype &map) {
 	for (int i=1;i<(map.x-1);i+=2)
 		for (int j=1;j<(map.y-1);j+=2)
-			if (map.cell[i][j] != 1)
+			if (map.cell[i][j] != WALL)
 				remove_corridor(map, i, j);
 }
 
 void Dungeon::remove_corridor(MapPrototype &map, int i, int j) {
 	//The algorithm is the same as flood algorithm
 	int count = 0;
-	if (map.cell[i-1][j] != 1)
+	if (map.cell[i-1][j] != WALL)
 		count++;
-	if (map.cell[i+1][j] != 1)
+	if (map.cell[i+1][j] != WALL)
 		count++;
-	if (map.cell[i][j-1] != 1)
+	if (map.cell[i][j-1] != WALL)
 		count++;
-	if (map.cell[i][j+1] != 1)
+	if (map.cell[i][j+1] != WALL)
 		count++;
 	if (count < 2) {
-		map.cell[i][j] = 1;
-		if (map.cell[i-1][j] != 1) {
+		map.cell[i][j] = WALL;
+		if (map.cell[i-1][j] != WALL) {
 			remove_corridor(map,i-1,j);
 		}
-		if (map.cell[i+1][j] != 1) {
+		if (map.cell[i+1][j] != WALL) {
 			remove_corridor(map,i+1,j);
 		}
-		if (map.cell[i][j-1] != 1) {
+		if (map.cell[i][j-1] != WALL) {
 			remove_corridor(map,i,j-1);
 		}
-		if (map.cell[i][j+1] != 1) {
+		if (map.cell[i][j+1] != WALL) {
 			remove_corridor(map,i,j+1);
 		}
 	}

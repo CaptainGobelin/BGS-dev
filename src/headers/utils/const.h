@@ -45,6 +45,12 @@
 #define UNDEFINED_CODE 0
 #define HUMAN_CODE 1
 
+//Map Prototype Cells
+#define IS_SOLID 0
+#define WALL -1
+#define FLOOR 1
+#define DOOR 2
+
 //Cells
 #define CHANGE_MAP_CODE 1000
 #define NOTHING_CODE 0

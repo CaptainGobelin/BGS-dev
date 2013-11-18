@@ -2,7 +2,7 @@ CC=g++
 CFLAGS=-Wall
 LDFLAGS=-lsfml-graphics -lsfml-window -lsfml-system -Wall
 EXEC=generate
-OBJ=main.o mapGenerator.o map.o pattern.o
+OBJ=main.o mapGenerator.o mapGenUtils.o map.o pattern.o
 
 %.o : %.cpp %.h
 	$(CC) -c $*.cpp $(CFLAGS)

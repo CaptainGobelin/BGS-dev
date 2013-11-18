@@ -15,9 +15,11 @@ class MapGenerator {
 		sf::Texture textureSol;
 		sf::Texture textureBloc;
 		sf::Texture textureDoor;
+		sf::Texture textureObj;
 		sf::Sprite spriteSol;
 		sf::Sprite spriteBloc;
 		sf::Sprite spriteDoor;
+		sf::Sprite spriteObj;
 };
 
 class MapGenerator_L : public MapGenerator {
@@ -29,9 +31,11 @@ class MapGenerator_L : public MapGenerator {
 		sf::Texture textureSol;
 		sf::Texture textureBloc;
 		sf::Texture textureDoor;
+		sf::Texture textureObj;
 		sf::Sprite spriteSol;
 		sf::Sprite spriteBloc;
 		sf::Sprite spriteDoor;
+		sf::Sprite spriteObj;
 };
 
 class MapGenerator_M : public MapGenerator {
@@ -43,9 +47,11 @@ class MapGenerator_M : public MapGenerator {
 		sf::Texture textureSol;
 		sf::Texture textureBloc;
 		sf::Texture textureDoor;
+		sf::Texture textureObj;
 		sf::Sprite spriteSol;
 		sf::Sprite spriteBloc;
 		sf::Sprite spriteDoor;
+		sf::Sprite spriteObj;
 };
 
 #endif
