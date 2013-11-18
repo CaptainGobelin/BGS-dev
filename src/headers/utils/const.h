@@ -47,6 +47,7 @@
 
 //Map Prototype Cells
 #define IS_SOLID 0
+#define WALL_ITEM -2
 #define WALL -1
 #define FLOOR 1
 #define DOOR 2
@@ -61,6 +62,7 @@
 #define CAVERN_FLOOR_A 5
 #define GRASS_A 6
 #define TREE_A 7
+#define DUNGEON_WALL_ITEM_A 8
 
 //Save File
 #define END_OF_FILE -99999

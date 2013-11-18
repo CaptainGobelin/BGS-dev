@@ -28,6 +28,7 @@ class Cell {
 		void nothing();
 		void dungeonFloorA();
 		void dungeonWallA();
+		void dungeonWallItemA();
 		void dungeonExit();
 		void cavernFloorA();
 		void cavernWallA();

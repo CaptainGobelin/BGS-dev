@@ -18,6 +18,9 @@ class MapPattern {
 		virtual std::string getRandomName() = 0;
 		virtual void floorCell(Cell &cell) = 0;
 		virtual void wallCell(Cell &cell) = 0;
+		virtual void wallItemCell(Cell &cell) = 0;
+		//Add the specify number of "walls"
+		void addWalls(MapPrototype &map, int k);
 	protected:
 		//The flood method will remove floors we can't access
 		//flood return the number of accessible floors
@@ -39,6 +42,7 @@ class Random : public MapPattern {
 		virtual std::string getRandomName();
 		virtual void floorCell(Cell &cell);
 		virtual void wallCell(Cell &cell);
+		virtual void wallItemCell(Cell &cell);
 };
 
 class Cavern : public MapPattern {
@@ -48,6 +52,7 @@ class Cavern : public MapPattern {
 		virtual std::string getRandomName();
 		virtual void floorCell(Cell &cell);
 		virtual void wallCell(Cell &cell);
+		virtual void wallItemCell(Cell &cell);
 };
 
 class Plain : public MapPattern {
@@ -57,6 +62,7 @@ class Plain : public MapPattern {
 		virtual std::string getRandomName();
 		virtual void floorCell(Cell &cell);
 		virtual void wallCell(Cell &cell);
+		virtual void wallItemCell(Cell &cell);
 };
 
 class Labyrinth : public MapPattern {
@@ -66,6 +72,7 @@ class Labyrinth : public MapPattern {
 		virtual std::string getRandomName();
 		virtual void floorCell(Cell &cell);
 		virtual void wallCell(Cell &cell);
+		virtual void wallItemCell(Cell &cell);
 	private:
 		void apply_backtrack(MapPrototype &map, int cX, int cY);
 		void remove_dead_end(MapPrototype &map);
@@ -79,6 +86,7 @@ class Dungeon : public MapPattern {
 		virtual std::string getRandomName();
 		virtual void floorCell(Cell &cell);
 		virtual void wallCell(Cell &cell);
+		virtual void wallItemCell(Cell &cell);
 	private:
 		void apply_loop(MapPrototype &map);
 		bool draw_room(MapPrototype &map, int i, int j, int &maxI, int &maxJ);

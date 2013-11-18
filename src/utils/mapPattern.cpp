@@ -102,6 +102,48 @@ void MapPattern::cavernGenerator(MapPrototype &map, int toWall, int limit, int l
 	}
 }
 
+void MapPattern::addWalls(MapPrototype &map, int k) {
+	for (int i=0;i<k;i++) {
+		int rX = rand()%map.x;
+		int rY = rand()%map.y;
+		if (canAddWall(map, rX, rY))
+			map.cell[rX][rY] = WALL_ITEM;
+	}
+}
+
+bool MapPattern::canAddWall(MapPrototype &map, int x, int y) {
+	if ((x <= 0) || (y <= 0))
+		return false;
+	if ((x >= (map.x-1)) || (y >= (map.y-1)))
+		return false;
+	if (map.cell[x][y] <= IS_SOLID)
+		return false;
+	int result = 0;
+	bool wallMemory = false;
+	int displ[8][2] = {
+		{-1, -1},
+		{-1, 0},
+		{-1, 1},
+		{0, 1},
+		{1, 1},
+		{1, 0},
+		{1, -1},
+		{0, -1}
+	};
+	for (int i=0;i<8;i++)
+		if (map.cell[x+displ[i][0]][y+displ[i][1]] <= IS_SOLID) {
+			if (!wallMemory) {
+				result++;
+				wallMemory = true;
+			}
+		}
+		else
+			wallMemory = false;
+	if (result < 2)
+		return true;
+	return false;
+}
+
 Random::Random() {}
 
 std::string Random::getRandomName() {
@@ -113,6 +155,10 @@ void Random::floorCell(Cell &cell) {
 }
 
 void Random::wallCell(Cell &cell) {
+	cell.dungeonWallA();
+}
+
+void Random::wallItemCell(Cell &cell) {
 	cell.dungeonWallA();
 }
 
@@ -149,6 +195,10 @@ void Cavern::wallCell(Cell &cell) {
 	cell.cavernWallA();
 }
 
+void Cavern::wallItemCell(Cell &cell) {
+	cell.dungeonWallA();
+}
+
 Plain::Plain() {}
 
 void Plain::apply(MapPrototype &map) {
@@ -166,6 +216,10 @@ void Plain::floorCell(Cell &cell) {
 }
 
 void Plain::wallCell(Cell &cell) {
+	cell.treeA();
+}
+
+void Plain::wallItemCell(Cell &cell) {
 	cell.treeA();
 }
 
@@ -200,6 +254,10 @@ void Labyrinth::floorCell(Cell &cell) {
 }
 
 void Labyrinth::wallCell(Cell &cell) {
+	cell.dungeonWallA();
+}
+
+void Labyrinth::wallItemCell(Cell &cell) {
 	cell.dungeonWallA();
 }
 
@@ -325,6 +383,10 @@ void Dungeon::floorCell(Cell &cell) {
 
 void Dungeon::wallCell(Cell &cell) {
 	cell.dungeonWallA();
+}
+
+void Dungeon::wallItemCell(Cell &cell) {
+	cell.dungeonWallItemA();
 }
 
 void Dungeon::apply_loop(MapPrototype &map) {

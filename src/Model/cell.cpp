@@ -37,6 +37,9 @@ void Cell::loadSprite() {
 		case TREE_A:
 			treeA();
 			break;
+		case DUNGEON_WALL_ITEM_A:
+			dungeonWallItemA();
+			break;
 		default:
 			nothing();
 	}
@@ -68,6 +71,10 @@ void Cell::dungeonFloorA() {
 
 void Cell::dungeonWallA() {
 	wallFactory(DUNGEON_WALL_A, true, false, 0, 0, T_TILES+4, T_TILES+4);
+}
+
+void Cell::dungeonWallItemA() {
+	wallFactory(DUNGEON_WALL_ITEM_A, true, false, 0, T_TILES+4, T_TILES, T_TILES);
 }
 
 void Cell::dungeonExit() {
