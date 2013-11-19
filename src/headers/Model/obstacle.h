@@ -20,6 +20,8 @@ class Obstacle {
 		sf::Sprite &getSpriteEntire() {return spriteEntire;}
 		sf::Sprite &getSpriteBroken() {return spriteBroken;}
 
+		void broke();
+
 		//Load element that don't need to be serialized
 		void loadSprite();
 
@@ -29,11 +31,11 @@ class Obstacle {
 
 		template<class Archive>
 	    void save(Archive& ar, const unsigned int version) const {
-	        ar & code & x & y & broken;
+	        ar & code & x & y & broken & solid;
 	    }
 	    template<class Archive>
 	    void load(Archive& ar, const unsigned int version) {
-	        ar & code & x & y & broken;
+	        ar & code & x & y & broken & solid;
 	        loadSprite();
 	    }
 	    BOOST_SERIALIZATION_SPLIT_MEMBER();

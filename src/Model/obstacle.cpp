@@ -10,6 +10,11 @@ Obstacle::Obstacle(int locX/* = -1*/, int locY/* = -1*/, int code/* = DEFAULT_IT
 	loadSprite();
 }
 
+void Obstacle::broke() {
+	this->broken = true;
+	this->solid = false;
+}
+
 void Obstacle::loadSprite() {
 	switch (code) {
 		case TABLE_A:

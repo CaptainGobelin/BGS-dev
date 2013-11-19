@@ -24,6 +24,8 @@ bool Character::move(int dX, int dY, const Map& map) {
 		setPosition(newX, newY);
 		return true;
 	}
+	if (!map.cell[newX][newY].obstacles.empty())
+		map.cell[newX][newY].obstacles.begin()->broke();
 	return false;
 }
 
