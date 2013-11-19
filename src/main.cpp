@@ -26,6 +26,7 @@ sf::Texture Textures::texturesArmorOn;
 sf::Texture Textures::texturesArmorOff;
 sf::Texture Textures::texturesWeaponOn;
 sf::Texture Textures::texturesWeaponOff;
+sf::Texture Textures::texturesObstacles;
 
 int main(int argc, char *argv[]) {
 	//Initialize game

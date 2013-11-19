@@ -75,4 +75,8 @@
 #define SWORD_1H_A 1
 #define GREAVES_L_A 2
 
+//Obstacles
+#define DEFAULT_OBSTACLE -1
+#define TABLE_A 1
+
 #endif

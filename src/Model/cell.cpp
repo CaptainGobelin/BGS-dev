@@ -13,6 +13,36 @@ Cell::Cell(int code) {
 	loadSprite();
 }
 
+bool Cell::isSolid() {
+	if (!this->obstacles.empty())
+		return this->obstacles.begin()->isSolid() || this->solid;
+	else
+		return this->solid;
+}
+
+void Cell::draw(const int x, const int y, bool drawSolid) {
+	if (!this->visited)
+		return;
+	if (this->solid != drawSolid)
+		return;
+	this->sprite.setPosition((x+11.5)*T_TILES,(y+11.5)*T_TILES);
+	GameWindow::window.draw(this->sprite);
+	if (!this->drops.empty())
+		for (std::list<Item>::reverse_iterator it=this->drops.rbegin();it!=this->drops.rend();++it) {
+			(*it).getSpriteOff().setPosition((x+11.5)*T_TILES,(y+11.5)*T_TILES);
+			GameWindow::window.draw((*it).getSpriteOff());
+		}
+	if (!this->obstacles.empty())
+		if (this->obstacles.begin()->isBroken()) {
+			this->obstacles.begin()->getSpriteBroken().setPosition((x+11.5)*T_TILES,(y+11.5)*T_TILES);
+			GameWindow::window.draw(this->obstacles.begin()->getSpriteBroken());
+		}
+		else {
+			this->obstacles.begin()->getSpriteEntire().setPosition((x+11.5)*T_TILES,(y+11.5)*T_TILES);
+			GameWindow::window.draw(this->obstacles.begin()->getSpriteEntire());
+		}
+}
+
 void Cell::loadSprite() {
 	this->viewed = false;
 	switch (code) {

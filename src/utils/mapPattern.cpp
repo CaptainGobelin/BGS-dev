@@ -386,7 +386,11 @@ void Dungeon::wallCell(Cell &cell) {
 }
 
 void Dungeon::wallItemCell(Cell &cell) {
-	cell.dungeonWallItemA();
+	//cell.dungeonWallItemA();
+	cell.dungeonFloorA();
+	Obstacle o;
+	o.tableA();
+	cell.obstacles.push_front(o);
 }
 
 void Dungeon::apply_loop(MapPrototype &map) {

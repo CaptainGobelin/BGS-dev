@@ -7,13 +7,14 @@
 #include "textures.h"
 #include "item.h"
 #include "mapExit.h"
+#include "obstacle.h"
 
 class Cell {
 	public:
 		Cell();
 		Cell(int code);
 		const int &getCode() const {return code;}
-		const bool &isSolid() const {return solid;}
+		bool isSolid();
 		const bool &isTransparent() const {return transparent;}
 		const bool &isViewed() const {return viewed;}
 		const bool &isVisited() const {return visited;}
@@ -21,6 +22,8 @@ class Cell {
 		void setViewed(const bool &newViewed) {viewed=newViewed;}
 		sf::Sprite &getSprite() {return sprite;}
 
+		//If drawSolid == true, we only draw solid cells
+		void draw(const int x, const int y, bool drawSolid);
 		//Load element that don't need to be serialized
 		void loadSprite();
 
@@ -39,14 +42,16 @@ class Cell {
 		std::list<Item> drops;
 		//This list may contains a way to an another map
 		std::list<MapExit> exits;
+		//This list constains all obstacles (like furnitures)
+		std::list<Obstacle> obstacles;
 
 		template<class Archive>
 	    void save(Archive& ar, const unsigned int version) const {
-	        ar & code & visited & drops & exits;
+	        ar & code & visited & drops & exits & obstacles;
 	    }
 		template<class Archive>
 	    void load(Archive& ar, const unsigned int version){
-	        ar & code & visited & drops & exits;
+	        ar & code & visited & drops & exits & obstacles;
 	        loadSprite();
 	    }
 	    BOOST_SERIALIZATION_SPLIT_MEMBER();

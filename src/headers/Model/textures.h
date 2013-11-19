@@ -15,6 +15,7 @@ class Textures {
 		static sf::Texture texturesArmorOff;
 		static sf::Texture texturesWeaponOn;
 		static sf::Texture texturesWeaponOff;
+		static sf::Texture texturesObstacles;
 		static sf::Texture texturesInterface;
 		static sf::Texture texturesMap;
 		static sf::Texture texturesMenu;
