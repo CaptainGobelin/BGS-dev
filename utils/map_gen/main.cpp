@@ -56,12 +56,12 @@ int main(int argc, char *argv[]) {
 		window.draw(spriteMap);
 		Map map = mapGenerator->generate();
 		pattern->apply(map);
-		for (int i=0;i<30;i++) {
+		/*for (int i=0;i<30;i++) {
 			int rX = rand()%map.x;
 			int rY = rand()%map.y;
 			if (MapGenUtils::canAddWall(map, rX, rY))
 				map.cell[rX][rY] = 2;
-		}
+		}*/
 		mapGenerator->draw(map);
 		window.display();
 		do
