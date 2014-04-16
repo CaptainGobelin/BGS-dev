@@ -61,7 +61,10 @@ void SaveUtils::deleteSave(std::string name) {
     std::string pCharacter = SAVE_PATH + ("/" + (nameStem + ".sav"));
     std::string pJournal = SAVE_PATH + ("/" + (nameStem + "_journal.txt"));
     std::string pMap = WORLD_PATH + ("/" + nameStem);
-    boost::filesystem::remove(boost::filesystem::path(pCharacter));
-    boost::filesystem::remove(boost::filesystem::path(pJournal));
-    boost::filesystem::remove_all(boost::filesystem::path(pMap));
+    if (boost::filesystem::exists(pCharacter))
+        boost::filesystem::remove(boost::filesystem::path(pCharacter));
+    if (boost::filesystem::exists(pJournal))
+        boost::filesystem::remove(boost::filesystem::path(pJournal));
+    if (boost::filesystem::exists(pMap))
+        boost::filesystem::remove_all(boost::filesystem::path(pMap));
 }

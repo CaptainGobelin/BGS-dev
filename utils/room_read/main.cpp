@@ -76,6 +76,8 @@ int main(int argc, char *argv[]) {
 							file << ",";
 						if (blueprint.getPixel(m,n) == sf::Color(255, 0, 0))
 							file << "1";
+						else if (blueprint.getPixel(m,n) == sf::Color(0, 255, 0))
+							file << "2";
 						else
 							file << "0";
 					}
