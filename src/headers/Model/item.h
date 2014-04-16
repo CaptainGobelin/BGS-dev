@@ -22,6 +22,12 @@ class Item {
 		//Load element that don't need to be serialized
 		void loadSprite();
 
+		//Factories
+		void weaponFactory(std::string name, int code, sf::Vector2i pos_off, sf::Vector2i offset_off,
+			sf::Vector2i pos_on, sf::Vector2i offset_on);
+		void armorFactory(std::string name, int code, sf::Vector2i pos_off, sf::Vector2i offset_off,
+			sf::Vector2i pos_on, sf::Vector2i offset_on);
+
 		//Method which contains standard properties of an item
 		void generalItem();
 		void sword1HA();

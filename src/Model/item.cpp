@@ -22,33 +22,41 @@ void Item::loadSprite() {
 	}
 }
 
-void Item::generalItem() {
-	this->name = "";
-	this->code = DEFAULT_ITEM;
+void Item::weaponFactory(std::string name, int code, sf::Vector2i pos_off, sf::Vector2i offset_off,
+			sf::Vector2i pos_on, sf::Vector2i offset_on) {
+	this->name = name;
+	this->code = code;
 	this->spriteOn.setTexture(Textures::texturesWeaponOn);
-	this->spriteOn.setTextureRect(sf::IntRect(0, 0, 1, 1));
+	this->spriteOn.setTextureRect(sf::IntRect(pos_on, offset_on));
 	this->spriteOff.setTexture(Textures::texturesWeaponOff);
-	this->spriteOff.setTextureRect(sf::IntRect(0, 0, 1, 1));
+	this->spriteOff.setTextureRect(sf::IntRect(pos_off, offset_off));
+}
+
+void Item::armorFactory(std::string name, int code, sf::Vector2i pos_off, sf::Vector2i offset_off,
+			sf::Vector2i pos_on, sf::Vector2i offset_on) {
+	this->name = name;
+	this->code = code;
+	this->spriteOn.setTexture(Textures::texturesArmorOn);
+	this->spriteOn.setTextureRect(sf::IntRect(pos_on, offset_on));
+	this->spriteOff.setTexture(Textures::texturesArmorOff);
+	this->spriteOff.setTextureRect(sf::IntRect(pos_off, offset_off));
+}
+
+void Item::generalItem() {
+	weaponFactory("", DEFAULT_ITEM, sf::Vector2i(0, 0), sf::Vector2i(1, 1),
+		sf::Vector2i(0, 0), sf::Vector2i(1, 1));
 }
 
 //////////////1H Weapons description///////////////////////
 
 void Item::sword1HA() {
-	this->name = "Sword";
-	this->code = SWORD_1H_A;
-	this->spriteOn.setTexture(Textures::texturesWeaponOn);
-	this->spriteOn.setTextureRect(sf::IntRect(0, 0, T_TILES, T_TILES));
-	this->spriteOff.setTexture(Textures::texturesWeaponOff);
-	this->spriteOff.setTextureRect(sf::IntRect(0, 0, T_TILES, T_TILES));
+	weaponFactory("Sword", SWORD_1H_A, sf::Vector2i(0, 0), sf::Vector2i(T_TILES, T_TILES), 
+		sf::Vector2i(0, 0), sf::Vector2i(T_TILES, T_TILES));
 }
 
 //////////////Greaves Ligth description///////////////////////
 
 void Item::greavesLA() {
-	this->name = "Loin cloth";
-	this->code = GREAVES_L_A;
-	this->spriteOn.setTexture(Textures::texturesArmorOn);
-	this->spriteOn.setTextureRect(sf::IntRect(0, 0, T_TILES, T_TILES));
-	this->spriteOff.setTexture(Textures::texturesArmorOff);
-	this->spriteOff.setTextureRect(sf::IntRect(0, 0, T_TILES, T_TILES));
+	armorFactory("Loin Cloth", GREAVES_L_A, sf::Vector2i(0, 0), sf::Vector2i(T_TILES, T_TILES), 
+		sf::Vector2i(0, 0), sf::Vector2i(T_TILES, T_TILES));
 }
