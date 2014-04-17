@@ -25,19 +25,33 @@ void Obstacle::loadSprite() {
 	}
 }
 
+void Obstacle::obstacleFactory(int code, bool solid, sf::Vector2i pos_ent, sf::Vector2i offset_ent,
+			sf::Vector2i pos_brok, sf::Vector2i offset_brok) {
+	this->code = code;
+	this->solid = solid;
+	this->spriteEntire.setTexture(Textures::texturesObstacles);
+	this->spriteEntire.setTextureRect(sf::IntRect(pos_ent, offset_ent));
+	this->spriteBroken.setTexture(Textures::texturesObstacles);
+	this->spriteBroken.setTextureRect(sf::IntRect(pos_brok, offset_brok));
+}
+
 void Obstacle::generalObstacle() {
-	this->code = DEFAULT_OBSTACLE;
+	obstacleFactory(DEFAULT_OBSTACLE, false, sf::Vector2i(0, 0), sf::Vector2i(1, 1),
+		sf::Vector2i(0, 0), sf::Vector2i(1, 1));
+	/*this->code = DEFAULT_OBSTACLE;
 	this->spriteEntire.setTexture(Textures::texturesObstacles);
 	this->spriteEntire.setTextureRect(sf::IntRect(0, 0, 1, 1));
 	this->spriteBroken.setTexture(Textures::texturesObstacles);
-	this->spriteBroken.setTextureRect(sf::IntRect(0, 0, 1, 1));
+	this->spriteBroken.setTextureRect(sf::IntRect(0, 0, 1, 1));*/
 }
 
 void Obstacle::tableA() {
-	this->code = TABLE_A;
+	obstacleFactory(TABLE_A, true, sf::Vector2i(0, 0), sf::Vector2i(T_TILES, T_TILES),
+		sf::Vector2i(0, T_TILES), sf::Vector2i(T_TILES, T_TILES));
+	/*this->code = TABLE_A;
 	this->solid = true;
 	this->spriteEntire.setTexture(Textures::texturesObstacles);
 	this->spriteEntire.setTextureRect(sf::IntRect(0, 0, T_TILES, T_TILES));
 	this->spriteBroken.setTexture(Textures::texturesObstacles);
-	this->spriteBroken.setTextureRect(sf::IntRect(0, T_TILES, T_TILES, T_TILES));
+	this->spriteBroken.setTextureRect(sf::IntRect(0, T_TILES, T_TILES, T_TILES));*/
 }

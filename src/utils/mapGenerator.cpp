@@ -22,13 +22,8 @@ Map MapGenerator::generate(int x, int y, MapPattern *pattern, std::string mapCod
 				pattern->floorCell(map.cell[i+1][j+1]);
 			else if (mapP.cell[i][j] == DOOR)
 				pattern->floorCell(map.cell[i+1][j+1]);
-			else if (mapP.cell[i][j] == WALL_ITEM) {
-				map.cell[i+1][j+1].dungeonFloorA();
-				Item it;
-				it.sword1HA();
-				map.cell[i+1][j+1].drops.push_front(it);
-			}
-				//pattern->wallItemCell(map.cell[i+1][j+1]);
+			else if (mapP.cell[i][j] == WALL_ITEM)
+				pattern->wallItemCell(map.cell[i+1][j+1]);
 		}
 	map.setName(pattern->getRandomName());
 	//If the map is a leaf we don't need to create way to oter map

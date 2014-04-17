@@ -25,6 +25,10 @@ class Obstacle {
 		//Load element that don't need to be serialized
 		void loadSprite();
 
+		//Factories
+		void obstacleFactory(int code, bool solid, sf::Vector2i pos_ent, sf::Vector2i offset_ent,
+			sf::Vector2i pos_brok, sf::Vector2i offset_brok);
+
 		//Method which contains standard properties of an obstacle
 		void generalObstacle();
 		void tableA();
