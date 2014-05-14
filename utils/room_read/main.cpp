@@ -36,6 +36,7 @@ int main(int argc, char *argv[]) {
 			}
 	int maxX = 0;
 	int maxY = 0;
+	file << "#define NB_ROOMS " << k << "\n\n";
 	file << "static const int roomsSizes[" << k << "][2] = {\n";
 	for (std::list<std::pair<int,int> >::iterator it=roomSizes.begin();it!=roomSizes.end();++it) {
 		if (it != roomSizes.begin())
@@ -75,11 +76,11 @@ int main(int argc, char *argv[]) {
 						if (m != x)
 							file << ",";
 						if (blueprint.getPixel(m,n) == sf::Color(255, 0, 0))
-							file << "1";
+							file << -1;
 						else if (blueprint.getPixel(m,n) == sf::Color(0, 255, 0))
 							file << "2";
 						else
-							file << "0";
+							file << "1";
 					}
 					file << "}";
 				}

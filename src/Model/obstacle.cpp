@@ -12,7 +12,6 @@ Obstacle::Obstacle(int locX/* = -1*/, int locY/* = -1*/, int code/* = DEFAULT_IT
 
 void Obstacle::broke() {
 	this->broken = true;
-	this->solid = false;
 }
 
 void Obstacle::loadSprite() {
@@ -38,20 +37,9 @@ void Obstacle::obstacleFactory(int code, bool solid, sf::Vector2i pos_ent, sf::V
 void Obstacle::generalObstacle() {
 	obstacleFactory(DEFAULT_OBSTACLE, false, sf::Vector2i(0, 0), sf::Vector2i(1, 1),
 		sf::Vector2i(0, 0), sf::Vector2i(1, 1));
-	/*this->code = DEFAULT_OBSTACLE;
-	this->spriteEntire.setTexture(Textures::texturesObstacles);
-	this->spriteEntire.setTextureRect(sf::IntRect(0, 0, 1, 1));
-	this->spriteBroken.setTexture(Textures::texturesObstacles);
-	this->spriteBroken.setTextureRect(sf::IntRect(0, 0, 1, 1));*/
 }
 
 void Obstacle::tableA() {
 	obstacleFactory(TABLE_A, true, sf::Vector2i(0, 0), sf::Vector2i(T_TILES, T_TILES),
 		sf::Vector2i(0, T_TILES), sf::Vector2i(T_TILES, T_TILES));
-	/*this->code = TABLE_A;
-	this->solid = true;
-	this->spriteEntire.setTexture(Textures::texturesObstacles);
-	this->spriteEntire.setTextureRect(sf::IntRect(0, 0, T_TILES, T_TILES));
-	this->spriteBroken.setTexture(Textures::texturesObstacles);
-	this->spriteBroken.setTextureRect(sf::IntRect(0, T_TILES, T_TILES, T_TILES));*/
 }

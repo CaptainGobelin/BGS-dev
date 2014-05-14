@@ -7,6 +7,7 @@
 #include "mapPrototype.h"
 #include "nameGenerator.h"
 #include "../Model/cell.h"
+#include "rooms.h"
 
 //Each pattern sub-class is a type of map we can generate.
 

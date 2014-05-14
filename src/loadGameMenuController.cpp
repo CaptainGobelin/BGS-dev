@@ -11,7 +11,7 @@ int LoadGameMenuController::launch(std::string &charName) {
 	GameInput input;
 	do {
 		input = loadGameMenuScreen.recupInput();
-		if (nChoices >= 0) {
+		if (nChoices <= 0) {
 			switch (input.getValue()) {
 				case CLOSE_INPUT:
 					return CLOSE_INPUT;

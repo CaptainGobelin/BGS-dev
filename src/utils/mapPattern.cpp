@@ -409,9 +409,7 @@ void Dungeon::apply_loop(MapPrototype &map) {
 			int maxI = (rand()%9)+3;
 			int maxJ = (rand()%9)+3;
 			//We draw an random number of entries
-			if (draw_room(map, i, j, maxI, maxJ)) {
-				draw_entries(map, i, j, maxI, maxJ);
-			}
+			draw_room(map, i, j, maxI, maxJ);
 		}
 	//Then for each odd cell where there's no room
 	//We fill ot with random corridors
@@ -459,13 +457,40 @@ bool Dungeon::draw_room(MapPrototype &map, int i, int j, int &maxI, int &maxJ) {
 		maxJ--;
 	if ((maxI < 3) || (maxJ < 3))
 		return false;
+
+	bool toDraw = rand()%4;
 	//Then we fill the room with floors
-	for (int ii=i-1;ii<(i+1+maxI);ii++)
-		for (int jj=j-1;jj<(j+1+maxJ);jj++)
-			if ((ii==i-1)||(jj==j-1)||(ii==i+maxI)||(jj==j+maxJ))
-				map.cell[ii][jj] = WALL<<4;
-			else
-				map.cell[ii][jj] = FLOOR;
+	if (toDraw) {
+		toDraw = false;
+		int chRoom = -1;
+		for (int k=0;k<NB_ROOMS;k++)
+			if ((roomsSizes[k][0] == (maxI+2)) && roomsSizes[k][1] == (maxJ+2)) {
+				toDraw = true;
+				chRoom = k;
+			}
+		if (toDraw) {
+			for (int ii=0;ii<(maxI+2);ii++) {
+				for (int jj=0;jj<(maxJ+2);jj++) {
+					if ((i <= 1) || (j <= 1) || (i >= map.x-2) || (j >= map.y+2))
+						map.cell[ii+i-1][jj+j-1] = WALL<<4;
+					else if ((rooms[chRoom][ii][jj] == WALL) &&
+						((ii == 0) || (jj == 0)) || (ii == maxI+1) || (jj == maxJ+1))
+						map.cell[ii+i-1][jj+j-1] = WALL<<4;
+					else
+						map.cell[ii+i-1][jj+j-1] = rooms[chRoom][ii][jj];
+				}
+			}
+		}
+	}
+	if (!toDraw) {
+		for (int ii=i-1;ii<(i+1+maxI);ii++)
+			for (int jj=j-1;jj<(j+1+maxJ);jj++)
+				if ((ii==i-1)||(jj==j-1)||(ii==i+maxI)||(jj==j+maxJ))
+					map.cell[ii][jj] = WALL<<4;
+				else
+					map.cell[ii][jj] = FLOOR;
+		draw_entries(map, i, j, maxI, maxJ);
+	}
 	return true;
 }
 
@@ -516,8 +541,8 @@ void Dungeon::draw_corridor(MapPrototype &map, int i, int j) {
 }
 
 void Dungeon::remove_dead_end(MapPrototype &map) {
-	for (int i=1;i<(map.x-1);i+=2)
-		for (int j=1;j<(map.y-1);j+=2)
+	for (int i=1;i<(map.x-1);i++)
+		for (int j=1;j<(map.y-1);j++)
 			if (map.cell[i][j] != WALL)
 				remove_corridor(map, i, j);
 }

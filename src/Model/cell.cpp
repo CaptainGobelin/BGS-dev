@@ -15,7 +15,7 @@ Cell::Cell(int code) {
 
 bool Cell::isSolid() {
 	if (!this->obstacles.empty())
-		return this->obstacles.begin()->isSolid() || this->solid;
+		return (this->obstacles.begin()->isSolid() && !this->obstacles.begin()->isBroken()) || this->solid;
 	else
 		return this->solid;
 }
