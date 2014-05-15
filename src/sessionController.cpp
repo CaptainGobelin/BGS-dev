@@ -20,6 +20,25 @@ int SessionController::launch(Character &character, Interface &interface) {
 		input = sessionScreen.recupInput();
 		switch (input.getValue()) {
 			moved = false;
+			//Quit Game
+			case ESCAPE_INPUT : {
+				interface.write("Return to the menu (y or n)?");
+				sessionScreen.display(character, interface, map);
+				GameInput tmpInput;
+				int tmpValue;
+				do {
+					tmpInput = sessionScreen.recupInput();
+					tmpValue = tmpInput.getValue();
+				} while ((tmpValue != N_INPUT) && (tmpValue != Y_INPUT));
+				if (tmpValue == N_INPUT)
+					interface.write("Okay then.");
+				else {
+					SaveUtils::save(character, interface);
+					SaveUtils::saveMap(character.getName(), character.getMap(), map);
+					return TO_MAIN_MENU;
+				}
+				break;
+			}
 			//Display Map
 			case M_INPUT : {
 				MapController mapController(map, character);

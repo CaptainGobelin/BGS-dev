@@ -42,6 +42,7 @@ int MenuController::launch() {
 			SessionController sessionController;
 			toDo = sessionController.launch(character, interface);
 		} while (toDo == REDO);
+		return toDo;
 	}
 	//If you press Load game, you choose the character you want
 	//And the game load it

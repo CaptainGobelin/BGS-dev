@@ -42,6 +42,14 @@ void GameInput::treatEvent(sf::Event event) {
 			value = Q_INPUT;
 			return;
 		}
+		if (event.key.code == OptionsFile::YMenuKey) {
+			value = Y_INPUT;
+			return;
+		}
+		if (event.key.code == OptionsFile::NMenuKey) {
+			value = N_INPUT;
+			return;
+		}
 		else switch (event.key.code) {
 			case sf::Keyboard::Delete : {value=DELETE_INPUT;return;}
 			default : {value=ANY_KEY_INPUT;return;}

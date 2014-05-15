@@ -14,6 +14,8 @@ sf::Keyboard::Key OptionsFile::leftGameKey = sf::Keyboard::Left;
 sf::Keyboard::Key OptionsFile::menuGameKey = sf::Keyboard::Escape;
 sf::Keyboard::Key OptionsFile::validGameKey = sf::Keyboard::Return;
 sf::Keyboard::Key OptionsFile::exitGameKey = sf::Keyboard::Q;
+sf::Keyboard::Key OptionsFile::YMenuKey = sf::Keyboard::Y;
+sf::Keyboard::Key OptionsFile::NMenuKey = sf::Keyboard::N;
 
 sf::Texture Textures::texturesStart;
 sf::Texture Textures::texturesCharacters;

@@ -48,6 +48,12 @@ void OptionsFile::setOption(std::string line) {
     else if (line.substr(0,pos) == "exit") {
     	exitGameKey = toKey(value);
     }
+    else if (line.substr(0,pos) == "YMenu") {
+    	YMenuKey = toKey(value);
+    }
+    else if (line.substr(0,pos) == "NMenu") {
+    	NMenuKey = toKey(value);
+    }
 }
 
 sf::Keyboard::Key OptionsFile::toKey(std::string const& s) {
