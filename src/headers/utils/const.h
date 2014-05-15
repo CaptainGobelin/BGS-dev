@@ -26,6 +26,8 @@
 #define ESCAPE_INPUT 9
 #define DELETE_INPUT 10
 #define Q_INPUT 11
+#define Y_INPUT 12
+#define N_INPUT 13
 
 //Menu inputs
 #define INIT_CHOICE 10

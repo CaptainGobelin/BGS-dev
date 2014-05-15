@@ -7,6 +7,10 @@
 #include "stringUtils.h"
 #include "../Model/map.h"
 #include "mapPattern.h"
+#include "dungeon.h"
+#include "maze.h"
+#include "cavern.h"
+#include "plain.h"
 
 class MapGenerator {
 	public:

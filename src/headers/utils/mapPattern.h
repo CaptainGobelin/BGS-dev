@@ -7,7 +7,6 @@
 #include "mapPrototype.h"
 #include "nameGenerator.h"
 #include "../Model/cell.h"
-#include "rooms.h"
 
 //Each pattern sub-class is a type of map we can generate.
 
@@ -44,59 +43,6 @@ class Random : public MapPattern {
 		virtual void floorCell(Cell &cell);
 		virtual void wallCell(Cell &cell);
 		virtual void wallItemCell(Cell &cell);
-};
-
-class Cavern : public MapPattern {
-	public: 
-		Cavern();
-		virtual void apply(MapPrototype &map);
-		virtual std::string getRandomName();
-		virtual void floorCell(Cell &cell);
-		virtual void wallCell(Cell &cell);
-		virtual void wallItemCell(Cell &cell);
-};
-
-class Plain : public MapPattern {
-	public: 
-		Plain();
-		virtual void apply(MapPrototype &map);
-		virtual std::string getRandomName();
-		virtual void floorCell(Cell &cell);
-		virtual void wallCell(Cell &cell);
-		virtual void wallItemCell(Cell &cell);
-};
-
-class Labyrinth : public MapPattern {
-	public: 
-		Labyrinth();
-		virtual void apply(MapPrototype &map);
-		virtual std::string getRandomName();
-		virtual void floorCell(Cell &cell);
-		virtual void wallCell(Cell &cell);
-		virtual void wallItemCell(Cell &cell);
-	private:
-		void apply_backtrack(MapPrototype &map, int cX, int cY);
-		void remove_dead_end(MapPrototype &map);
-		bool is_dead_end(MapPrototype &map, int i, int j);
-};
-
-class Dungeon : public MapPattern {
-	public: 
-		Dungeon();
-		virtual void apply(MapPrototype &map);
-		virtual std::string getRandomName();
-		virtual void floorCell(Cell &cell);
-		virtual void wallCell(Cell &cell);
-		virtual void wallItemCell(Cell &cell);
-	private:
-		void apply_loop(MapPrototype &map);
-		bool draw_room(MapPrototype &map, int i, int j, int &maxI, int &maxJ);
-		void draw_entries(MapPrototype &map, int i, int j, int maxI, int maxJ);
-		void draw_corridor(MapPrototype &map, int i, int j);
-		void remove_dead_end(MapPrototype &map);
-		void remove_corridor(MapPrototype &map, int i, int j);
-		int dirI(int dir);
-		int dirJ(int dir);
 };
 
 #endif
