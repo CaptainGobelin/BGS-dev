@@ -1,157 +1,356 @@
 <?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="11.3">
-  <zoom_level>6</zoom_level>
+  <zoom_level>8</zoom_level>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>444</x>
-      <y>30</y>
-      <w>126</w>
-      <h>42</h>
+      <x>480</x>
+      <y>0</y>
+      <w>168</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>GameController
 --
---</panel_attributes>
+--
++ GameController()
++ launch() : void
+- startScreen() : int
+- mainMenu() : int</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>396</x>
-      <y>540</y>
-      <w>126</w>
-      <h>42</h>
+      <x>416</x>
+      <y>680</y>
+      <w>168</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>GameWindow
 --
---</panel_attributes>
+_+ window : RenderWindow_
+_+ viewGame : View_
+_+ viewInt : View_
+--
+_+ setOptions()_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>126</x>
-      <y>132</y>
-      <w>126</w>
-      <h>42</h>
+      <x>56</x>
+      <y>136</y>
+      <w>168</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>StartController
 --
---</panel_attributes>
+- startScreen : StartScreen
+--
++ StartController()
++ launch() : int</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>126</x>
-      <y>372</y>
-      <w>126</w>
-      <h>42</h>
+      <x>56</x>
+      <y>456</y>
+      <w>168</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>StartScreen
 --
---</panel_attributes>
+- titleScreen : Sprite
+--
++ StartScreen()
++ recupInput : GameInput
++ display()
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>444</x>
-      <y>132</y>
-      <w>126</w>
-      <h>42</h>
+      <x>480</x>
+      <y>136</y>
+      <w>168</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>MenuController
 --
---</panel_attributes>
+- menuScreen : MenuScreen
+--
++ MenuController()
++ launch() : int</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>300</x>
-      <y>372</y>
-      <w>126</w>
-      <h>42</h>
+      <x>232</x>
+      <y>456</y>
+      <w>168</w>
+      <h>128</h>
     </coordinates>
     <panel_attributes>MenuScreen
 --
---</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>546</x>
-      <y>282</y>
-      <w>126</w>
-      <h>42</h>
-    </coordinates>
-    <panel_attributes>OptionsMenuController
+- titleScreen : Sprite
+- menuPanel : Sprite
+- arrow : Sprite
+- textBox : Text[4]
+- font : Font
 --
---</panel_attributes>
++ MenuScreen()
++ recuptInput() : GameInput
++ display(int choice)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>546</x>
-      <y>186</y>
-      <w>126</w>
-      <h>42</h>
+      <x>704</x>
+      <y>256</y>
+      <w>168</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes>NewGameMenuController
 --
---</panel_attributes>
+- newGameMenuScreen :
+     NewGameMenuScreen
+- characters : String[]
+--
++ NewGameMenuController()
++ launch(String name) : int
++ createCharacter
+     (String name) : int</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>546</x>
-      <y>234</y>
-      <w>126</w>
-      <h>42</h>
+      <x>528</x>
+      <y>256</y>
+      <w>168</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>LoadGameMenuController
 --
---</panel_attributes>
+- loadGameMenuScreen :
+     LoadGameMenuScreen
+--
++LoadGameMenuController()
+- sure() : bool</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>546</x>
-      <y>438</y>
-      <w>126</w>
-      <h>42</h>
+      <x>696</x>
+      <y>464</y>
+      <w>168</w>
+      <h>104</h>
     </coordinates>
     <panel_attributes>NewGameMenuScreen
 --
---</panel_attributes>
+- font : Font
+- warning : Text
++ characterName : Text
+--
++ NewGameMenuScreen()
++ recuptInput() : Event
++ display(bool correct)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>546</x>
-      <y>390</y>
-      <w>126</w>
-      <h>42</h>
+      <x>512</x>
+      <y>464</y>
+      <w>168</w>
+      <h>128</h>
     </coordinates>
     <panel_attributes>LoadGameMenuScreen
 --
+- characters : Text[]
+- font : Font
+--
++ LoadGameMenuScreen()
++ getNChoices() : int
++ getName(int choice)
+     : String
++ recuptInput() : GameInput
++ display(int choice)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>536</x>
+      <y>48</y>
+      <w>40</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>24;24;24;88</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>112</x>
+      <y>48</y>
+      <w>424</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>408;24;408;64;24;64;24;88</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>592</x>
+      <y>176</y>
+      <w>208</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>192;80;192;56;24;56;24;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>552</x>
+      <y>176</y>
+      <w>64</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>48;80;48;64;24;64;24;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>288</x>
+      <y>144</y>
+      <w>208</w>
+      <h>328</h>
+    </coordinates>
+    <panel_attributes>m1=  1
+m2=  1</panel_attributes>
+    <additional_attributes>24;312;24;24;192;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>112</x>
+      <y>176</y>
+      <w>40</w>
+      <h>296</h>
+    </coordinates>
+    <panel_attributes>m1=  1
+m2=  1</panel_attributes>
+    <additional_attributes>24;280;24;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>576</x>
+      <y>304</y>
+      <w>40</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>m1=  1
+m2=  1</panel_attributes>
+    <additional_attributes>24;160;24;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>760</x>
+      <y>344</y>
+      <w>40</w>
+      <h>136</h>
+    </coordinates>
+    <panel_attributes>m1=  1
+m2=  1</panel_attributes>
+    <additional_attributes>24;120;24;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>560</x>
+      <y>544</y>
+      <w>240</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>224;24;224;152;24;152</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>488</x>
+      <y>568</y>
+      <w>128</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>24;112;24;32;112;32;112;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>296</x>
+      <y>560</y>
+      <w>200</w>
+      <h>136</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>184;120;184;32;24;32;24;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>112</x>
+      <y>504</y>
+      <w>360</w>
+      <h>192</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>344;176;344;96;24;96;24;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>0</x>
+      <y>8</y>
+      <w>496</w>
+      <h>720</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>480;24;32;24;24;704;416;704</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1160</x>
+      <y>344</y>
+      <w>168</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Map
+--
 --</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>546</x>
-      <y>342</y>
-      <w>126</w>
-      <h>42</h>
+      <x>1160</x>
+      <y>432</y>
+      <w>168</w>
+      <h>56</h>
     </coordinates>
-    <panel_attributes>OptionsMenuScreen
+    <panel_attributes>Cell
 --
 --</panel_attributes>
     <additional_attributes/>
@@ -159,177 +358,263 @@
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>486</x>
-      <y>54</y>
-      <w>30</w>
-      <h>90</h>
+      <x>1224</x>
+      <y>376</y>
+      <w>40</w>
+      <h>72</h>
     </coordinates>
-    <panel_attributes/>
-    <additional_attributes>18;18;18;78</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=   *
+m2=  1</panel_attributes>
+    <additional_attributes>24;56;24;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1344</x>
+      <y>272</y>
+      <w>168</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Items
+--
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1096</x>
+      <y>504</y>
+      <w>168</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>MapExit
+--
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1096</x>
+      <y>576</y>
+      <w>168</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Obstacle
+--
+--</panel_attributes>
+    <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>168</x>
-      <y>54</y>
-      <w>318</w>
-      <h>90</h>
+      <x>1240</x>
+      <y>464</y>
+      <w>64</w>
+      <h>88</h>
     </coordinates>
-    <panel_attributes/>
-    <additional_attributes>306;18;306;60;18;60;18;78</additional_attributes>
+    <panel_attributes>lt=&gt;&gt;&gt;
+m1=  1
+m2=  *</panel_attributes>
+    <additional_attributes>48;24;48;72;24;72</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>510</x>
-      <y>156</y>
-      <w>48</w>
-      <h>66</h>
+      <x>1240</x>
+      <y>464</y>
+      <w>88</w>
+      <h>160</h>
     </coordinates>
-    <panel_attributes/>
-    <additional_attributes>36;54;18;54;18;18</additional_attributes>
+    <panel_attributes>lt=&gt;&gt;&gt;
+m1=  1
+m2=  *</panel_attributes>
+    <additional_attributes>72;24;72;144;24;144</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>498</x>
-      <y>156</y>
-      <w>60</w>
-      <h>114</h>
+      <x>1304</x>
+      <y>304</y>
+      <w>112</w>
+      <h>176</h>
     </coordinates>
-    <panel_attributes/>
-    <additional_attributes>48;102;18;102;18;18</additional_attributes>
+    <panel_attributes>lt=&gt;&gt;&gt;
+m1=  1
+m2=  *</panel_attributes>
+    <additional_attributes>24;160;96;160;96;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1144</x>
+      <y>32</y>
+      <w>168</w>
+      <h>280</h>
+    </coordinates>
+    <panel_attributes>Character
+--
++ inventory : Item[]
+- name : String
+- race : Race
+- attributes : int[2]
+- x : int
+- y : int
+- map : String
+--
++ Caracter()
++ Character(Strong name,
+     int raceChoice, String 
+     map)
++ draw()
++ move(int dx, int dy, Map 
+     map) : bool
++ setPosition(int newX, int
+     newY)
++ checkView(Map map)
++ loadSprite()
+goToStart(Map map, String
+     mapName)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1344</x>
+      <y>120</y>
+      <w>168</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>Race
+--
+- body : Sprite
+- attributes : int
+- raceCode : int
+--
++ Race()
++ Race(int code)
++ setPosition(int x, int y)
++ loadSprite()
++ humanRace()</panel_attributes>
+    <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>486</x>
-      <y>156</y>
-      <w>72</w>
-      <h>162</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes>60;150;18;150;18;18</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>408</x>
-      <y>156</y>
-      <w>66</w>
-      <h>252</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes>18;240;54;240;54;18</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>168</x>
-      <y>156</y>
-      <w>30</w>
-      <h>228</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes>18;216;18;18</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>654</x>
+      <x>1208</x>
       <y>288</y>
-      <w>48</w>
-      <h>90</h>
+      <w>152</w>
+      <h>48</h>
     </coordinates>
-    <panel_attributes/>
-    <additional_attributes>18;78;36;78;36;18;18;18</additional_attributes>
+    <panel_attributes>lt=&gt;&gt;&gt;
+m1=  1
+m2=   *</panel_attributes>
+    <additional_attributes>24;24;24;32;136;32</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>654</x>
-      <y>240</y>
-      <w>54</w>
-      <h>186</h>
+      <x>1288</x>
+      <y>80</y>
+      <w>152</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>18;174;42;174;42;18;18;18</additional_attributes>
+    <additional_attributes>24;24;136;24;136;40</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>880</x>
+      <y>280</y>
+      <w>168</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>SessionController
+--
+--
++ SessionController()
++ launch(Character 
+     character, Interface
+     interface) : int
++ changeMap(Character
+     character, Map map,
+     Interface interface) : bool</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>872</x>
+      <y>464</y>
+      <w>168</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>SessionScreen
+--
+--
++ SessionScreen()
++ recuptInput() : GameInput
++ display(Character
+     character, Interface
+     interface, Map map)</panel_attributes>
+    <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>654</x>
-      <y>192</y>
-      <w>60</w>
-      <h>282</h>
+      <x>624</x>
+      <y>144</y>
+      <w>352</w>
+      <h>152</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>18;270;48;270;48;18;18;18</additional_attributes>
+    <additional_attributes>336;136;336;24;24;24</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>474</x>
-      <y>444</y>
-      <w>84</w>
-      <h>108</h>
+      <x>936</x>
+      <y>368</y>
+      <w>40</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>72;18;48;18;48;48;18;48;18;96</additional_attributes>
+    <additional_attributes>24;96;24;24</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>462</x>
-      <y>396</y>
-      <w>96</w>
-      <h>156</h>
+      <x>560</x>
+      <y>528</y>
+      <w>416</w>
+      <h>200</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>18;144;18;90;54;90;54;18;84;18</additional_attributes>
+    <additional_attributes>400;24;400;184;24;184</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>450</x>
-      <y>348</y>
-      <w>108</w>
-      <h>204</h>
+      <x>1024</x>
+      <y>80</y>
+      <w>136</w>
+      <h>240</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>18;192;18;132;60;132;60;18;96;18</additional_attributes>
+    <additional_attributes>120;24;56;24;56;224;24;224</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>348</x>
-      <y>396</y>
-      <w>108</w>
-      <h>156</h>
+      <x>1024</x>
+      <y>296</y>
+      <w>152</w>
+      <h>96</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>96;144;96;78;18;78;18;18</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>168</x>
-      <y>396</y>
-      <w>270</w>
-      <h>156</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes>258;144;258;84;18;84;18;18</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>84</x>
-      <y>36</y>
-      <w>372</w>
-      <h>540</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes>360;18;24;18;18;528;312;528</additional_attributes>
+    <additional_attributes>24;24;56;24;56;80;136;80</additional_attributes>
   </element>
 </diagram>
