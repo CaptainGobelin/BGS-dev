@@ -42,11 +42,11 @@ void GameInput::treatEvent(sf::Event event) {
 			value = Q_INPUT;
 			return;
 		}
-		if (event.key.code == OptionsFile::YMenuKey) {
+		if (event.key.code == OptionsFile::confirmGameKey) {
 			value = Y_INPUT;
 			return;
 		}
-		if (event.key.code == OptionsFile::NMenuKey) {
+		if (event.key.code == OptionsFile::cancelGameKey) {
 			value = N_INPUT;
 			return;
 		}

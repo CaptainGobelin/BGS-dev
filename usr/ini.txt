@@ -22,5 +22,5 @@ rightMove=RightArrow
 leftMove=LeftArrow
 map=M
 exit=E
-YMenu=Y
-NMenu=N
+confirm=Y
+cancel=N

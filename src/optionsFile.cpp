@@ -48,11 +48,11 @@ void OptionsFile::setOption(std::string line) {
     else if (line.substr(0,pos) == "exit") {
     	exitGameKey = toKey(value);
     }
-    else if (line.substr(0,pos) == "YMenu") {
-    	YMenuKey = toKey(value);
+    else if (line.substr(0,pos) == "confirm") {
+    	confirmGameKey = toKey(value);
     }
-    else if (line.substr(0,pos) == "NMenu") {
-    	NMenuKey = toKey(value);
+    else if (line.substr(0,pos) == "cancel") {
+    	cancelGameKey = toKey(value);
     }
 }
 
