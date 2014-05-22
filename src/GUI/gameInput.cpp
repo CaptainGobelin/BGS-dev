@@ -9,9 +9,25 @@ void GameInput::treatEvent(sf::Event event) {
 		value = CLOSE_INPUT;
 		return;
 	}
+	else if (event.type == sf::Event::GainedFocus) {
+		GameWindow::window.display();
+		return;
+	}
+	else if (event.type == sf::Event::LostFocus) {
+		GameWindow::window.display();
+		return;
+	}
+	else if (event.type == sf::Event::Resized) {
+		GameWindow::window.display();
+		return;
+	}
 	else if (event.type == sf::Event::KeyPressed) {
 		if (event.key.code == OptionsFile::mapGameKey) {
 			value = M_INPUT;
+			return;
+		}
+		if (event.key.code == OptionsFile::inventoryGameKey) {
+			value = I_INPUT;
 			return;
 		}
 		if (event.key.code == OptionsFile::upGameKey) {
@@ -50,7 +66,7 @@ void GameInput::treatEvent(sf::Event event) {
 			value = N_INPUT;
 			return;
 		}
-		else switch (event.key.code) {
+		switch (event.key.code) {
 			case sf::Keyboard::Delete : {value=DELETE_INPUT;return;}
 			default : {value=ANY_KEY_INPUT;return;}
 		}

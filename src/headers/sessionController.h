@@ -12,6 +12,7 @@
 #include "Model/map.h"
 #include "GUI/sessionScreen.h"
 #include "mapController.h"
+#include "inventoryController.h"
 
 
 class SessionController {

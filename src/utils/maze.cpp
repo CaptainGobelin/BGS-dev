@@ -30,6 +30,10 @@ void Maze::floorCell(Cell &cell) {
 	cell.dungeonFloorA();
 }
 
+void Maze::doorCell(Cell &cell) {
+	cell.dungeonFloorA();
+}
+
 void Maze::wallCell(Cell &cell) {
 	cell.dungeonWallA();
 }

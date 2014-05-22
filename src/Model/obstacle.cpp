@@ -6,8 +6,23 @@ Obstacle::Obstacle(int locX/* = -1*/, int locY/* = -1*/, int code/* = DEFAULT_IT
 	this->code = code;
 	this->x = locX;
 	this->y = locY;
-	this->broken = false;
+	this->broken = true;
 	loadSprite();
+}
+
+bool Obstacle::isSolid() {
+	return !this->broken && this->solid;
+}
+
+void Obstacle::draw(int x, int y) {
+	if (isBroken()) {
+		getSpriteBroken().setPosition((x+11.5)*T_TILES,(y+11.5)*T_TILES);
+		GameWindow::window.draw(getSpriteBroken());
+	}
+	else {
+		getSpriteEntire().setPosition((x+11.5)*T_TILES,(y+11.5)*T_TILES);
+		GameWindow::window.draw(getSpriteEntire());
+	}
 }
 
 void Obstacle::broke() {

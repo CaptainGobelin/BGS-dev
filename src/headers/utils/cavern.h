@@ -16,6 +16,7 @@ class Cavern : public MapPattern {
 		virtual void apply(MapPrototype &map);
 		virtual std::string getRandomName();
 		virtual void floorCell(Cell &cell);
+		virtual void doorCell(Cell &cell);
 		virtual void wallCell(Cell &cell);
 		virtual void wallItemCell(Cell &cell);
 };

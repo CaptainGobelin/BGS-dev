@@ -14,11 +14,14 @@ class Obstacle {
 		const int &getX() const {return x;}
 		const int &getY() const {return y;}
 		const bool &isBroken() const {return broken;}
-		const bool &isSolid() const {return solid;}
-		void setLocation(const int newX, const int newY) {x=newX;y=newY;} 
+		void setLocation(const int newX, const int newY) {x=newX;y=newY;}
 
 		sf::Sprite &getSpriteEntire() {return spriteEntire;}
 		sf::Sprite &getSpriteBroken() {return spriteBroken;}
+
+		bool isSolid();
+
+		void draw(int x, int y);
 
 		void broke();
 

@@ -21,7 +21,7 @@ Map MapGenerator::generate(int x, int y, MapPattern *pattern, std::string mapCod
 			else if (mapP.cell[i][j] == FLOOR)
 				pattern->floorCell(map.cell[i+1][j+1]);
 			else if (mapP.cell[i][j] == DOOR)
-				pattern->floorCell(map.cell[i+1][j+1]);
+				pattern->doorCell(map.cell[i+1][j+1]);
 			else if (mapP.cell[i][j] == WALL_ITEM)
 				pattern->wallItemCell(map.cell[i+1][j+1]);
 		}

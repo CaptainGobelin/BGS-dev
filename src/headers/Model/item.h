@@ -19,6 +19,8 @@ class Item {
 		sf::Sprite &getSpriteOn() {return spriteOn;}
 		sf::Sprite &getSpriteOff() {return spriteOff;}
 
+		void draw(int x, int y);
+
 		//Load element that don't need to be serialized
 		void loadSprite();
 

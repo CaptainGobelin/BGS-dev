@@ -45,6 +45,12 @@ int SessionController::launch(Character &character, Interface &interface) {
 				input.setValue(mapController.launch(map, character));
 				break;
 			}
+			//Display Inventory
+			case I_INPUT : {
+				InventoryController inventoryController;
+				input.setValue(inventoryController.launch(character));
+				break;
+			}
 			//Change map
 			case Q_INPUT : {
 				if (changeMap(character, map, interface)) {

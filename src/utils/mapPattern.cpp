@@ -154,6 +154,10 @@ void Random::floorCell(Cell &cell) {
 	cell.dungeonFloorA();
 }
 
+void Random::doorCell(Cell &cell) {
+	cell.dungeonFloorA();
+}
+
 void Random::wallCell(Cell &cell) {
 	cell.dungeonWallA();
 }

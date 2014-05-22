@@ -9,6 +9,11 @@ Item::Item(int locX/* = -1*/, int locY/* = -1*/, int code/* = DEFAULT_ITEM*/) {
 	loadSprite();
 }
 
+void Item::draw(int x, int y) {
+	getSpriteOff().setPosition((x+11.5)*T_TILES,(y+11.5)*T_TILES);
+	GameWindow::window.draw(getSpriteOff());
+}
+
 void Item::loadSprite() {
 	switch (code) {
 		case SWORD_1H_A:

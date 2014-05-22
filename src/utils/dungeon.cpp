@@ -20,6 +20,13 @@ void Dungeon::floorCell(Cell &cell) {
 	cell.dungeonFloorA();
 }
 
+void Dungeon::doorCell(Cell &cell) {
+	cell.dungeonFloorA();
+	Door d;
+	d.dungeonDoorA();
+	cell.doors.push_front(d);
+}
+
 void Dungeon::wallCell(Cell &cell) {
 	cell.dungeonWallA();
 }
@@ -43,7 +50,7 @@ void Dungeon::apply_loop(MapPrototype &map) {
 		for (int j=1;j<(map.y-1);j+=2) {
 			if (map.cell[i][j] == FLOOR)
 				continue;
-			if (rand()%2)
+			if (rand()%2 < 1)
 				continue;
 			int maxI = (rand()%9)+3;
 			int maxJ = (rand()%9)+3;
@@ -97,7 +104,7 @@ bool Dungeon::draw_room(MapPrototype &map, int i, int j, int &maxI, int &maxJ) {
 	if ((maxI < 3) || (maxJ < 3))
 		return false;
 
-	bool toDraw = rand()%4;
+	bool toDraw = true;//rand()%6;
 	//Then we fill the room with floors
 	if (toDraw) {
 		toDraw = false;
@@ -110,11 +117,10 @@ bool Dungeon::draw_room(MapPrototype &map, int i, int j, int &maxI, int &maxJ) {
 		if (toDraw) {
 			for (int ii=0;ii<(maxI+2);ii++) {
 				for (int jj=0;jj<(maxJ+2);jj++) {
-					if ((i <= 1) || (j <= 1) || (i >= map.x-2) || (j >= map.y+2))
+					if ((i <= 1) || (j <= 1) || (i >= map.x-2) || (j >= map.y-2))
 						map.cell[ii+i-1][jj+j-1] = WALL<<4;
-					else if ((rooms[chRoom][ii][jj] == WALL) &&
-						((ii == 0) || (jj == 0)) || (ii == maxI+1) || (jj == maxJ+1))
-						map.cell[ii+i-1][jj+j-1] = WALL<<4;
+					else if (rooms[chRoom][ii][jj] == WALL)
+						map.cell[ii+i-1][jj+j-1] = rooms[chRoom][ii][jj]<<4;
 					else
 						map.cell[ii+i-1][jj+j-1] = rooms[chRoom][ii][jj];
 				}
@@ -135,7 +141,7 @@ bool Dungeon::draw_room(MapPrototype &map, int i, int j, int &maxI, int &maxJ) {
 
 void Dungeon::draw_entries(MapPrototype &map, int i, int j, int maxI, int maxJ) {
 	//The number of entires is computed with the size of the room
-	int nEntries = 1+(rand()%(maxI+maxJ))/6;
+	int nEntries = 0;//(rand()%((maxI+maxJ)/3));
 	//We place the entries around the room
 	for (int t=0;t<=nEntries;t++) {
 		int dir1 = rand()%2;

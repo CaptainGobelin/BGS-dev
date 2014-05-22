@@ -8,6 +8,7 @@
 #include "item.h"
 #include "mapExit.h"
 #include "obstacle.h"
+#include "door.h"
 
 class Cell {
 	public:
@@ -15,7 +16,7 @@ class Cell {
 		Cell(int code);
 		const int &getCode() const {return code;}
 		bool isSolid();
-		const bool &isTransparent() const {return transparent;}
+		bool isTransparent();
 		const bool &isViewed() const {return viewed;}
 		const bool &isVisited() const {return visited;}
 		void setVisited(const bool &newVisited) {visited=newVisited;}
@@ -45,13 +46,15 @@ class Cell {
 		//This list constains all obstacles (like furnitures)
 		std::list<Obstacle> obstacles;
 
+		std::list<Door> doors;
+
 		template<class Archive>
 	    void save(Archive& ar, const unsigned int version) const {
-	        ar & code & visited & drops & exits & obstacles;
+	        ar & code & visited & drops & exits & obstacles & doors;
 	    }
 		template<class Archive>
 	    void load(Archive& ar, const unsigned int version){
-	        ar & code & visited & drops & exits & obstacles;
+	        ar & code & visited & drops & exits & obstacles & doors;
 	        loadSprite();
 	    }
 	    BOOST_SERIALIZATION_SPLIT_MEMBER();

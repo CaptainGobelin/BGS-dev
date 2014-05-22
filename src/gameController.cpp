@@ -26,7 +26,6 @@ void GameController::launch() {
 				choice = mainMenu();
 				break;
 			}
-
 		}
 	}
 }

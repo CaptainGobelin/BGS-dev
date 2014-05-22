@@ -10,7 +10,9 @@ void Textures::loadTextures(const char *path) {
 	texturesWeaponOn.loadFromFile(path+(std::string)"tiles/weapon_on.png");
 	texturesWeaponOff.loadFromFile(path+(std::string)"tiles/weapon_off.png");
 	texturesObstacles.loadFromFile(path+(std::string)"tiles/obstacles.png");
+	texturesDoors.loadFromFile(path+(std::string)"tiles/doors.png");
 	texturesInterface.loadFromFile(path+(std::string)"int/panel.png");
 	texturesMap.loadFromFile(path+(std::string)"int/mParch.png");
+	texturesInventory.loadFromFile(path+(std::string)"int/inventory.png");
 	texturesMenu.loadFromFile(path+(std::string)"int/menuPan.png");
 }

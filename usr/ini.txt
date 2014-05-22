@@ -21,6 +21,7 @@ downMove=DownArrow
 rightMove=RightArrow
 leftMove=LeftArrow
 map=M
+inventory=I
 exit=E
 confirm=Y
 cancel=N

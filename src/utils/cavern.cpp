@@ -19,6 +19,10 @@ void Cavern::floorCell(Cell &cell) {
 	cell.cavernFloorA();
 }
 
+void Cavern::doorCell(Cell &cell) {
+	cell.cavernFloorA();
+}
+
 void Cavern::wallCell(Cell &cell) {
 	cell.cavernWallA();
 }

@@ -10,6 +10,7 @@ class OptionsFile {
 		static int frameLimit;
 		static bool vSync;
 		static sf::Keyboard::Key mapGameKey;
+		static sf::Keyboard::Key inventoryGameKey;
 		static sf::Keyboard::Key upGameKey;
 		static sf::Keyboard::Key downGameKey;
 		static sf::Keyboard::Key rightGameKey;

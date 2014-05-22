@@ -8,6 +8,7 @@ sf::View GameWindow::viewInt;
 int OptionsFile::frameLimit = 50;
 bool OptionsFile::vSync = true;
 sf::Keyboard::Key OptionsFile::mapGameKey = sf::Keyboard::M;
+sf::Keyboard::Key OptionsFile::inventoryGameKey = sf::Keyboard::I;
 sf::Keyboard::Key OptionsFile::upGameKey = sf::Keyboard::Up;
 sf::Keyboard::Key OptionsFile::downGameKey = sf::Keyboard::Down;
 sf::Keyboard::Key OptionsFile::rightGameKey = sf::Keyboard::Right;
@@ -24,12 +25,14 @@ sf::Texture Textures::texturesFloors;
 sf::Texture Textures::texturesWalls;
 sf::Texture Textures::texturesInterface;
 sf::Texture Textures::texturesMap;
+sf::Texture Textures::texturesInventory;
 sf::Texture Textures::texturesMenu;
 sf::Texture Textures::texturesArmorOn;
 sf::Texture Textures::texturesArmorOff;
 sf::Texture Textures::texturesWeaponOn;
 sf::Texture Textures::texturesWeaponOff;
 sf::Texture Textures::texturesObstacles;
+sf::Texture Textures::texturesDoors;
 
 int main(int argc, char *argv[]) {
 	//Initialize game

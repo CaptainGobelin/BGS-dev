@@ -16,6 +16,10 @@ void Plain::floorCell(Cell &cell) {
 	cell.grassA();
 }
 
+void Plain::doorCell(Cell &cell) {
+	cell.grassA();
+}
+
 void Plain::wallCell(Cell &cell) {
 	cell.treeA();
 }

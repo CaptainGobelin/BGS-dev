@@ -75,7 +75,7 @@ int NewGameMenuController::launch(std::string &name) {
 
 void NewGameMenuController::createCharacter(std::string name) {
 	//We generate the starting map
-	Map map = MapGenerator::generate(40,40, new Cavern(), "1_1_1", 5);
+	Map map = MapGenerator::generate(40,40, new Dungeon(), "1_1_1", 5);
 	//And random coordinates
 	int x, y;
 	do  {

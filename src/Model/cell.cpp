@@ -1,7 +1,7 @@
 #include "../headers/Model/cell.h"
 
 Cell::Cell() {
-	this->visited = false;
+	this->visited = true;
 	this->viewed = false;
 	nothing();
 }
@@ -14,10 +14,19 @@ Cell::Cell(int code) {
 }
 
 bool Cell::isSolid() {
+	bool result = this->solid;
 	if (!this->obstacles.empty())
-		return (this->obstacles.begin()->isSolid() && !this->obstacles.begin()->isBroken()) || this->solid;
-	else
-		return this->solid;
+		result |= this->obstacles.begin()->isSolid();
+	if (!this->doors.empty())
+		result |= !this->doors.begin()->isOpen();
+	return result;
+}
+
+bool Cell::isTransparent() {
+	bool result = this->transparent;
+	if (!this->doors.empty())
+		result &= this->doors.begin()->isTransparent();
+	return result;
 }
 
 void Cell::draw(const int x, const int y, bool drawSolid) {
@@ -29,18 +38,12 @@ void Cell::draw(const int x, const int y, bool drawSolid) {
 	GameWindow::window.draw(this->sprite);
 	if (!this->drops.empty())
 		for (std::list<Item>::reverse_iterator it=this->drops.rbegin();it!=this->drops.rend();++it) {
-			(*it).getSpriteOff().setPosition((x+11.5)*T_TILES,(y+11.5)*T_TILES);
-			GameWindow::window.draw((*it).getSpriteOff());
+			(*it).draw(x, y);
 		}
 	if (!this->obstacles.empty())
-		if (this->obstacles.begin()->isBroken()) {
-			this->obstacles.begin()->getSpriteBroken().setPosition((x+11.5)*T_TILES,(y+11.5)*T_TILES);
-			GameWindow::window.draw(this->obstacles.begin()->getSpriteBroken());
-		}
-		else {
-			this->obstacles.begin()->getSpriteEntire().setPosition((x+11.5)*T_TILES,(y+11.5)*T_TILES);
-			GameWindow::window.draw(this->obstacles.begin()->getSpriteEntire());
-		}
+		this->obstacles.begin()->draw(x, y);
+	if (!this->doors.empty())
+		this->doors.begin()->draw(x, y);
 }
 
 void Cell::loadSprite() {

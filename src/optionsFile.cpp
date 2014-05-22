@@ -27,6 +27,9 @@ void OptionsFile::setOption(std::string line) {
     else if (line.substr(0,pos) == "map") {
     	mapGameKey = toKey(value);
     }
+    else if (line.substr(0,pos) == "inventory") {
+    	inventoryGameKey = toKey(value);
+    }
     else if (line.substr(0,pos) == "upMove") {
     	upGameKey = toKey(value);
     }

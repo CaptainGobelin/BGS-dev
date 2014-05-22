@@ -17,6 +17,7 @@ class MapPattern {
 		virtual void apply(MapPrototype &map) = 0;
 		virtual std::string getRandomName() = 0;
 		virtual void floorCell(Cell &cell) = 0;
+		virtual void doorCell(Cell &cell) = 0;
 		virtual void wallCell(Cell &cell) = 0;
 		virtual void wallItemCell(Cell &cell) = 0;
 		//Add the specify number of "walls"
@@ -41,6 +42,7 @@ class Random : public MapPattern {
 		virtual void apply(MapPrototype &map);
 		virtual std::string getRandomName();
 		virtual void floorCell(Cell &cell);
+		virtual void doorCell(Cell &cell);
 		virtual void wallCell(Cell &cell);
 		virtual void wallItemCell(Cell &cell);
 };

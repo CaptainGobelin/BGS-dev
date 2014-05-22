@@ -26,6 +26,8 @@ bool Character::move(int dX, int dY, const Map& map) {
 	}
 	if (!map.cell[newX][newY].obstacles.empty())
 		map.cell[newX][newY].obstacles.begin()->broke();
+	if (!map.cell[newX][newY].doors.empty())
+		map.cell[newX][newY].doors.begin()->openDoor();
 	return false;
 }
 

@@ -28,6 +28,7 @@
 #define Q_INPUT 11
 #define Y_INPUT 12
 #define N_INPUT 13
+#define I_INPUT 14
 
 //Menu inputs
 #define INIT_CHOICE 10
@@ -80,5 +81,9 @@
 //Obstacles
 #define DEFAULT_OBSTACLE -1
 #define TABLE_A 1
+
+//Doors
+#define DEFAULT_DOOR -1
+#define DUNGEON_DOOR_A 1
 
 #endif
