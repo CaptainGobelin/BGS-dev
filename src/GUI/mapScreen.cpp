@@ -9,10 +9,12 @@ MapScreen::MapScreen() {
 	this->blocSprite.setTexture(Textures::texturesMap);
 	this->emptySprite.setTexture(Textures::texturesMap);
 	this->charSprite.setTexture(Textures::texturesMap);
+	this->doorSprite.setTexture(Textures::texturesMap);
 	this->mapSprite.setTextureRect(sf::IntRect(0, 0, 950, 630));
 	this->blocSprite.setTextureRect(sf::IntRect(0, 630, 50, 50));
 	this->emptySprite.setTextureRect(sf::IntRect(50, 630, 50, 50));
 	this->charSprite.setTextureRect(sf::IntRect(100, 630, 50, 50));
+	this->doorSprite.setTextureRect(sf::IntRect(150, 630, 50, 50));
 	this->mapSprite.setPosition(21,21);
 	this->mapLength = 1;
 	this->mapWidth = 1;
@@ -28,6 +30,7 @@ void MapScreen::setScale(int mLength, int mWidth) {
 	this->blocSprite.setScale(scale,scale);
 	this->emptySprite.setScale(scale,scale);
 	this->charSprite.setScale(scale,scale);
+	this->doorSprite.setScale(scale,scale);
 }
 
 GameInput MapScreen::recupInput() {
@@ -51,7 +54,11 @@ void MapScreen::display(Map &map, Character &character) {
 	for (int i=-this->mapLength/2;i<(this->mapLength+1)/2;i++)
 		for (int j=-this->mapWidth/2;j<(this->mapWidth+1)/2;j++) {
 			if (map.cell[i+this->mapLength/2][j+this->mapWidth/2].isVisited()) {
-				if (map.cell[i+this->mapLength/2][j+this->mapWidth/2].isSolid()) {
+				if (!map.cell[i+this->mapLength/2][j+this->mapWidth/2].doors.empty()) {
+					this->doorSprite.setPosition(503+pix*i,369+pix*j);
+					GameWindow::window.draw(this->doorSprite);
+				}
+				else if (!map.cell[i+this->mapLength/2][j+this->mapWidth/2].isTransparent()) {
 					this->blocSprite.setPosition(503+pix*i,369+pix*j);
 					GameWindow::window.draw(this->blocSprite);
 				}

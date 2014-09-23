@@ -5,6 +5,7 @@
 #include "../utils/lib.h"
 
 #include "race.h"
+#include "equipement.h"
 #include "map.h"
 #include "item.h"
 #include "textures.h"
@@ -36,11 +37,12 @@ class Character {
 		//If there's no entrance, generate one
 		void goToStart(Map &map, std::string mapName);
 
-		std::list<Item> inventory;
+		std::vector<Item> inventory;
+		//Equipement equipement;
 
 		template<class Archive>
 	    void serialize(Archive& ar, const unsigned int version){
-	        ar & name & attributes & x & y & map & race;
+	        ar & name & attributes & x & y & map & race/* & equipement*/;
 	    }
 
 	private :

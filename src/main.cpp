@@ -18,6 +18,7 @@ sf::Keyboard::Key OptionsFile::validGameKey = sf::Keyboard::Return;
 sf::Keyboard::Key OptionsFile::exitGameKey = sf::Keyboard::Q;
 sf::Keyboard::Key OptionsFile::confirmGameKey = sf::Keyboard::Y;
 sf::Keyboard::Key OptionsFile::cancelGameKey = sf::Keyboard::N;
+sf::Keyboard::Key OptionsFile::pickGameKey = sf::Keyboard::P;
 
 sf::Texture Textures::texturesStart;
 sf::Texture Textures::texturesCharacters;

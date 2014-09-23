@@ -11,6 +11,8 @@ class StringUtils {
 		//Map file are named after 3 component (X_X_X)
 		//These method return the desired component of the given code
 		static int getMapCode(std::string mapCode, int component);
+		//Generate unique number from two
+		static int generateID(int a, int b);
 };
 
 #endif

@@ -6,7 +6,7 @@ Door::Door(int locX/* = -1*/, int locY/* = -1*/, int code/* = DEFAULT_ITEM*/) {
 	this->code = code;
 	this->x = locX;
 	this->y = locY;
-	this->open = true;
+	this->open = false;
 	loadSprite();
 }
 

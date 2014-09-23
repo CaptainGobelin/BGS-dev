@@ -24,6 +24,8 @@ Map MapGenerator::generate(int x, int y, MapPattern *pattern, std::string mapCod
 				pattern->doorCell(map.cell[i+1][j+1]);
 			else if (mapP.cell[i][j] == WALL_ITEM)
 				pattern->wallItemCell(map.cell[i+1][j+1]);
+			else
+				pattern->wallItemCell(map.cell[i+1][j+1]);
 		}
 	map.setName(pattern->getRandomName());
 	//If the map is a leaf we don't need to create way to oter map
@@ -36,15 +38,18 @@ Map MapGenerator::generate(int x, int y, MapPattern *pattern, std::string mapCod
 		yE = rand()%w;
 	} while (map.cell[xE][yE].isSolid());
 	map.cell[xE][yE].dungeonExit();
+	Item i;
+	i.greavesLA();
+	map.cell[xE+1][yE].drops.push_back(i);
 	//And finally we generate code for linked map
 	int newMapCode = StringUtils::getMapCode(mapCode, 1);
 	std::ostringstream oss;
 	oss.str("");
-	oss << newMapCode;
+	oss << (newMapCode+1);
 	newMapCode = StringUtils::getMapCode(mapCode, 2);
 	oss << "_" << 1;
-	newMapCode = StringUtils::getMapCode(mapCode, 3);
-	oss << "_" << newMapCode+1;
-	map.cell[xE][yE].exits.push_front(MapExit(oss.str(), dependencies-1));
+	newMapCode = StringUtils::generateID(1, StringUtils::getMapCode(mapCode, 3));
+	oss << "_" << newMapCode;
+	map.cell[xE][yE].exits.push_back(MapExit(oss.str(), dependencies-1));
 	return map;
 }

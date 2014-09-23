@@ -57,6 +57,9 @@ void OptionsFile::setOption(std::string line) {
     else if (line.substr(0,pos) == "cancel") {
     	cancelGameKey = toKey(value);
     }
+    else if (line.substr(0,pos) == "pick") {
+    	pickGameKey = toKey(value);
+    }
 }
 
 sf::Keyboard::Key OptionsFile::toKey(std::string const& s) {

@@ -51,6 +51,15 @@ int SessionController::launch(Character &character, Interface &interface) {
 				input.setValue(inventoryController.launch(character));
 				break;
 			}
+			//Pick Item
+			case P_INPUT : {
+				/*if (map.cell[character.getX()][character.getY()].drops.empty())
+					interface.write("There's nothing here.");
+				else {
+					//character.equipement.legs = &map.cell[character.getX()][character.getY()].drops.front();
+				}*/
+				break;
+			}
 			//Change map
 			case Q_INPUT : {
 				if (changeMap(character, map, interface)) {
@@ -105,7 +114,8 @@ bool SessionController::changeMap(Character &character, Map &map, Interface &int
 	if (map.cell[character.getX()][character.getY()].exits.empty())
 		return false;
 	SaveUtils::saveMap(character.getName(), character.getMap(), map);
-	std::string dest = map.cell[character.getX()][character.getY()].exits.begin()->getDestCode();
+	//std::string dest = map.cell[character.getX()][character.getY()].exits.begin()->getDestCode();
+	std::string dest = map.cell[character.getX()][character.getY()].exits[0].getDestCode();
 	//Check if the map already exists.
 	bool mapExists = false;
 	boost::filesystem::path path(WORLD_PATH+StringUtils::saveStem(character.getName()));
@@ -117,11 +127,13 @@ bool SessionController::changeMap(Character &character, Map &map, Interface &int
 			}
 	//In the other case we generate a new map.
 	if (!mapExists) {
-		int nDep = map.cell[character.getX()][character.getY()].exits.begin()->getDependencies();
+		//int nDep = map.cell[character.getX()][character.getY()].exits.begin()->getDependencies();
+		int nDep = map.cell[character.getX()][character.getY()].exits[0].getDependencies();
 		Map nMap = MapGenerator::generate(20,20, new Dungeon(), dest, nDep);
 		interface.write("Welcome to "+nMap.getName()+".");
 		//Then we change previous map and chracter informations.
-		map.cell[character.getX()][character.getY()].exits.begin()->setDestName(nMap.getName());
+		//map.cell[character.getX()][character.getY()].exits.begin()->setDestName(nMap.getName());
+		map.cell[character.getX()][character.getY()].exits[0].setDestName(nMap.getName());
 		character.goToStart(nMap, map.getName());
 		character.setMap(dest);
 		//Finally we save the new map.
@@ -130,7 +142,8 @@ bool SessionController::changeMap(Character &character, Map &map, Interface &int
 	else {
 		Map nMap = SaveUtils::loadMap(character.getName(), dest);
 		//Then we change previous map and chracter informations.
-		map.cell[character.getX()][character.getY()].exits.begin()->setDestName(nMap.getName());
+		//map.cell[character.getX()][character.getY()].exits.begin()->setDestName(nMap.getName());
+		map.cell[character.getX()][character.getY()].exits[0].setDestName(nMap.getName());
 		character.goToStart(nMap, map.getName());
 		character.setMap(dest);
 		//Finally we save the new map.

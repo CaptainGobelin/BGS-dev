@@ -26,3 +26,9 @@ int StringUtils::getMapCode(std::string mapCode, int component) {
 	//Integer conversion
 	return std::atoi(const_cast<char*>(resultS.c_str()));
 }
+
+int StringUtils::generateID(int a, int b) {
+	int result = (a+b)*(a+b+1);
+	result /= 2;
+	return (result+b);
+}

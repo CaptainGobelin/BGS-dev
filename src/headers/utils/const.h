@@ -29,6 +29,7 @@
 #define Y_INPUT 12
 #define N_INPUT 13
 #define I_INPUT 14
+#define P_INPUT 15
 
 //Menu inputs
 #define INIT_CHOICE 10
@@ -49,11 +50,11 @@
 #define HUMAN_CODE 1
 
 //Map Prototype Cells
-#define IS_SOLID 0
-#define WALL_ITEM -2
-#define WALL -1
-#define FLOOR 1
-#define DOOR 2
+#define IS_SOLID 1000
+#define WALL_ITEM 2
+#define WALL 1
+#define FLOOR 1001
+#define DOOR 1002
 
 //Cells
 #define CHANGE_MAP_CODE 1000

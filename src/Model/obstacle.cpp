@@ -6,7 +6,7 @@ Obstacle::Obstacle(int locX/* = -1*/, int locY/* = -1*/, int code/* = DEFAULT_IT
 	this->code = code;
 	this->x = locX;
 	this->y = locY;
-	this->broken = true;
+	this->broken = false;
 	loadSprite();
 }
 

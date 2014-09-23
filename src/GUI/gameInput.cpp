@@ -66,6 +66,10 @@ void GameInput::treatEvent(sf::Event event) {
 			value = N_INPUT;
 			return;
 		}
+		if (event.key.code == OptionsFile::pickGameKey) {
+			value = P_INPUT;
+			return;
+		}
 		switch (event.key.code) {
 			case sf::Keyboard::Delete : {value=DELETE_INPUT;return;}
 			default : {value=ANY_KEY_INPUT;return;}

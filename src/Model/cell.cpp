@@ -1,7 +1,7 @@
 #include "../headers/Model/cell.h"
 
 Cell::Cell() {
-	this->visited = true;
+	this->visited = false;
 	this->viewed = false;
 	nothing();
 }
@@ -15,17 +15,17 @@ Cell::Cell(int code) {
 
 bool Cell::isSolid() {
 	bool result = this->solid;
-	if (!this->obstacles.empty())
-		result |= this->obstacles.begin()->isSolid();
-	if (!this->doors.empty())
-		result |= !this->doors.begin()->isOpen();
+	for (int i=0;i<this->obstacles.size();i++)
+		result |= this->obstacles[i].isSolid();
+	for (int i=0;i<this->doors.size();i++)
+		result |= !this->doors[i].isOpen();
 	return result;
 }
 
 bool Cell::isTransparent() {
 	bool result = this->transparent;
-	if (!this->doors.empty())
-		result &= this->doors.begin()->isTransparent();
+	for (int i=0;i<this->doors.size();i++)
+		result |= this->doors[i].isTransparent();
 	return result;
 }
 
@@ -36,14 +36,12 @@ void Cell::draw(const int x, const int y, bool drawSolid) {
 		return;
 	this->sprite.setPosition((x+11.5)*T_TILES,(y+11.5)*T_TILES);
 	GameWindow::window.draw(this->sprite);
-	if (!this->drops.empty())
-		for (std::list<Item>::reverse_iterator it=this->drops.rbegin();it!=this->drops.rend();++it) {
-			(*it).draw(x, y);
-		}
-	if (!this->obstacles.empty())
-		this->obstacles.begin()->draw(x, y);
-	if (!this->doors.empty())
-		this->doors.begin()->draw(x, y);
+	for (int i=0;i<this->drops.size();i++)
+		this->drops[i].draw(x, y);
+	for (int i=0;i<this->obstacles.size();i++)
+		this->obstacles[i].draw(x, y);
+	for (int i=0;i<this->doors.size();i++)
+		this->doors[i].draw(x, y);
 }
 
 void Cell::loadSprite() {

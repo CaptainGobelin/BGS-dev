@@ -15,6 +15,7 @@ void Character::draw() {
 	GameWindow::window.setView(GameWindow::viewGame);
 	race.setPosition((H_WINDOW-T_TILES)/2,(H_WINDOW-T_TILES)/2);
 	GameWindow::window.draw(race.getBody());
+	//equipement.draw();
 }
 
 bool Character::move(int dX, int dY, const Map& map) {
@@ -94,7 +95,7 @@ void Character::goToStart(Map &map, std::string mapName) {
 		rY = rand()%map.getWidth();
 	} while (map.cell[rX][rY].isSolid() || !map.cell[rX][rY].exits.empty());
 	map.cell[rX][rY].dungeonExit();
-	map.cell[rX][rY].exits.push_front(MapExit(this->map));
+	map.cell[rX][rY].exits.push_back(MapExit(this->map));
 	map.cell[rX][rY].exits.begin()->setDestName(mapName);
 	this->x = rX;
 	this->y = rY;

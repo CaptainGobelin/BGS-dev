@@ -52,15 +52,15 @@ void Interface::showItems(Cell &cell) {
 	std::ostringstream oss;
 	std::string line = "You see";
 	int count = 1;
-	for (std::list<Item>::iterator it=cell.drops.begin(); it != cell.drops.end(); ++it) {
+	for (int i=0;i<cell.drops.size();i++) {
 		oss.str("");
 		oss << count;
 		if (count == 1)
-			line += " (" + oss.str()+") "+(*it).getName();
-		else if (it == --(cell.drops.end()))
-			line += " and (" + oss.str()+") "+(*it).getName();
+			line += " (" + oss.str()+") "+cell.drops[i].getName();
+		else if (i == cell.drops.size()-1)
+			line += " and (" + oss.str()+") "+cell.drops[i].getName();
 		else
-			line += ", (" + oss.str()+") "+(*it).getName();
+			line += ", (" + oss.str()+") "+cell.drops[i].getName();
 		count++;
 	}
 	line += ".";

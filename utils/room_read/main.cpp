@@ -76,11 +76,11 @@ int main(int argc, char *argv[]) {
 						if (m != x)
 							file << ",";
 						if (blueprint.getPixel(m,n) == sf::Color(255, 0, 0))
-							file << "-1";
+							file << "WALL";
 						else if (blueprint.getPixel(m,n) == sf::Color(0, 255, 0))
-							file << "2";
+							file << "DOOR";
 						else
-							file << "1";
+							file << "FLOOR";
 					}
 					file << "}";
 				}

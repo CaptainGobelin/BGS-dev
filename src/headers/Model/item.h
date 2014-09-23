@@ -18,7 +18,8 @@ class Item {
 		void setName(const std::string &newName) {name=newName;}
 		sf::Sprite &getSpriteOn() {return spriteOn;}
 		sf::Sprite &getSpriteOff() {return spriteOff;}
-
+		
+		void setPosition(float x, float y);
 		void draw(int x, int y);
 
 		//Load element that don't need to be serialized

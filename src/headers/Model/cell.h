@@ -40,13 +40,13 @@ class Cell {
 		void treeA();
 
 		//The drops are items contains on the cell
-		std::list<Item> drops;
-		//This list may contains a way to an another map
-		std::list<MapExit> exits;
-		//This list constains all obstacles (like furnitures)
-		std::list<Obstacle> obstacles;
+		std::vector<Item> drops;
+		//This vector may contains a way to an another map
+		std::vector<MapExit> exits;
+		//This vector constains all obstacles (like furnitures)
+		std::vector<Obstacle> obstacles;
 
-		std::list<Door> doors;
+		std::vector<Door> doors;
 
 		template<class Archive>
 	    void save(Archive& ar, const unsigned int version) const {

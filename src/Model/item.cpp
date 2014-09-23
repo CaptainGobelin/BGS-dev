@@ -27,6 +27,10 @@ void Item::loadSprite() {
 	}
 }
 
+void Item::setPosition(float x, float y) {
+	this->spriteOn.setPosition(x,y);
+}
+
 void Item::weaponFactory(std::string name, int code, sf::Vector2i pos_off, sf::Vector2i offset_off,
 			sf::Vector2i pos_on, sf::Vector2i offset_on) {
 	this->name = name;

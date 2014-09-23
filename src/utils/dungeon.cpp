@@ -24,7 +24,7 @@ void Dungeon::doorCell(Cell &cell) {
 	cell.dungeonFloorA();
 	Door d;
 	d.dungeonDoorA();
-	cell.doors.push_front(d);
+	cell.doors.push_back(d);
 }
 
 void Dungeon::wallCell(Cell &cell) {
@@ -36,21 +36,21 @@ void Dungeon::wallItemCell(Cell &cell) {
 	cell.dungeonFloorA();
 	Obstacle o;
 	o.tableA();
-	cell.obstacles.push_front(o);
+	cell.obstacles.push_back(o);
 }
 
 void Dungeon::apply_loop(MapPrototype &map) {
 	//First all the cells are wall
 	for (int i=0;i<map.x;i++)
 		for (int j=0;j<map.y;j++)
-				map.cell[i][j] = WALL;
+				map.cell[i][j] = -WALL;
 	//Then, for each odd cell (if it's a wall)
 	//We can make a new room appear (with an odd size)
 	for (int i=1;i<(map.x-1);i+=2)
 		for (int j=1;j<(map.y-1);j+=2) {
-			if (map.cell[i][j] == FLOOR)
+			if (map.cell[i][j] == -FLOOR)
 				continue;
-			if (rand()%2 < 1)
+			if (rand()%4 != 0)
 				continue;
 			int maxI = (rand()%9)+3;
 			int maxJ = (rand()%9)+3;
@@ -61,16 +61,12 @@ void Dungeon::apply_loop(MapPrototype &map) {
 	//We fill ot with random corridors
 	for (int i=1;i<(map.x-1);i+=2)
 		for (int j=1;j<(map.y-1);j+=2)
-				if (map.cell[i][j] == WALL)
+				if (map.cell[i][j] == -WALL)
 					draw_corridor(map, i, j);
 	//Finally temp wall/floor are converted to real wall/floor
 	for (int i=0;i<map.x;i++)
-		for (int j=0;j<map.y;j++) {
-			if (map.cell[i][j] == WALL<<4)
-				map.cell[i][j] = WALL;
-			if (map.cell[i][j] == FLOOR<<4)
-				map.cell[i][j] = FLOOR;
-		}
+		for (int j=0;j<map.y;j++)
+			map.cell[i][j] = std::abs(map.cell[i][j]);
 }
 
 bool Dungeon::draw_room(MapPrototype &map, int i, int j, int &maxI, int &maxJ) {
@@ -86,13 +82,11 @@ bool Dungeon::draw_room(MapPrototype &map, int i, int j, int &maxI, int &maxJ) {
 		int turnJ = 0;
 		for (int jj=j;jj<(j+maxJ);jj++) {
 			turnJ++;
-			if (map.cell[ii][jj] == WALL<<4) {
+			if (map.cell[ii][jj] == WALL) {
 				ii = i+maxI;
 				jj = j+maxJ;
-				if (turnI > turnJ)
-					maxI = turnI;
-				else
-					maxJ = turnJ;
+				maxI = turnI;
+				maxJ = turnJ;
 			}
 		}
 	}
@@ -104,7 +98,7 @@ bool Dungeon::draw_room(MapPrototype &map, int i, int j, int &maxI, int &maxJ) {
 	if ((maxI < 3) || (maxJ < 3))
 		return false;
 
-	bool toDraw = true;//rand()%6;
+	bool toDraw = !rand()%5;
 	//Then we fill the room with floors
 	if (toDraw) {
 		toDraw = false;
@@ -117,10 +111,11 @@ bool Dungeon::draw_room(MapPrototype &map, int i, int j, int &maxI, int &maxJ) {
 		if (toDraw) {
 			for (int ii=0;ii<(maxI+2);ii++) {
 				for (int jj=0;jj<(maxJ+2);jj++) {
-					if ((i <= 1) || (j <= 1) || (i >= map.x-2) || (j >= map.y-2))
-						map.cell[ii+i-1][jj+j-1] = WALL<<4;
-					else if (rooms[chRoom][ii][jj] == WALL)
-						map.cell[ii+i-1][jj+j-1] = rooms[chRoom][ii][jj]<<4;
+					if (((ii+i-1) <= 0) || ((jj+j-1) <= 0) || ((ii+i-1) >= map.x-1) || ((jj+j-1) >= map.y-1))
+						map.cell[ii+i-1][jj+j-1] = WALL;
+					else if ((rooms[chRoom][ii][jj] == WALL) &&
+						((ii <= 0) || (jj <= 0) || (ii >= maxI+1) || (jj >= maxJ+1)))
+						map.cell[ii+i-1][jj+j-1] = WALL;
 					else
 						map.cell[ii+i-1][jj+j-1] = rooms[chRoom][ii][jj];
 				}
@@ -131,7 +126,7 @@ bool Dungeon::draw_room(MapPrototype &map, int i, int j, int &maxI, int &maxJ) {
 		for (int ii=i-1;ii<(i+1+maxI);ii++)
 			for (int jj=j-1;jj<(j+1+maxJ);jj++)
 				if ((ii==i-1)||(jj==j-1)||(ii==i+maxI)||(jj==j+maxJ))
-					map.cell[ii][jj] = WALL<<4;
+					map.cell[ii][jj] = WALL;
 				else
 					map.cell[ii][jj] = FLOOR;
 		draw_entries(map, i, j, maxI, maxJ);
@@ -141,7 +136,10 @@ bool Dungeon::draw_room(MapPrototype &map, int i, int j, int &maxI, int &maxJ) {
 
 void Dungeon::draw_entries(MapPrototype &map, int i, int j, int maxI, int maxJ) {
 	//The number of entires is computed with the size of the room
-	int nEntries = 0;//(rand()%((maxI+maxJ)/3));
+	int nEntries = 1;
+	for (int k=0;k<((maxI+maxJ)/3);k++)
+		if (!rand()%10)
+			nEntries++;
 	//We place the entries around the room
 	for (int t=0;t<=nEntries;t++) {
 		int dir1 = rand()%2;
@@ -169,7 +167,7 @@ void Dungeon::draw_entries(MapPrototype &map, int i, int j, int maxI, int maxJ) 
 
 void Dungeon::draw_corridor(MapPrototype &map, int i, int j) {
 	//The algorithm is almost the same that maze generation
-	map.cell[i][j] = FLOOR<<4;
+	map.cell[i][j] = -FLOOR;
 	int dir = rand()%4;
 	int sDir = 2*(rand()%2)+1;
 	for (int t=0;t<4;t++) {
@@ -177,8 +175,8 @@ void Dungeon::draw_corridor(MapPrototype &map, int i, int j) {
 			continue;
 		if (((j+2*dirJ(dir)) <= 0) || ((j+2*dirJ(dir)) >= (map.y-1)))
 			continue;
-		if (map.cell[i+2*dirI(dir)][j+2*dirJ(dir)] == WALL) {
-			map.cell[i+dirI(dir)][j+dirJ(dir)] = FLOOR<<4;
+		if (map.cell[i+2*dirI(dir)][j+2*dirJ(dir)] == -WALL) {
+			map.cell[i+dirI(dir)][j+dirJ(dir)] = -FLOOR;
 			draw_corridor(map, i+2*dirI(dir), j+2*dirJ(dir));
 		}
 		dir = (dir+sDir)%4;

@@ -15,6 +15,7 @@ class MapScreen {
 		MapScreen();
 
 		const sf::Sprite &getMapSprite() const {return mapSprite;}
+		const sf::Sprite &getDoorSprite() const {return doorSprite;}
 		const sf::Sprite &getCharSprite() const {return charSprite;}
 		const sf::Sprite &getBlocSprite() const {return blocSprite;}
 		const sf::Sprite &getEmptySprite() const {return emptySprite;}
@@ -27,6 +28,7 @@ class MapScreen {
 	private:
 		sf::Font font;
 		sf::Sprite mapSprite;
+		sf::Sprite doorSprite;
 		sf::Sprite charSprite;
 		sf::Sprite blocSprite;
 		sf::Sprite emptySprite;

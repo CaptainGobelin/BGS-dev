@@ -20,6 +20,7 @@ class OptionsFile {
 		static sf::Keyboard::Key exitGameKey;
 		static sf::Keyboard::Key confirmGameKey;
 		static sf::Keyboard::Key cancelGameKey;
+		static sf::Keyboard::Key pickGameKey;
 
 	private:
 		static void setOption(std::string line);

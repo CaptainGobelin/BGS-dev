@@ -4,8 +4,8 @@ Map::Map(int x/*=0*/, int y/*=0*/) {
 	this->length = x;
 	this->width = y;
 	cell = new Cell* [length];
-   			for (int i=0;i<length;i++)
-        		cell[i] = new Cell [width];
+   	for (int i=0;i<length;i++)
+    	cell[i] = new Cell [width];
 	this->fog.setTexture(Textures::texturesFloors);
 	this->fog.setTextureRect(sf::IntRect(0, 2*T_TILES, T_TILES, T_TILES));
 }
